@@ -1,105 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KRREVIVEÉLITE Universe - AI-Powered Creation Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    @keyframes glow-pulse { 0%, 100% { text-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea; } 50% { text-shadow: 0 0 30px #00ffea, 0 0 50px #00ffea, 0 0 70px #00ccbb; } }
-    @keyframes slide-in { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes slide-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounce-in { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
-    @keyframes float-up { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-    @keyframes shimmer { 0%, 100% { box-shadow: 0 0 20px rgba(255,0,85,0.5); } 50% { box-shadow: 0 0 30px rgba(255,0,85,0.8), 0 0 50px rgba(255,0,255,0.4); } }
-    @keyframes rotate-glow { 0% { box-shadow: 0 0 20px #00ffea; } 50% { box-shadow: 0 0 30px #ff0055; } 100% { box-shadow: 0 0 20px #00ffea; } }
-    @keyframes particle-float { 0% { opacity: 1; transform: translateY(0) translateX(0); } 100% { opacity: 0; transform: translateY(-50px) translateX(20px); } }
 
-    body { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); color: #e0e0e0; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden; }
-    .hero { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); padding: 100px 20px; text-align: center; border-bottom: 2px solid #00ffea; animation: slide-in-up 0.8s ease-out; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(0,255,234,0.1) 0%, transparent 50%); pointer-events: none; }
-    .hero h1 { font-size: 4em; font-family: 'Orbitron', sans-serif; color: #00ffea; text-shadow: 0 0 20px #00ffea; margin: 0 0 20px 0; letter-spacing: 2px; animation: glow-pulse 3s ease-in-out infinite; position: relative; z-index: 1; }
-    .hero p { font-size: 1.3em; color: #bbb; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; animation: slide-in-up 0.8s ease-out 0.2s both; position: relative; z-index: 1; }
-    .hero-cta { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-    .hero-cta .cta-button:nth-child(1) { animation: bounce-in 0.6s ease-out 0.3s both; }
-    .hero-cta .cta-button:nth-child(2) { animation: bounce-in 0.6s ease-out 0.5s both; }
-    .cta-button { background: linear-gradient(135deg, #ff0055, #ff00ff); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 20px rgba(255,0,85,0.5); font-weight: bold; font-family: 'Orbitron', sans-serif; position: relative; overflow: hidden; }
-    .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
-    .cta-button:hover::before { left: 100%; }
-    .cta-button:hover { box-shadow: 0 0 40px rgba(255,0,85,0.8), 0 0 60px rgba(255,0,255,0.4); transform: translateY(-4px) scale(1.05); }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 20px; max-width: 1400px; margin: 0 auto; }
-    .feature-card { background: rgba(0,255,234,0.05); border: 2px solid #00ffea; border-radius: 15px; padding: 30px; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; animation: slide-in-up 0.6s ease-out both; position: relative; overflow: hidden; }
-    .feature-card:nth-child(1) { animation-delay: 0.1s; }
-    .feature-card:nth-child(2) { animation-delay: 0.2s; }
-    .feature-card:nth-child(3) { animation-delay: 0.3s; }
-    .feature-card:nth-child(4) { animation-delay: 0.4s; }
-    .feature-card:nth-child(5) { animation-delay: 0.5s; }
-    .feature-card:nth-child(6) { animation-delay: 0.6s; }
-    .feature-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,255,234,0.1) 0%, transparent 70%); opacity: 0; transition: opacity 0.3s; }
-    .feature-card:hover { box-shadow: 0 0 40px rgba(0,255,234,0.4), inset 0 0 20px rgba(0,255,234,0.1); transform: translateY(-8px) scale(1.03); background: rgba(0,255,234,0.12); border-color: #00ffea; }
-    .feature-card:hover::before { opacity: 1; }
-    .feature-card h3 { color: #00ffea; margin: 15px 0; font-size: 1.5em; font-family: 'Orbitron', sans-serif; transition: all 0.3s; }
-    .feature-card:hover h3 { text-shadow: 0 0 15px #00ffea; }
-    .feature-card p { color: #aaa; line-height: 1.6; margin: 10px 0; }
-    .feature-card .icon { font-size: 3em; margin-bottom: 15px; animation: float-up 3s ease-in-out infinite; display: inline-block; }
-    .feature-badge { color: #ff0055; font-size: 0.9em; font-weight: bold; }
-    .section-title { text-align: center; font-size: 2.8em; color: #00ffea; margin: 80px 20px 40px; font-family: 'Orbitron', sans-serif; text-shadow: 0 0 15px #00ffea; letter-spacing: 1px; animation: slide-in-up 0.6s ease-out; }
-    .notifications { position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 350px; }
-    .notification { background: rgba(0,255,234,0.15); border: 2px solid #00ffea; color: #00ffea; padding: 15px 20px; margin-bottom: 10px; border-radius: 8px; font-size: 0.95em; box-shadow: 0 0 15px rgba(0,255,234,0.3); animation: slide-in 0.4s ease-out; }
-    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
-    .quick-action { background: linear-gradient(135deg, rgba(255,0,85,0.15), rgba(255,0,255,0.15)); border: 2px solid #ff0055; border-radius: 12px; padding: 25px; text-align: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); animation: bounce-in 0.6s ease-out both; position: relative; overflow: hidden; }
-    .quick-action:nth-child(1) { animation-delay: 0.1s; }
-    .quick-action:nth-child(2) { animation-delay: 0.2s; }
-    .quick-action:nth-child(3) { animation-delay: 0.3s; }
-    .quick-action:nth-child(4) { animation-delay: 0.4s; }
-    .quick-action:nth-child(5) { animation-delay: 0.5s; }
-    .quick-action:nth-child(6) { animation-delay: 0.6s; }
-    .quick-action::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: radial-gradient(circle, rgba(255,0,85,0.3), transparent); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
-    .quick-action:hover::after { width: 300px; height: 300px; }
-    .quick-action:hover { box-shadow: 0 0 30px rgba(255,0,85,0.6), inset 0 0 15px rgba(255,0,85,0.2); background: linear-gradient(135deg, rgba(255,0,85,0.3), rgba(255,0,255,0.3)); transform: translateY(-5px) scale(1.02); border-color: #ff00ff; }
-    .quick-action h4 { color: #ff0055; margin: 10px 0; font-family: 'Orbitron', sans-serif; font-size: 1.3em; position: relative; z-index: 1; transition: all 0.3s; }
-    .quick-action:hover h4 { text-shadow: 0 0 10px #ff0055; }
-    .quick-action p { color: #aaa; margin: 5px 0; position: relative; z-index: 1; }
-    .pricing-section { background: linear-gradient(135deg, rgba(255,0,85,0.08), rgba(255,0,255,0.08)); padding: 80px 20px; text-align: center; border: 2px solid #ff00ff; border-radius: 20px; margin: 60px 20px; animation: slide-in-up 0.8s ease-out; position: relative; overflow: hidden; }
-    .pricing-section::before { content: ''; position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,0,255,0.15) 0%, transparent 70%); border-radius: 50%; animation: float-up 6s ease-in-out infinite; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto; position: relative; z-index: 1; }
-    .price-card { background: rgba(0,0,0,0.4); padding: 30px; border-radius: 15px; border: 2px solid #00ffea; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); animation: bounce-in 0.6s ease-out both; position: relative; overflow: hidden; }
-    .price-card:nth-child(1) { animation-delay: 0.2s; }
-    .price-card:nth-child(2) { animation-delay: 0.4s; }
-    .price-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(0,255,234,0.05) 0%, rgba(255,0,85,0.05) 100%); opacity: 0; transition: opacity 0.3s; }
-    .price-card:hover { border-color: #ff0055; box-shadow: 0 0 40px rgba(255,0,85,0.4), inset 0 0 20px rgba(255,0,85,0.1); transform: translateY(-8px) scale(1.03); }
-    .price-card:hover::before { opacity: 1; }
-    .price-card h3 { color: #00ffea; font-size: 1.8em; margin: 0 0 10px 0; font-family: 'Orbitron', sans-serif; position: relative; z-index: 1; transition: all 0.3s; }
-    .price-card:hover h3 { text-shadow: 0 0 15px #00ffea; }
-    .price-card .amount { color: #ff0055; font-size: 2.5em; margin: 15px 0; font-weight: bold; position: relative; z-index: 1; animation: pulse-scale 2s ease-in-out infinite; }
-    .price-card ul { text-align: left; color: #aaa; margin: 20px 0; position: relative; z-index: 1; }
-    .price-card li { margin: 10px 0; transition: all 0.2s; }
-    .price-card:hover li { transform: translateX(5px); color: #ddd; }
-    .price-card .btn-buy { width: 100%; margin-top: 20px; }
-    @keyframes pulse-scale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .stats-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 40px; background: rgba(0,255,234,0.03); border: 2px solid #00ffea; border-radius: 15px; margin: 60px 20px; animation: slide-in-up 0.6s ease-out; }
-    .stat-item { text-align: center; animation: bounce-in 0.6s ease-out both; }
-    .stat-item:nth-child(1) { animation-delay: 0.1s; }
-    .stat-item:nth-child(2) { animation-delay: 0.2s; }
-    .stat-item:nth-child(3) { animation-delay: 0.3s; }
-    .stat-item:nth-child(4) { animation-delay: 0.4s; }
-    .stat-number { font-size: 2.5em; color: #ff0055; font-weight: bold; font-family: 'Orbitron', sans-serif; animation: glow-pulse 3s ease-in-out infinite; }
-    .stat-label { color: #aaa; margin-top: 10px; }
-    footer { background: #0a0a0a; border-top: 2px solid #00ffea; padding: 50px 20px; text-align: center; color: #aaa; }
-    footer p { margin: 10px 0; }
-    footer a { color: #00ffea; text-decoration: none; transition: all 0.3s; }
-    footer a:hover { text-shadow: 0 0 10px #00ffea; text-decoration: underline; }
-    .navbar { background: rgba(13, 13, 13, 0.95); border-bottom: 2px solid #00ffea; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; animation: slide-in-down 0.6s ease-out; }
-    @keyframes slide-in-down { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-    .nav-brand { color: #00ffea; font-size: 1.5em; font-family: 'Orbitron', sans-serif; font-weight: bold; animation: glow-pulse 4s ease-in-out infinite; }
-    .nav-menu { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
-    .nav-menu a { color: #aaa; text-decoration: none; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); font-size: 0.95em; position: relative; }
-    .nav-menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #00ffea, #ff0055); transition: width 0.3s; }
-    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
-    .nav-menu a:hover, .nav-menu a.active { color: #00ffea; text-shadow: 0 0 10px #00ffea; }
-    @media (max-width: 768px) { .hero h1 { font-size: 2.5em; } .nav-menu { gap: 10px; } .features-grid { grid-template-columns: 1fr; } .pricing-grid { grid-template-columns: 1fr; } }
-  </style>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -124,58 +34,63 @@
     <!-- Hero Section -->
     <section class="hero">
       <h1>KRREVIVEÉLITE Universe</h1>
-      <p>AI-Powered automation, creation tools, and premium content platform designed for creators, engineers, and innovators</p>
+      <p>AI-powered automation, creation tools, and a premium content platform for creators, engineers, and innovators.</p>
       <div class="hero-cta">
-        <button class="cta-button" onclick="handleSubscribe()">🚀 Start Free</button>
-        <button class="cta-button" onclick="Subscription.simulatePurchase()" style="background: linear-gradient(135deg, #00ffea, #00ccbb);">✨ Go Premium</button>
+        <button class="cta-button" id="start-free">🚀 Start Free</button>
+        <button class="cta-button" id="go-premium" style="background: linear-gradient(135deg,#00ffea,#00ccbb);">✨ Go Premium</button>
       </div>
     </section>
 
     <!-- Stats -->
     <div class="stats-section">
-      <div class="stat-item"><div class="stat-number">1000+</div><div class="stat-label">Active Users</div></div>
-      <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">AI Tools</div></div>
-      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Availability</div></div>
-      <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime</div></div>
+      <div class="stat-item"><div class="stat-number">1000</div><div class="stat-label">Active Users</div></div>
+      <div class="stat-item"><div class="stat-number">50</div><div class="stat-label">AI Tools</div></div>
+      <div class="stat-item"><div class="stat-number">24</div><div class="stat-label">Availability (hrs)</div></div>
+      <div class="stat-item"><div class="stat-number">99.9</div><div class="stat-label">Uptime (%)</div></div>
     </div>
 
     <!-- Features Section -->
     <h2 class="section-title">Core Features</h2>
     <div class="features-grid">
-      <div class="feature-card" onclick="navigate('resume-generator.html')">
+      <div class="feature-card" data-target="resume-generator.html">
         <div class="icon">📄</div>
         <h3>Resume Generator</h3>
-        <p>AI-powered resume creation with premium templates and one-click PDF export</p>
+        <p>AI-powered resumes with premium templates and PDF export.</p>
         <span class="feature-badge">⭐ Premium</span>
       </div>
-      <div class="feature-card" onclick="navigate('playground.html')">
+
+      <div class="feature-card" data-target="playground.html">
         <div class="icon">💻</div>
         <h3>Code Playground</h3>
-        <p>Live HTML/CSS/JavaScript editor with AI code suggestions</p>
+        <p>Live HTML/CSS/JS editor with AI suggestions.</p>
         <span class="feature-badge">⭐ Premium</span>
       </div>
-      <div class="feature-card" onclick="navigate('engineering-hub.html')">
+
+      <div class="feature-card" data-target="engineering-hub.html">
         <div class="icon">⚙️</div>
         <h3>Automation Hub</h3>
-        <p>Ready-to-use automation scripts and workflow templates</p>
+        <p>Reusable automation scripts and workflow templates.</p>
         <span class="feature-badge">⭐ Premium</span>
       </div>
-      <div class="feature-card" onclick="navigate('tutorials.html')">
+
+      <div class="feature-card" data-target="tutorials.html">
         <div class="icon">🎓</div>
         <h3>Learning Center</h3>
-        <p>Video tutorials, PDFs, courses, and exclusive content</p>
+        <p>Courses, videos, and premium content for upskilling.</p>
         <span class="feature-badge">⭐ Premium</span>
       </div>
-      <div class="feature-card" onclick="navigate('mini-game.html')">
+
+      <div class="feature-card" data-target="mini-game.html">
         <div class="icon">🎮</div>
         <h3>Mini Game</h3>
-        <p>Play, compete on leaderboard, unlock skins and power-ups</p>
+        <p>Play, unlock skins and compete on leaderboards.</p>
         <span class="feature-badge">Free + Premium</span>
       </div>
-      <div class="feature-card" onclick="navigate('library.html')">
+
+      <div class="feature-card" data-target="library.html">
         <div class="icon">📚</div>
         <h3>Content Library</h3>
-        <p>Books, courses, and trending content for continuous learning</p>
+        <p>Books, templates and trending content.</p>
         <span class="feature-badge">⭐ Premium</span>
       </div>
     </div>
@@ -183,36 +98,21 @@
     <!-- Quick Actions -->
     <h2 class="section-title">Quick Actions</h2>
     <div class="dashboard-grid">
-      <div class="quick-action" onclick="navigate('resume-generator.html')">
-        <h4>📄 Create Resume</h4>
-        <p>AI-assisted resume builder with templates</p>
-      </div>
-      <div class="quick-action" onclick="navigate('daily-tasks.html')">
-        <h4>✅ View Tasks</h4>
-        <p>Manage daily automation and schedule</p>
-      </div>
-      <div class="quick-action" onclick="navigate('playground.html')">
-        <h4>💻 Write Code</h4>
-        <p>Live editor with AI suggestions</p>
-      </div>
-      <div class="quick-action" onclick="navigate('mini-game.html')">
-        <h4>🎮 Play Game</h4>
-        <p>Compete on leaderboard</p>
-      </div>
-      <div class="quick-action" onclick="navigate('tutorials.html')">
-        <h4>📖 Learn</h4>
-        <p>Videos and courses</p>
-      </div>
-      <div class="quick-action" onclick="navigate('engineering-hub.html')">
-        <h4>⚙️ Automate</h4>
-        <p>Workflow automation scripts</p>
-      </div>
+      <div class="quick-action" data-target="resume-generator.html"><h4>📄 Create Resume</h4><p>AI-assisted resume builder</p></div>
+      <div class="quick-action" data-target="daily-tasks.html"><h4>✅ View Tasks</h4><p>Manage daily automation</p></div>
+      <div class="quick-action" data-target="playground.html"><h4>💻 Write Code</h4><p>Live editor with AI</p></div>
+      <div class="quick-action" data-target="mini-game.html"><h4>🎮 Play Game</h4><p>Compete on leaderboards</p></div>
+      <div class="quick-action" data-target="tutorials.html"><h4>📖 Learn</h4><p>Courses and videos</p></div>
+      <div class="quick-action" data-target="engineering-hub.html"><h4>⚙️ Automate</h4><p>Workflow scripts</p></div>
     </div>
 
     <!-- Pricing -->
     <div class="pricing-section">
-      <h2 class="section-title" style="margin: 0 0 40px 0;">Premium Membership</h2>
-      <p style="color: #aaa; max-width: 600px; margin: 0 auto 30px; font-size: 1.1em;">Unlock unlimited access to all AI tools, advanced automation, premium templates, and exclusive learning content</p>
+      <h2 class="section-title" style="margin:0 0 40px 0">Premium Membership</h2>
+      <p style="color:#aaa;max-width:600px;margin:0 auto 30px;font-size:1.05em;">
+        Unlock unlimited access to all AI tools, advanced automation, premium templates, and exclusive learning content.
+      </p>
+
       <div class="pricing-grid">
         <div class="price-card">
           <h3>Free</h3>
@@ -220,24 +120,24 @@
           <ul>
             <li>✓ Mini game (free levels)</li>
             <li>✓ Basic dashboard</li>
-            <li>✓ 5 free resumes/month</li>
+            <li>✓ 5 free resumes / month</li>
             <li>✗ Code playground AI</li>
             <li>✗ Advanced automation</li>
           </ul>
         </div>
-        <div class="price-card" style="border-color: #ff0055; transform: scale(1.05);">
+
+        <div class="price-card highlight">
           <h3>Premium</h3>
-          <div class="amount">$9.99/mo</div>
+          <div class="amount">$9.99 / mo</div>
           <ul>
             <li>✓ All features unlocked</li>
             <li>✓ AI resume generator</li>
             <li>✓ Code playground with AI</li>
             <li>✓ Unlimited automation scripts</li>
             <li>✓ Premium tutorials & courses</li>
-            <li>✓ Advanced game levels</li>
             <li>✓ Priority support</li>
           </ul>
-          <button class="cta-button btn-buy" onclick="Subscription.simulatePurchase()">Subscribe Now</button>
+          <button class="cta-button btn-buy" id="subscribe-now">Subscribe Now</button>
         </div>
       </div>
     </div>
@@ -249,256 +149,28 @@
     </footer>
   </main>
 
-  <script src="scripts/subscription.js"></script>
-  <script src="scripts/dashboard.js"></script>
-  <script src="scripts/animation-system.js"></script>
+  <!-- Module scripts -->
+  <script src="assets/js/subscription.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/animation-system.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Small inline bindings (keeps behavior immediate & clear) -->
   <script>
-    // Particle effect system
-    class ParticleSystem {
-      constructor() {
-        this.particles = [];
-      }
-      
-      createParticle(x, y) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.pointerEvents = 'none';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-        particle.style.borderRadius = '50%';
-        particle.style.background = ['#00ffea', '#ff0055', '#ff00ff'][Math.floor(Math.random() * 3)];
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.boxShadow = '0 0 10px ' + particle.style.background;
-        particle.style.animation = 'particle-float ' + (0.8 + Math.random() * 0.4) + 's ease-out forwards';
-        document.body.appendChild(particle);
-        
-        setTimeout(() => particle.remove(), 1200);
-      }
-      
-      burst(x, y, count = 5) {
-        for (let i = 0; i < count; i++) {
-          setTimeout(() => this.createParticle(x, y), i * 50);
-        }
-      }
-    }
-    
-    const particles = new ParticleSystem();
-
-    // Add particle burst on button clicks
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.cta-button') || e.target.closest('.feature-card') || e.target.closest('.quick-action')) {
-        particles.burst(e.clientX, e.clientY, 8);
-      }
+    document.getElementById('start-free').addEventListener('click', () => {
+      if (!Subscription.isPremium()) Subscription.showModal(); else alert('You are already premium.');
     });
+    document.getElementById('go-premium').addEventListener('click', () => Subscription.simulatePurchase());
+    document.getElementById('subscribe-now').addEventListener('click', () => Subscription.simulatePurchase());
 
-    // Scroll-triggered animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = entry.target.dataset.animation || 'slide-in-up 0.6s ease-out forwards';
-          entry.target.style.opacity = '1';
-        }
+    // Navigation from cards & quick actions
+    document.querySelectorAll('.feature-card, .quick-action').forEach(el => {
+      el.addEventListener('click', () => {
+        const page = el.dataset.target;
+        // premium gating handled in animation-system.js navigate()
+        navigate(page);
       });
-    }, observerOptions);
-
-    // Observe cards for staggered scroll animations
-    document.querySelectorAll('.feature-card, .quick-action, .price-card').forEach((el, index) => {
-      el.style.opacity = '0';
-      el.dataset.animation = `slide-in-up 0.6s ease-out ${index * 0.1}s both`;
-      observer.observe(el);
-    });
-
-    // Mouse tracking effect on hero
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      document.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        if (e.clientY < rect.bottom) {
-          const x = (e.clientX / window.innerWidth - 0.5) * 20;
-          const y = (e.clientY / window.innerHeight - 0.5) * 20;
-          hero.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
-        }
-      });
-    }
-
-    // Number counter animation for stats
-    function animateCounter(element, target, duration = 2000) {
-      const start = 0;
-      const increment = target / (duration / 16);
-      let current = start;
-
-      const counter = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          element.textContent = target;
-          clearInterval(counter);
-        } else {
-          element.textContent = Math.floor(current) + '+';
-        }
-      }, 16);
-    }
-
-    // Trigger counter on scroll
-    const statNumbers = document.querySelectorAll('.stat-number');
-    let statsAnimated = false;
-
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !statsAnimated) {
-          statsAnimated = true;
-          statNumbers.forEach(el => {
-            const target = parseInt(el.textContent);
-            animateCounter(el, target);
-          });
-        }
-      });
-    }, { threshold: 0.5 });
-
-    document.querySelector('.stats-section')?.addEventListener('visible', () => {
-      statNumbers.forEach(el => {
-        const target = parseInt(el.textContent);
-        animateCounter(el, target);
-      });
-    });
-
-    // Hover glow effect tracking
-    document.addEventListener('mousemove', (e) => {
-      document.querySelectorAll('.feature-card, .quick-action, .price-card').forEach(card => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
-          card.style.setProperty('--mouse-x', x + 'px');
-          card.style.setProperty('--mouse-y', y + 'px');
-        }
-      });
-    });
-
-    // Add dynamic background stars
-    function createBackgroundParticles() {
-      const starCount = 50;
-      const bg = document.body;
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.style.position = 'fixed';
-        star.style.width = Math.random() * 2 + 'px';
-        star.style.height = star.style.width;
-        star.style.background = '#00ffea';
-        star.style.borderRadius = '50%';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.opacity = Math.random() * 0.5 + 0.3;
-        star.style.pointerEvents = 'none';
-        star.style.zIndex = '-1';
-        star.style.animation = `float-up ${5 + Math.random() * 5}s infinite`;
-        star.style.animationDelay = Math.random() * 2 + 's';
-        star.className = 'bg-particle';
-        bg.appendChild(star);
-      }
-    }
-
-    createBackgroundParticles();
-
-    function navigate(page) {
-      const premiumPages = ['resume-generator.html', 'playground.html', 'engineering-hub.html', 'tutorials.html', 'library.html'];
-      if (premiumPages.includes(page) && !Subscription.isPremium()) {
-        Subscription.showModal();
-        return;
-      }
-      window.location.href = page;
-    }
-
-    function handleSubscribe() {
-      if (!Subscription.isPremium()) {
-        Subscription.showModal();
-      } else {
-        alert('You are already a premium member!');
-      }
-    }
-
-    function showNotification(message, type = 'info') {
-      const notifDiv = document.getElementById('notifications');
-      const notif = document.createElement('div');
-      notif.className = 'notification';
-      notif.textContent = message;
-      notifDiv.appendChild(notif);
-      setTimeout(() => notif.remove(), 5000);
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const user = await Session.getMe();
-      if (user) {
-        document.getElementById('user-link').style.display = 'block';
-        showNotification(`Welcome back, ${user.email}!`);
-      }
     });
   </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE Universe</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-
-<header>
-    <h1>KRREVIVEÉLITE Universe</h1>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="universe.html">Universe</a></li>
-            <li><a href="game.html">Game</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
-<section class="hero">
-    <h2>Step Into The KRREVIVEÉLITE Universe</h2>
-    <p>A multidimensional experience merging technology, spirituality, dominance, and awakening.</p>
-    <a class="cta-btn" href="game.html">Download the Game</a>
-</section>
-
-<section class="features">
-    <h3>Core Pillars</h3>
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-            <h4>Elite Knowledge</h4>
-            <p>Unlock the deepest systems of power, discipline, and self-evolution.</p>
-        </div>
-
-        <div class="feature-card">
-            <h4>Universe Expansion</h4>
-            <p>Characters, realms, missions, and a complete story world.</p>
-        </div>
-
-        <div class="feature-card">
-            <h4>Next-Level AI Integration</h4>
-            <p>The website, game and world update dynamically through your AI directives.</p>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2025 KRREVIVEÉLITE Universe</p>
-</footer>
-
-<script src="assets/js/main.js"></script>
-
 </body>
 </html>
