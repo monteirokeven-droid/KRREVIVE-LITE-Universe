@@ -5,4 +5,51 @@
 		}
 	],
 	"settings": {}
-}
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KRREVIVEÉLITE Universe Lore</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Universe Lore</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="universe.html">Universe</a></li>
+            <li><a href="game.html">Game</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="content">
+    <h2>Main Characters</h2>
+
+    <div class="card">
+        <h3>King Cerebrus</h3>
+        <p>The wise brain-king guiding awakened beings.</p>
+    </div>
+
+    <div class="card">
+        <h3>Squire Focus</h3>
+        <p>A guardian who assists in defeating distraction goblins.</p>
+    </div>
+
+    <div class="card">
+        <h3>The Forgotten Order</h3>
+        <p>A hidden group trying to block human ascension.</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2025 KRREVIVEÉLITE Universe</p>
+</footer>
+
+</body>
+</html>
