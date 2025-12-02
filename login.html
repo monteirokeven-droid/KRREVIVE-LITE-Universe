@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login — KRREVIVEÉLITE Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="neon-bg">
+  <header class="site-header">
+    <div class="brand">KRREVIVEÉLITE <span class="accent">Login</span></div>
+    <nav class="main-nav"><a href="index.html">Home</a></nav>
+  </header>
+  <main class="container">
+    <h2>Sign In with Magic Link</h2>
+    <p>Enter your email to receive a login link.</p>
+
+    <section class="card" style="max-width:400px">
+      <div id="login-form" style="display:block">
+        <label>Email</label>
+        <input id="email" type="email" placeholder="you@example.com" style="width:100%;padding:8px;border-radius:6px;margin-top:6px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f0ff">
+        <div style="margin-top:12px">
+          <button id="request-link" class="btn primary">Send Link</button>
+        </div>
+        <div id="status" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+      </div>
+
+      <div id="verify-form" style="display:none">
+        <p>Link sent to <strong id="sent-email"></strong>. Check your email and paste the token below:</p>
+        <label>Token</label>
+        <input id="token" type="text" placeholder="Paste token from email link" style="width:100%;padding:8px;border-radius:6px;margin-top:6px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f0ff">
+        <div style="margin-top:12px">
+          <button id="verify-token" class="btn primary">Verify & Sign In</button>
+        </div>
+        <div id="verify-status" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/subscription.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      let currentEmail = '';
+      document.getElementById('request-link').addEventListener('click', async ()=>{
+        const email = (document.getElementById('email').value||'').trim();
+        if (!email) return alert('Enter email');
+        try{
+          const res = await fetch('/api/auth/request-magic-link', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email})});
+          const j = await res.json();
+          if (j.error) return document.getElementById('status').textContent = j.error;
+          currentEmail = email;
+          document.getElementById('login-form').style.display='none';
+          document.getElementById('verify-form').style.display='block';
+          document.getElementById('sent-email').textContent = email;
+        }catch(e){ document.getElementById('status').textContent = 'Error: '+e.message; }
+      });
+
+      document.getElementById('verify-token').addEventListener('click', async ()=>{
+        const token = (document.getElementById('token').value||'').trim();
+        if (!token) return alert('Enter token');
+        try{
+          const res = await fetch('/api/auth/verify-magic-link', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: currentEmail, token})});
+          const j = await res.json();
+          if (j.error) return document.getElementById('verify-status').textContent = j.error;
+          if (j.session_token){
+            Session.setToken(j.session_token);
+            localStorage.setItem('kr_client_id', j.client_id);
+            localStorage.setItem('kr_user_email', currentEmail);
+            alert('Signed in!');
+            window.location.href='account.html';
+          }
+        }catch(e){ document.getElementById('verify-status').textContent = 'Error: '+e.message; }
+      });
+
+      // Check if URL has token (from email link)
+      const params = new URLSearchParams(window.location.search);
+      const urlToken = params.get('token');
+      const urlEmail = params.get('email');
+      if (urlToken && urlEmail){
+        document.getElementById('email').value = urlEmail;
+        document.getElementById('token').value = urlToken;
+        currentEmail = urlEmail;
+        document.getElementById('login-form').style.display='none';
+        document.getElementById('verify-form').style.display='block';
+        document.getElementById('sent-email').textContent = urlEmail;
+      }
+    });
+  </script>
+</body>
+</html>

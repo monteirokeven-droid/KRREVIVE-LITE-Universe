@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Account — KRREVIVEÉLITE Universe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="neon-bg">
+  <header class="site-header">
+    <div class="brand">KRREVIVEÉLITE <span class="accent">Account</span></div>
+    <nav class="main-nav"><a href="index.html">Home</a></nav>
+  </header>
+  <main class="container">
+    <h2>My Account</h2>
+
+    <section class="card">
+      <h3>Profile</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.02)">
+        <div>
+          <strong>Email</strong><div id="email-display" style="color:var(--muted);font-size:13px">Loading...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px">
+      <h3>Subscription</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0">
+        <div>
+          <strong>Status</strong><div id="status-display" style="color:var(--muted);font-size:13px">Loading...</div>
+        </div>
+        <button id="manage-subscription" class="btn" style="display:none">Manage Billing</button>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:12px">
+      <h3>Account Actions</h3>
+      <div style="display:flex;gap:8px">
+        <button id="logout-btn" class="btn">Logout</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="scripts/subscription.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async ()=>{
+      const user = await Session.getMe();
+      if (!user || !user.email) {
+        window.location.href = 'login.html';
+        return;
+      }
+      document.getElementById('email-display').textContent = user.email;
+      if (user.is_premium) {
+        document.getElementById('status-display').textContent = '✓ Premium';
+        document.getElementById('status-display').style.color = '#00ffea';
+        document.getElementById('manage-subscription').style.display = 'inline-block';
+      } else {
+        document.getElementById('status-display').textContent = 'Free';
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', ()=>{
+        Session.clear();
+        alert('Logged out.');
+        window.location.href = 'login.html';
+      });
+
+      document.getElementById('manage-subscription').addEventListener('click', async ()=>{
+        const token = Session.getToken();
+        const res = await fetch('/api/billing-portal', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json', 'X-Session-Token': token},
+          body: JSON.stringify({client_id: user.client_id})
+        });
+        const j = await res.json();
+        if (j.url) window.location.href = j.url;
+        else alert('Billing portal not available: '+JSON.stringify(j));
+      });
+    });
+  </script>
+</body>
+</html>

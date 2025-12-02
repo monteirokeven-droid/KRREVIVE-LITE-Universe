@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KRREVIVEÉLITE Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background:#08090a;color:#e6f7ff;padding:20px;font-family:Roboto,Arial">
+  <h1 style="font-family:Orbitron, sans-serif">Admin Console</h1>
+  <p>Provide `admin_token` as a query parameter (e.g. ?admin_token=YOUR_TOKEN) to view data.</p>
+
+  <section class="card" id="auth-card">
+    <h3>Admin Login</h3>
+    <input id="admin-token-input" placeholder="Enter admin token" type="password" style="padding:8px;border-radius:6px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f7ff;width:100%">
+    <button id="admin-login" class="btn primary" style="margin-top:8px">Login</button>
+  </section>
+
+  <section class="card" id="subs-card" style="display:none">
+    <h3>Subscriptions</h3>
+    <div id="subs">Loading...</div>
+  </section>
+
+  <section class="card" id="lb-card" style="margin-top:12px;display:none">
+    <h3>Leaderboard</h3>
+    <div id="lb">Loading...</div>
+  </section>
+
+  <section class="card" style="margin-top:12px;display:none" id="portal-card">
+    <h3>Billing Portal</h3>
+    <p>Open Stripe Billing Portal for a subscriber (requires Stripe configured and a `client_id` present for that user).</p>
+    <input id="bp-client" placeholder="client_id" style="padding:8px;border-radius:6px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#e6f7ff">
+    <button id="open-billing" class="btn">Open Portal</button>
+  </section>
+
+  <script>
+    let adminToken = null;
+
+    document.getElementById('admin-login').addEventListener('click', async ()=>{
+      const token = (document.getElementById('admin-token-input').value||'').trim();
+      if (!token) return alert('Enter admin token');
+      try{
+        const h = { 'X-ADMIN-TOKEN': token };
+        const res = await fetch('/api/admin/subscriptions', {headers: h});
+        if (res.status === 401) return alert('Invalid token');
+        adminToken = token;
+        loadAdminData(token);
+        document.getElementById('auth-card').style.display='none';
+        document.getElementById('subs-card').style.display='block';
+        document.getElementById('lb-card').style.display='block';
+        document.getElementById('portal-card').style.display='block';
+      }catch(e){ alert('Login failed: '+e.message); }
+    });
+
+    async function loadAdminData(token){
+      try{
+        const h = { 'X-ADMIN-TOKEN': token };
+        const sres = await fetch('/api/admin/subscriptions', {headers: h});
+        const subs = await sres.json();
+        document.getElementById('subs').innerHTML = '<pre>'+JSON.stringify(subs, null, 2)+'</pre>';
+
+        const lres = await fetch('/api/admin/leaderboard', {headers: h});
+        const lb = await lres.json();
+        document.getElementById('lb').innerHTML = '<ol>'+ (lb.leaders||[]).map(p=>`<li>${p.name} — ${p.score}</li>`).join('') +'</ol>';
+      }catch(e){
+        document.getElementById('subs').textContent = 'Failed to load data: '+e.message;
+      }
+    }
+
+    document.getElementById('open-billing').addEventListener('click', async ()=>{
+      if (!adminToken) return alert('Not logged in');
+      const cid = document.getElementById('bp-client').value.trim();
+      if(!cid) return alert('Enter client_id');
+      try{
+        const resp = await fetch('/api/billing-portal', {method:'POST', headers: {'Content-Type':'application/json', 'X-ADMIN-TOKEN': adminToken}, body: JSON.stringify({client_id: cid})});
+        const j = await resp.json();
+        if (j.url) window.open(j.url, '_blank'); else alert(JSON.stringify(j));
+      }catch(e){ alert('Billing portal failed: '+e.message); }
+    });
+  </script>
+</body>
+</html>

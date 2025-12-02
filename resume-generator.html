@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Resume Generator - KRREVIVEÉLITE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    @keyframes glow-pulse { 0%, 100% { text-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea; } 50% { text-shadow: 0 0 30px #00ffea, 0 0 50px #00ffea, 0 0 70px #00ccbb; } }
+    @keyframes slide-in { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slide-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce-in { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
+
+    body { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); color: #e0e0e0; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; }
+    .navbar { background: rgba(13, 13, 13, 0.95); border-bottom: 2px solid #00ffea; padding: 15px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; animation: slide-in 0.6s ease-out; }
+    .nav-brand { color: #00ffea; font-weight: bold; cursor: pointer; font-family: 'Orbitron', sans-serif; animation: glow-pulse 4s ease-in-out infinite; }
+    .nav-menu { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+    .nav-menu a { color: #aaa; text-decoration: none; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; }
+    .nav-menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #00ffea, #ff0055); transition: width 0.3s; }
+    .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+    .nav-menu a:hover, .nav-menu a.active { color: #00ffea; text-shadow: 0 0 10px #00ffea; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; border-bottom: 2px solid #00ffea; padding-bottom: 30px; margin-bottom: 40px; animation: slide-in-up 0.6s ease-out; }
+    .header h1 { font-size: 2.5em; color: #00ffea; font-family: 'Orbitron', sans-serif; margin: 0 0 10px 0; animation: glow-pulse 3s ease-in-out infinite; }
+    .header p { color: #aaa; margin: 0; animation: slide-in-up 0.6s ease-out 0.2s both; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .section { background: rgba(0,255,234,0.05); border: 2px solid #00ffea; border-radius: 15px; padding: 25px; animation: bounce-in 0.6s ease-out; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.4s; }
+    .section:hover { box-shadow: 0 0 30px rgba(0,255,234,0.3), inset 0 0 15px rgba(0,255,234,0.1); transform: translateY(-3px); }
+    .section h2 { color: #00ffea; font-family: 'Orbitron', sans-serif; font-size: 1.5em; margin: 0 0 20px 0; transition: all 0.3s; }
+    .section:hover h2 { text-shadow: 0 0 15px #00ffea; }
+    .form-group { margin: 15px 0; animation: slide-in-up 0.6s ease-out backwards; }
+    .form-group:nth-child(1) { animation-delay: 0.3s; }
+    .form-group:nth-child(2) { animation-delay: 0.35s; }
+    .form-group:nth-child(3) { animation-delay: 0.4s; }
+    .form-group:nth-child(4) { animation-delay: 0.45s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.55s; }
+    .form-group:nth-child(7) { animation-delay: 0.6s; }
+    .form-group:nth-child(8) { animation-delay: 0.65s; }
+    .form-label { display: block; color: #00ffea; margin-bottom: 8px; font-weight: bold; transition: all 0.2s; }
+    .form-input, .form-textarea { background: rgba(0,0,0,0.6); border: 2px solid rgba(0,255,234,0.3); color: #e0e0e0; padding: 12px; border-radius: 8px; width: 100%; font-family: 'Roboto', sans-serif; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .form-input:focus, .form-textarea:focus { outline: none; box-shadow: 0 0 20px rgba(0,255,234,0.4), inset 0 0 10px rgba(0,255,234,0.1); border-color: #00ffea; transform: scale(1.01); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); margin: 5px; position: relative; overflow: hidden; }
+    .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+    .btn:hover::before { left: 100%; }
+    .btn-primary { background: linear-gradient(135deg, #ff0055, #ff00ff); color: white; box-shadow: 0 0 15px rgba(255,0,85,0.4); animation: bounce-in 0.6s ease-out backwards; }
+    .btn-primary:nth-of-type(1) { animation-delay: 0.7s; }
+    .btn-primary:nth-of-type(2) { animation-delay: 0.75s; }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(255,0,85,0.8), 0 0 50px rgba(255,0,255,0.4); transform: translateY(-3px) scale(1.05); }
+    .preview { background: #ffffff; color: #000; padding: 30px; border-radius: 10px; min-height: 500px; font-family: 'Times New Roman', serif; animation: slide-in-up 0.6s ease-out 0.3s both; box-shadow: 0 0 30px rgba(0,255,234,0.2); transition: all 0.3s; }
+    .preview:hover { box-shadow: 0 0 40px rgba(0,255,234,0.4), 0 0 60px rgba(255,0,85,0.2); }
+    .preview h2 { color: #333; margin: 20px 0 5px 0; }
+    .preview h3 { color: #666; margin: 15px 0 5px 0; font-size: 1em; }
+    .preview p { margin: 5px 0; line-height: 1.5; }
+    footer { background: #0a0a0a; border-top: 2px solid #00ffea; padding: 30px 20px; text-align: center; color: #aaa; margin-top: 60px; }
+    @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand" onclick="window.location.href='index.html'">⚡ KRREVIVEÉLITE</div>
+    <ul class="nav-menu">
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="resume-generator.html" class="active">Resume</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="engineering-hub.html">Engineering</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="mini-game.html">Game</a></li>
+      <li><a href="library.html">Library</a></li>
+      <li><a href="daily-tasks.html">Tasks</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="header">
+      <h1>📄 AI Resume Generator</h1>
+      <p>Create professional resumes with AI suggestions and premium templates</p>
+    </div>
+
+    <div class="content-grid">
+      <div class="section">
+        <h2>Build Your Resume</h2>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="fullName" placeholder="John Doe" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-input" id="title" placeholder="Full Stack Developer" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="email" placeholder="john@example.com" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input" id="phone" placeholder="+1 (555) 123-4567" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Summary</label>
+          <textarea class="form-textarea" id="summary" placeholder="Professional summary..." oninput="updatePreview()"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Experience</label>
+          <textarea class="form-textarea" id="experience" placeholder="Job Title at Company (Years)" oninput="updatePreview()"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Skills</label>
+          <input type="text" class="form-input" id="skills" placeholder="JavaScript, React, Node.js..." oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" onclick="downloadPDF()">📥 Download PDF</button>
+          <button class="btn btn-primary" onclick="generateAISuggestions()">✨ AI Tips</button>
+        </div>
+      </div>
+
+      <div class="section" style="background: #ffffff; color: #000; border-color: #ff0055;">
+        <h2 style="color: #333;">Preview</h2>
+        <div class="preview" id="preview">
+          <h2 id="pName">John Doe</h2>
+          <p id="pTitle" style="color: #666;">Full Stack Developer</p>
+          <p id="pContact" style="font-size: 0.9em; color: #999;"></p>
+          <h3>Summary</h3>
+          <p id="pSummary">Professional summary...</p>
+          <h3>Experience</h3>
+          <p id="pExp">Job Title at Company</p>
+          <h3>Skills</h3>
+          <p id="pSkills">JavaScript, React, Node.js</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer><p>&copy; 2025 KRREVIVEÉLITE Universe</p></footer>
+
+  <script src="scripts/subscription.js"></script>
+  <script>
+    window.addEventListener('load', () => { if (!Subscription.isPremium()) Subscription.showModal(); });
+    function updatePreview() {
+      document.getElementById('pName').textContent = document.getElementById('fullName').value || 'John Doe';
+      document.getElementById('pTitle').textContent = document.getElementById('title').value || 'Full Stack Developer';
+      document.getElementById('pContact').textContent = document.getElementById('email').value + ' | ' + document.getElementById('phone').value;
+      document.getElementById('pSummary').textContent = document.getElementById('summary').value || 'Professional summary...';
+      document.getElementById('pExp').textContent = document.getElementById('experience').value || 'Job Title at Company';
+      document.getElementById('pSkills').textContent = document.getElementById('skills').value || 'JavaScript, React, Node.js';
+    }
+    function downloadPDF() { alert('PDF Download: Open in production'); }
+    function generateAISuggestions() { alert('✨ Tip: Use action verbs and quantifiable achievements!'); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Tasks - KRREVIVEÉLITE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); color: #e0e0e0; font-family: 'Roboto', sans-serif; margin: 0; }
+    .navbar { background: rgba(13, 13, 13, 0.95); border-bottom: 2px solid #00ffea; padding: 15px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; }
+    .nav-brand { color: #00ffea; font-weight: bold; cursor: pointer; font-family: 'Orbitron', sans-serif; }
+    .nav-menu { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+    .nav-menu a { color: #aaa; text-decoration: none; transition: all 0.3s; }
+    .nav-menu a:hover, .nav-menu a.active { color: #00ffea; }
+    .header { text-align: center; padding: 40px 20px; border-bottom: 2px solid #00ffea; }
+    .header h1 { font-size: 2.5em; color: #00ffea; font-family: 'Orbitron', sans-serif; margin: 0; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    .task-section { background: rgba(0,255,234,0.05); border: 2px solid #00ffea; border-radius: 12px; padding: 25px; margin: 20px 0; }
+    .task-section h2 { color: #00ffea; font-family: 'Orbitron', sans-serif; margin: 0 0 20px 0; }
+    .task-list { display: flex; flex-direction: column; gap: 15px; }
+    .task-item { background: rgba(0,0,0,0.6); border: 1px solid #00ffea; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s; }
+    .task-item:hover { background: rgba(0,255,234,0.08); }
+    .task-item.completed { border-color: #ff0055; opacity: 0.7; }
+    .task-item.completed .task-text { text-decoration: line-through; }
+    .task-text { color: #e0e0e0; }
+    .task-time { color: #aaa; font-size: 0.9em; }
+    .btn { padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin: 0 5px; }
+    .btn-primary { background: linear-gradient(135deg, #ff0055, #ff00ff); color: white; }
+    .btn-primary:hover { box-shadow: 0 0 20px rgba(255,0,85,0.5); }
+    .btn-secondary { background: #00ffea; color: #000; }
+    .btn-secondary:hover { box-shadow: 0 0 20px rgba(0,255,234,0.5); }
+    .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0; }
+    .action-btn { background: linear-gradient(135deg, rgba(255,0,85,0.2), rgba(255,0,255,0.2)); border: 2px solid #ff0055; padding: 12px; border-radius: 8px; cursor: pointer; color: #ff0055; font-weight: bold; transition: all 0.3s; }
+    .action-btn:hover { box-shadow: 0 0 15px rgba(255,0,85,0.4); }
+    footer { background: #0a0a0a; border-top: 2px solid #00ffea; padding: 30px 20px; text-align: center; color: #aaa; margin-top: 60px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand" onclick="window.location.href='index.html'">⚡ KRREVIVEÉLITE</div>
+    <ul class="nav-menu">
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="resume-generator.html">Resume</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="engineering-hub.html">Engineering</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="mini-game.html">Game</a></li>
+      <li><a href="library.html">Library</a></li>
+      <li><a href="daily-tasks.html" class="active">Tasks</a></li>
+    </ul>
+  </nav>
+
+  <div class="header">
+    <h1>✅ Daily Tasks</h1>
+    <p style="color: #aaa;">Schedule, reminders, and AI automation for daily productivity</p>
+  </div>
+
+  <div class="container">
+    <!-- Quick Actions -->
+    <div class="task-section">
+      <h2>⚡ Quick Actions</h2>
+      <div class="quick-actions" id="quickActions"></div>
+    </div>
+
+    <!-- Today's Tasks -->
+    <div class="task-section">
+      <h2>📅 Today's Tasks</h2>
+      <div class="task-list" id="todayTasks"></div>
+    </div>
+
+    <!-- Recurring Tasks -->
+    <div class="task-section">
+      <h2>🔄 Recurring Tasks</h2>
+      <div class="task-list" id="recurringTasks"></div>
+    </div>
+  </div>
+
+  <footer><p>&copy; 2025 KRREVIVEÉLITE Universe</p></footer>
+
+  <script src="scripts/subscription.js"></script>
+  <script>
+    window.addEventListener('load', () => { if (!Subscription.isPremium()) Subscription.showModal(); });
+
+    const quickActions = ['Process Emails', 'Check Analytics', 'Review PRs', 'Update Docs', 'Deploy Update', 'Backup Data'];
+    const todaysTasks = [
+      { text: 'Finish project design', time: '09:00 AM', done: false },
+      { text: 'Code review for team', time: '11:00 AM', done: false },
+      { text: 'Update documentation', time: '02:00 PM', done: true },
+      { text: 'Deploy to production', time: '04:00 PM', done: false },
+      { text: 'Team standup meeting', time: '10:00 AM', done: true },
+    ];
+    const recurringTasks = [
+      { text: 'Daily standup', time: 'Every morning', done: false },
+      { text: 'Code optimization', time: 'Every Friday', done: false },
+      { text: 'Backup database', time: 'Every night', done: false },
+      { text: 'Update dependencies', time: 'Every week', done: false },
+    ];
+
+    // Quick actions
+    const qaDiv = document.getElementById('quickActions');
+    quickActions.forEach(action => {
+      const btn = document.createElement('div');
+      btn.className = 'action-btn';
+      btn.textContent = action;
+      btn.onclick = () => alert(`Executing: ${action}`);
+      qaDiv.appendChild(btn);
+    });
+
+    // Today's tasks
+    const ttDiv = document.getElementById('todayTasks');
+    todaysTasks.forEach(task => {
+      const item = document.createElement('div');
+      item.className = `task-item ${task.done ? 'completed' : ''}`;
+      item.innerHTML = `
+        <div><input type="checkbox" ${task.done ? 'checked' : ''} onchange="this.parentElement.parentElement.classList.toggle('completed')"> <span class="task-text">${task.text}</span> <span class="task-time">${task.time}</span></div>
+        <div><button class="btn btn-secondary" onclick="alert('Task details')">Details</button></div>
+      `;
+      ttDiv.appendChild(item);
+    });
+
+    // Recurring tasks
+    const rtDiv = document.getElementById('recurringTasks');
+    recurringTasks.forEach(task => {
+      const item = document.createElement('div');
+      item.className = `task-item ${task.done ? 'completed' : ''}`;
+      item.innerHTML = `
+        <div><input type="checkbox" ${task.done ? 'checked' : ''} onchange="this.parentElement.parentElement.classList.toggle('completed')"> <span class="task-text">${task.text}</span> <span class="task-time">${task.time}</span></div>
+        <div><button class="btn btn-secondary" onclick="alert('Configure automation')">Automate</button></div>
+      `;
+      rtDiv.appendChild(item);
+    });
+  </script>
+</body>
+</html>

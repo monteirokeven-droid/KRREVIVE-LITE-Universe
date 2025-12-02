@@ -1,0 +1,86 @@
+/* KRREVIVEÉLITE Resume — Stylesheet
+   - Futuristic, luxe theme: neon gold, purple, and cyan
+   - Responsive layout, grid-based, easy to customize
+*/
+
+:root{
+  --bg:#07070a;
+  --card:#0f1116;
+  --gold:#f0b700;
+  --purple:#8e44ad;
+  --cyan:#00d9ff;
+  --muted:#9aa3b2;
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  --accent: linear-gradient(90deg, var(--gold), var(--purple));
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Lato',system-ui,Arial;color:#e9e7e2;background:linear-gradient(180deg,#050508 0%, #0a0a0f 100%);} 
+
+.rv-root{max-width:1100px;margin:28px auto;padding:24px;}
+.rv-header{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06)); border-radius:var(--radius); padding:18px; border:1px solid rgba(255,255,255,0.04); box-shadow:0 14px 50px rgba(0,0,0,0.6);}
+.rv-header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.rv-profile{display:flex;align-items:center;gap:18px}
+.rv-pic{width:110px;height:110px;border-radius:999px;background:linear-gradient(135deg, rgba(124,58,237,0.14), rgba(240,183,0,0.12));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(124,58,237,0.06), 0 6px 18px rgba(240,183,0,0.06);position:relative;border:4px solid transparent}
+.rv-pic::after{content:'';position:absolute;inset:-6px;border-radius:999px;background:conic-gradient(from 0deg, rgba(240,183,0,0.18), rgba(124,58,237,0.14));filter:blur(8px);opacity:0.95}
+.rv-pic .rv-initials{font-family:'Playfair Display',serif;font-size:34px;color:#06060a}
+.rv-meta .rv-name{margin:0;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold)}
+.rv-meta .rv-title{margin:4px 0;color:var(--cyan);font-weight:700}
+.rv-meta .rv-tag{margin:0;color:var(--muted);font-size:14px}
+
+.rv-actions{display:flex;gap:10px;align-items:center}
+.rv-btn{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:inherit;cursor:pointer}
+.rv-btn-primary{background:var(--accent);color:#071018;font-weight:700;box-shadow:0 12px 40px rgba(240,183,0,0.12)}
+.rv-btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+/* Grid */
+.rv-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;margin-top:20px}
+.rv-left{display:flex;flex-direction:column;gap:18px}
+.rv-right{display:flex;flex-direction:column;gap:18px}
+.rv-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 36px rgba(2,6,23,0.6)}
+.rv-card h2{margin:0 0 10px 0;color:var(--gold);font-family:'Playfair Display',serif}
+.muted{color:var(--muted)}
+
+/* Skills */
+.skill{margin-bottom:12px}
+.skill label{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
+.progress{height:12px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;position:relative}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:999px;box-shadow:0 8px 20px rgba(0,217,255,0.06);transition:width 900ms cubic-bezier(.2,.9,.3,1)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{padding:8px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+
+/* Experience */
+.exp-item{margin-bottom:14px}
+.exp-item h3{margin:0;color:var(--cyan)}
+.exp-item .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+.exp-item ul{margin:0;padding-left:18px;color:var(--muted)}
+
+/* Education */
+.edu-item{margin-bottom:12px}
+
+/* Projects */
+.projects-list{margin:0;padding-left:18px;color:var(--muted)}
+
+/* Contact & social */
+.social-grid{display:flex;gap:10px}
+.social-btn{display:inline-flex;gap:8px;align-items:center;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.03);color:var(--muted);text-decoration:none}
+
+/* Footer */
+.rv-footer{margin-top:18px;text-align:center;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:920px){
+  .rv-grid{grid-template-columns:1fr;}
+  .rv-left{order:2}
+  .rv-right{order:1}
+  .rv-pic{width:96px;height:96px}
+}
+
+@media (max-width:520px){
+  .rv-header-inner{flex-direction:column;align-items:center;text-align:center}
+  .rv-pic{width:86px;height:86px}
+}
+
+/* Small helper for PDF - hide buttons while printing */
+@media print{ .rv-actions{display:none} }
