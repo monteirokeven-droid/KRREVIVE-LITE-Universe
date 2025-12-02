@@ -1,33 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Center - KRREVIVEÉLITE</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    body { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); color: #e0e0e0; font-family: 'Roboto', sans-serif; margin: 0; }
-    .navbar { background: rgba(13, 13, 13, 0.95); border-bottom: 2px solid #00ffea; padding: 15px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; }
-    .nav-brand { color: #00ffea; font-weight: bold; cursor: pointer; font-family: 'Orbitron', sans-serif; }
-    .nav-menu { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
-    .nav-menu a { color: #aaa; text-decoration: none; transition: all 0.3s; }
+    /* --- Reset & Base --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%); color: #e0e0e0; font-family: 'Roboto', sans-serif; }
+
+    /* --- Navbar --- */
+    .navbar { background: rgba(13,13,13,0.95); border-bottom: 2px solid #00ffea; padding: 15px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; }
+    .nav-brand { color: #00ffea; font-weight: bold; cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 1.5em; }
+    .nav-menu { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+    .nav-menu a { color: #aaa; text-decoration: none; transition: 0.3s; }
     .nav-menu a:hover, .nav-menu a.active { color: #00ffea; }
+
+    /* --- Header --- */
     .header { text-align: center; padding: 40px 20px; border-bottom: 2px solid #00ffea; }
-    .header h1 { font-size: 2.5em; color: #00ffea; font-family: 'Orbitron', sans-serif; margin: 0; }
+    .header h1 { font-size: 2.5em; color: #00ffea; font-family: 'Orbitron', sans-serif; margin-bottom: 10px; }
+    .header p { color: #aaa; font-size: 1em; }
+
+    /* --- Container & Grid --- */
     .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
     .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .content-card { background: rgba(0,255,234,0.05); border: 2px solid #00ffea; border-radius: 12px; padding: 20px; transition: all 0.3s; cursor: pointer; }
-    .content-card:hover { box-shadow: 0 0 25px rgba(0,255,234,0.3); transform: translateY(-5px); }
+
+    /* --- Content Card --- */
+    .content-card { 
+      background: rgba(0,255,234,0.05); 
+      border: 2px solid #00ffea; 
+      border-radius: 12px; 
+      padding: 20px; 
+      transition: all 0.3s; 
+      cursor: pointer; 
+      position: relative;
+      overflow: hidden;
+    }
+    .content-card:hover { 
+      box-shadow: 0 0 25px rgba(0,255,234,0.5); 
+      transform: translateY(-5px); 
+    }
     .content-card .icon { font-size: 2.5em; margin-bottom: 10px; }
-    .content-card h3 { color: #00ffea; margin: 10px 0; }
-    .content-card p { color: #aaa; margin: 0; }
+    .content-card h3 { color: #00ffea; margin: 10px 0; font-size: 1.2em; }
+    .content-card p { color: #aaa; font-size: 0.9em; }
     .badge { display: inline-block; padding: 5px 10px; background: #ff0055; color: white; border-radius: 5px; font-size: 0.8em; margin-top: 10px; }
-    .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin: 10px 5px 5px 0; }
+    .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin-top: 10px; display: inline-block; }
     .btn-primary { background: linear-gradient(135deg, #ff0055, #ff00ff); color: white; }
     .btn-primary:hover { box-shadow: 0 0 20px rgba(255,0,85,0.5); }
+
+    /* --- Modal --- */
+    .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: #111; padding: 30px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%; }
+    .modal-content h2 { color: #ff0055; margin-bottom: 15px; }
+    .modal-content p { color: #ccc; margin-bottom: 20px; }
+    .modal-content .close-btn { background: #00ffea; color: #111; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+    /* --- Footer --- */
     footer { background: #0a0a0a; border-top: 2px solid #00ffea; padding: 30px 20px; text-align: center; color: #aaa; margin-top: 60px; }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 2em; }
+      .content-card { padding: 15px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-brand" onclick="window.location.href='index.html'">⚡ KRREVIVEÉLITE</div>
     <ul class="nav-menu">
@@ -42,45 +83,59 @@
     </ul>
   </nav>
 
+  <!-- Header -->
   <div class="header">
     <h1>📖 Learning Center</h1>
-    <p style="color: #aaa;">Video tutorials, courses, PDFs, and exclusive master key books</p>
+    <p>Video tutorials, courses, PDFs, and exclusive master key books</p>
   </div>
 
+  <!-- Content -->
   <div class="container">
     <div class="content-grid" id="contentGrid"></div>
   </div>
 
+  <!-- Modal -->
+  <div class="modal" id="premiumModal">
+    <div class="modal-content">
+      <h2>🔒 Premium Access Required</h2>
+      <p>This content is available only for premium members.</p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer><p>&copy; 2025 KRREVIVEÉLITE Universe</p></footer>
 
-  <script src="scripts/subscription.js"></script>
+  <!-- Scripts -->
   <script>
-    window.addEventListener('load', () => { if (!Subscription.isPremium()) Subscription.showModal(); });
+    // --- Premium Check Simulation ---
+    const Subscription = {
+      isPremium: () => false, // set true for testing premium
+      showModal: () => document.getElementById('premiumModal').style.display = 'flex'
+    };
 
+    window.addEventListener('load', () => {
+      // Check premium (could redirect or block content)
+      if (!Subscription.isPremium()) {
+        // Optional: Show modal immediately
+        // Subscription.showModal();
+      }
+    });
+
+    function closeModal() { document.getElementById('premiumModal').style.display = 'none'; }
+
+    // --- Content Cards ---
     const content = [
-      { icon: '🎥', title: 'Web Development Masterclass', desc: 'Complete course from basics to advanced' },
-      { icon: '📚', title: 'The Master Key Books', desc: 'Exclusive wisdom and philosophy' },
-      { icon: '💻', title: 'JavaScript Deep Dive', desc: 'Advanced JS concepts and patterns' },
-      { icon: '🎨', title: 'UI/UX Design Principles', desc: 'Create beautiful interfaces' },
-      { icon: '⚡', title: 'Performance Optimization', desc: 'Speed up your applications' },
-      { icon: '🔐', title: 'Security & Best Practices', desc: 'Build secure applications' },
+      { icon: '🎥', title: 'Web Development Masterclass', desc: 'Complete course from basics to advanced', url: 'content/web-dev.html' },
+      { icon: '📚', title: 'The Master Key Books', desc: 'Exclusive wisdom and philosophy', url: 'content/master-key.html' },
+      { icon: '💻', title: 'JavaScript Deep Dive', desc: 'Advanced JS concepts and patterns', url: 'content/js-deep.html' },
+      { icon: '🎨', title: 'UI/UX Design Principles', desc: 'Create beautiful interfaces', url: 'content/uiux.html' },
+      { icon: '⚡', title: 'Performance Optimization', desc: 'Speed up your applications', url: 'content/performance.html' },
+      { icon: '🔐', title: 'Security & Best Practices', desc: 'Build secure applications', url: 'content/security.html' },
     ];
 
     const grid = document.getElementById('contentGrid');
     content.forEach(item => {
       const card = document.createElement('div');
       card.className = 'content-card';
-      card.innerHTML = `
-        <div class="icon">${item.icon}</div>
-        <h3>${item.title}</h3>
-        <p>${item.desc}</p>
-        <span class="badge">Premium</span>
-        <button class="btn btn-primary" onclick="openContent()">▶ View</button>
-      `;
-      grid.appendChild(card);
-    });
-
-    function openContent() { alert('Opening content...'); }
-  </script>
-</body>
-</html>
+      card.innerHTML =
