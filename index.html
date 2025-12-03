@@ -1,176 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KRREVIVEÉLITE Universe - AI-Powered Creation Hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ KRREVIVEÉLITE Universe - Main Hub</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    body {
+      margin:0;
+      font-family:'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #001a00, #004d00);
+      color:#00ffea;
+      text-align:center;
+    }
+
+    h1 {margin-top:20px;}
+
+    #token-display {
+      color:#ffcc00;
+      font-weight:bold;
+      margin-top:10px;
+      font-size:1.2em;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% {transform: scale(1);}
+      50% {transform: scale(1.1);}
+    }
+
+    #portal-container {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:30px;
+    }
+
+    .portal-card {
+      background: rgba(0,255,234,0.1);
+      border:2px solid #00ffea;
+      border-radius:15px;
+      width:220px;
+      height:150px;
+      margin:15px;
+      padding:10px;
+      cursor:pointer;
+      transition:0.3s;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      font-weight:bold;
+      font-size:1.05em;
+    }
+
+    .portal-card:hover {
+      box-shadow: 0 0 25px #00ffea;
+      transform: scale(1.05) rotateX(5deg);
+    }
+
+    iframe {
+      width:90%;
+      height:600px;
+      border:none;
+      margin-top:20px;
+      border-radius:12px;
+      transition: all 0.5s ease-in-out;
+      opacity:0;
+    }
+
+    iframe.active {opacity:1;}
+
+    .notifications {
+      position:fixed;
+      top:80px;
+      right:20px;
+      width:250px;
+      z-index:999;
+    }
+
+    .notif {
+      background: rgba(0,255,234,0.1);
+      border:1px solid #00ffea;
+      border-radius:10px;
+      margin:5px;
+      padding:8px;
+      color:#00ffea;
+      font-size:0.9em;
+      animation: fadein 0.5s, fadeout 0.5s 4.5s forwards;
+    }
+
+    @keyframes fadein {from {opacity:0;} to {opacity:1;}}
+    @keyframes fadeout {to {opacity:0;}}
+  </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-brand">⚡ KRREVIVEÉLITE</div>
-    <ul class="nav-menu">
-      <li><a href="index.html" class="active">Dashboard</a></li>
-      <li><a href="resume-generator.html">Resume AI</a></li>
-      <li><a href="playground.html">Code Studio</a></li>
-      <li><a href="engineering-hub.html">Automation</a></li>
-      <li><a href="tutorials.html">Learn</a></li>
-      <li><a href="mini-game.html">Game</a></li>
-      <li><a href="library.html">Library</a></li>
-      <li><a href="daily-tasks.html">Tasks</a></li>
-      <li><a href="account.html" id="user-link" style="display:none;">📧 Account</a></li>
-    </ul>
-  </nav>
 
+  <h1>⚡ KRREVIVEÉLITE Universe</h1>
+  <div id="token-display">💎 Tokens: 0</div>
   <div class="notifications" id="notifications"></div>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1>KRREVIVEÉLITE Universe</h1>
-      <p>AI-powered automation, creation tools, and a premium content platform for creators, engineers, and innovators.</p>
-      <div class="hero-cta">
-        <button class="cta-button" id="start-free">🚀 Start Free</button>
-        <button class="cta-button" id="go-premium" style="background: linear-gradient(135deg,#00ffea,#00ccbb);">✨ Go Premium</button>
-      </div>
-    </section>
+  <div id="portal-container">
+    <div class="portal-card" data-src="mini-game.html">🎮 Games Hub</div>
+    <div class="portal-card" data-src="playground.html">💻 Creative Lab</div>
+    <div class="portal-card" data-src="library.html">📚 Learning Hub</div>
+    <div class="portal-card" data-src="kids.html">🧒 Kids Zone</div>
+    <div class="portal-card" data-src="meditation.html">🧘 Meditation Garden</div>
+    <div class="portal-card" data-src="marketplace.html">🛒 Marketplace</div>
+    <div class="portal-card" data-src="cyber-bank.html">💳 Cyber & Bank Zone</div>
+    <div class="portal-card" data-src="legal-automation.html">⚖️ Legal & Automation</div>
+    <div class="portal-card" data-src="services.html">🌎 Global & Local Services</div>
+  </div>
 
-    <!-- Stats -->
-    <div class="stats-section">
-      <div class="stat-item"><div class="stat-number">1000</div><div class="stat-label">Active Users</div></div>
-      <div class="stat-item"><div class="stat-number">50</div><div class="stat-label">AI Tools</div></div>
-      <div class="stat-item"><div class="stat-number">24</div><div class="stat-label">Availability (hrs)</div></div>
-      <div class="stat-item"><div class="stat-number">99.9</div><div class="stat-label">Uptime (%)</div></div>
-    </div>
+  <iframe id="portal-frame"></iframe>
 
-    <!-- Features Section -->
-    <h2 class="section-title">Core Features</h2>
-    <div class="features-grid">
-      <div class="feature-card" data-target="resume-generator.html">
-        <div class="icon">📄</div>
-        <h3>Resume Generator</h3>
-        <p>AI-powered resumes with premium templates and PDF export.</p>
-        <span class="feature-badge">⭐ Premium</span>
-      </div>
-
-      <div class="feature-card" data-target="playground.html">
-        <div class="icon">💻</div>
-        <h3>Code Playground</h3>
-        <p>Live HTML/CSS/JS editor with AI suggestions.</p>
-        <span class="feature-badge">⭐ Premium</span>
-      </div>
-
-      <div class="feature-card" data-target="engineering-hub.html">
-        <div class="icon">⚙️</div>
-        <h3>Automation Hub</h3>
-        <p>Reusable automation scripts and workflow templates.</p>
-        <span class="feature-badge">⭐ Premium</span>
-      </div>
-
-      <div class="feature-card" data-target="tutorials.html">
-        <div class="icon">🎓</div>
-        <h3>Learning Center</h3>
-        <p>Courses, videos, and premium content for upskilling.</p>
-        <span class="feature-badge">⭐ Premium</span>
-      </div>
-
-      <div class="feature-card" data-target="mini-game.html">
-        <div class="icon">🎮</div>
-        <h3>Mini Game</h3>
-        <p>Play, unlock skins and compete on leaderboards.</p>
-        <span class="feature-badge">Free + Premium</span>
-      </div>
-
-      <div class="feature-card" data-target="library.html">
-        <div class="icon">📚</div>
-        <h3>Content Library</h3>
-        <p>Books, templates and trending content.</p>
-        <span class="feature-badge">⭐ Premium</span>
-      </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <h2 class="section-title">Quick Actions</h2>
-    <div class="dashboard-grid">
-      <div class="quick-action" data-target="resume-generator.html"><h4>📄 Create Resume</h4><p>AI-assisted resume builder</p></div>
-      <div class="quick-action" data-target="daily-tasks.html"><h4>✅ View Tasks</h4><p>Manage daily automation</p></div>
-      <div class="quick-action" data-target="playground.html"><h4>💻 Write Code</h4><p>Live editor with AI</p></div>
-      <div class="quick-action" data-target="mini-game.html"><h4>🎮 Play Game</h4><p>Compete on leaderboards</p></div>
-      <div class="quick-action" data-target="tutorials.html"><h4>📖 Learn</h4><p>Courses and videos</p></div>
-      <div class="quick-action" data-target="engineering-hub.html"><h4>⚙️ Automate</h4><p>Workflow scripts</p></div>
-    </div>
-
-    <!-- Pricing -->
-    <div class="pricing-section">
-      <h2 class="section-title" style="margin:0 0 40px 0">Premium Membership</h2>
-      <p style="color:#aaa;max-width:600px;margin:0 auto 30px;font-size:1.05em;">
-        Unlock unlimited access to all AI tools, advanced automation, premium templates, and exclusive learning content.
-      </p>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <h3>Free</h3>
-          <div class="amount">$0</div>
-          <ul>
-            <li>✓ Mini game (free levels)</li>
-            <li>✓ Basic dashboard</li>
-            <li>✓ 5 free resumes / month</li>
-            <li>✗ Code playground AI</li>
-            <li>✗ Advanced automation</li>
-          </ul>
-        </div>
-
-        <div class="price-card highlight">
-          <h3>Premium</h3>
-          <div class="amount">$9.99 / mo</div>
-          <ul>
-            <li>✓ All features unlocked</li>
-            <li>✓ AI resume generator</li>
-            <li>✓ Code playground with AI</li>
-            <li>✓ Unlimited automation scripts</li>
-            <li>✓ Premium tutorials & courses</li>
-            <li>✓ Priority support</li>
-          </ul>
-          <button class="cta-button btn-buy" id="subscribe-now">Subscribe Now</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2025 KRREVIVEÉLITE Universe. All rights reserved. | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
-      <p>Powered by AI • Built for Creators • Made with ⚡</p>
-    </footer>
-  </main>
-
-  <!-- Module scripts -->
-  <script src="assets/js/subscription.js"></script>
+  <!-- JS Scripts -->
+  <script src="assets/js/token-system.js"></script>
   <script src="assets/js/dashboard.js"></script>
-  <script src="assets/js/animation-system.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/ai-universe.js"></script>
 
-  <!-- Small inline bindings (keeps behavior immediate & clear) -->
   <script>
-    document.getElementById('start-free').addEventListener('click', () => {
-      if (!Subscription.isPremium()) Subscription.showModal(); else alert('You are already premium.');
-    });
-    document.getElementById('go-premium').addEventListener('click', () => Subscription.simulatePurchase());
-    document.getElementById('subscribe-now').addEventListener('click', () => Subscription.simulatePurchase());
+    const portalCards = document.querySelectorAll('.portal-card');
+    const portalFrame = document.getElementById('portal-frame');
+    const tokenDisplay = document.getElementById('token-display');
+    const notifications = document.getElementById('notifications');
 
-    // Navigation from cards & quick actions
-    document.querySelectorAll('.feature-card, .quick-action').forEach(el => {
-      el.addEventListener('click', () => {
-        const page = el.dataset.target;
-        // premium gating handled in animation-system.js navigate()
-        navigate(page);
+    // Initialize dashboard
+    window.addEventListener('load', ()=>dashboard.init());
+
+    portalCards.forEach(card => {
+      card.addEventListener('click', ()=>{
+        const src = card.dataset.src;
+        portalFrame.src = src;
+        portalFrame.classList.remove('active');
+        setTimeout(()=>portalFrame.classList.add('active'), 50);
+        dashboard.addNotification(`🌌 Entered ${card.innerText} portal`);
       });
     });
+
+    // Token display updates
+    setInterval(() => {
+      tokenDisplay.innerText = `💎 Tokens: ${tokenSystem.getTokens()}`;
+    }, 1000);
+
+    // Example of notification function if needed outside dashboard
+    function addNotification(msg) {
+      const notif = document.createElement('div');
+      notif.className = 'notif';
+      notif.innerText = msg;
+      notifications.appendChild(notif);
+      setTimeout(()=>notif.remove(), 5000);
+    }
   </script>
+
 </body>
 </html>
