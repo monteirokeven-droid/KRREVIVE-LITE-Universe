@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | ELITE GEAR PROTOCOL</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* PRODUCTS PAGE SPECIFIC STYLING */
+        .products-section {
+            padding: 5rem 0;
+            min-height: 80vh;
+        }
+        .products-header h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .products-header p {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #aaa;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .product-card {
+            background-color: var(--color-grey-dark);
+            border: 1px solid rgba(0, 191, 255, 0.1);
+            padding: 20px;
+            transition: box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .product-card::before {
+            content: attr(data-type);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--color-gold-neon);
+            color: var(--color-black-obsidian);
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .product-card h2 {
+            font-family: var(--font-primary);
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            padding-top: 10px;
+        }
+        .product-card .price {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            color: var(--color-gold-neon);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .product-card .gating {
+            font-size: 0.8rem;
+            color: var(--color-blue-deep);
+            margin-top: 10px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+        }
+        .product-card .desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--color-blue-deep);
+            color: var(--color-black-obsidian);
+            text-align: center;
+            text-transform: uppercase;
+            font-family: var(--font-primary);
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        .buy-btn:hover {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="tools.html">AI AUGMENTATION</a></li>
+                <li><a href="universe.html">UNIVERSE MAP</a></li>
+                <li><a href="products.html">ELITE GEAR</a></li>
+            </ul>
+            <button class="btn-revive-code">VIEW GEAR STATUS</button>
+        </nav>
+    </header>
+
+    <main class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <h1 class="glitch-text">ELITE GEAR & ASSETS TRANSMISSION</h1>
+                <p>These tools, assets, and armor are precision-engineered to amplify your frequency and accelerate dimensional mastery. Access is restricted by Protocol clearance level.</p>
+            </div>
+            
+            <div class="product-grid">
+
+                <div class="product-card" data-type="PHYSICAL">
+                    <h2>SAMURAI PROTOCOL Training Hoodie</h2>
+                    <span class="price">$185.00</span>
+                    <p class="desc">Engineered for physical dimension mastery. Heavy-weight cotton composite with reinforced geometric stitching. Features the subtle Revive Code 002 motif.</p>
+                    <a href="#" class="buy-btn">ACQUIRE ARMOR</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 002 RECOMMENDED</p>
+                </div>
+
+                <div class="product-card" data-type="DIGITAL (AI TOOL)">
+                    <h2>Quantum Prompt Generator (QPG)</h2>
+                    <span class="price">$149.00 / YR</span>
+                    <p class="desc">The core AI tool for manifesting universe aesthetics. Translates abstract concepts into high-contrast, production-ready image prompts for generative engines.</p>
+                    <a href="#" class="buy-btn disabled">ACCESS PENDING</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 004 REQUIRED</p>
+                </div>
+
+                <div class="product-card" data-type="COLLECTOR ART">
+                    <h2>The Watcher's Mandate Print</h2>
+                    <span class="price">$450.00</span>
+                    <p class="desc">Signed, large-format acrylic print detailing the multi-dimensional structure using luminous neon-gold ink. Limited run of 100 prints.</p>
+                    <a href="#" class="buy-btn disabled">ACCESS PENDING</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 005 REQUIRED</p>
+                </div>
+
+                <div class="product-card" data-type="DIGITAL ASSET">
+                    <h2>The Watchers' UI Template Pack</h2>
+                    <span class="price">$99.00</span>
+                    <p class="desc">A library of high-contrast, animated HTML/CSS/JS components ready for deployment. Accelerate your own system architecture instantly.</p>
+                    <a href="#" class="buy-btn disabled">ACQUIRE ASSET</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 005 RECOMMENDED</p>
+                </div>
+                
+                <div class="product-card" data-type="PHYSICAL (TOOL)">
+                    <h2>The Anchor Protocol Cube</h2>
+                    <span class="price">$99.00</span>
+                    <p class="desc">Precision-milled desk object made from aerospace-grade aluminum. A tactile anchor point for the Samurai Mind during intensive focus sessions.</p>
+                    <a href="#" class="buy-btn">ACQUIRE TOOL</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 003 RECOMMENDED</p>
+                </div>
+                
+                <div class="product-card" data-type="ELITE GEAR">
+                    <h2>Sovereignty Protocol Field Bag</h2>
+                    <span class="price">$295.00</span>
+                    <p class="desc">Rugged, water-resistant utility bag with integrated geometric structure. For missions in the physical dimension. Features subtle CODE 003 patch.</p>
+                    <a href="#" class="buy-btn">ACQUIRE GEAR</a>
+                    <p class="gating">PROTOCOL ACCESS: CODE 003 RECOMMENDED</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Engineered for Precision.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
