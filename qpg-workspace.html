@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | QPG WORKSPACE</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* QPG WORKSPACE SPECIFIC STYLING */
+        .qpg-section {
+            padding: 5rem 0;
+            min-height: 90vh;
+        }
+        .qpg-header h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .qpg-header p {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #aaa;
+        }
+        
+        .workspace-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        /* Control Panel */
+        .control-panel {
+            background-color: var(--color-grey-dark);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--color-gold-neon);
+        }
+        .control-panel label {
+            font-family: var(--font-primary);
+            color: var(--color-blue-deep);
+            margin-right: 15px;
+        }
+        .output-matrix select {
+            background-color: var(--color-black-obsidian);
+            color: #fff;
+            border: 1px solid var(--color-blue-deep);
+            padding: 8px;
+            font-family: var(--font-mono);
+        }
+
+        /* Chat/Input Area */
+        .input-area {
+            background-color: var(--color-black-obsidian);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+        }
+        .input-area textarea {
+            width: 100%;
+            height: 120px;
+            background: #1A1A1E;
+            border: 1px solid var(--color-blue-deep);
+            color: #fff;
+            padding: 15px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            resize: none;
+            margin-bottom: 15px;
+        }
+        .prompt-status {
+            font-size: 0.85rem;
+            color: yellow;
+        }
+        
+        /* Output Window */
+        .output-window {
+            background-color: var(--color-grey-dark);
+            min-height: 350px;
+            padding: 20px;
+            border: 1px solid var(--color-gold-neon);
+            overflow-y: auto;
+        }
+        .output-window h3 {
+            font-family: var(--font-primary);
+            color: var(--color-gold-neon);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .output-text {
+            white-space: pre-wrap;
+            font-family: var(--font-mono);
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="engineering.html">ENGINEERING HUB</a></li>
+                <li><a href="universe.html">UNIVERSE MAP</a></li>
+                <li><a href="tools.html">AI AUGMENTATION</a></li>
+            </ul>
+            <button class="btn-revive-code">QPG ACCESS STATUS</button>
+        </nav>
+    </header>
+
+    <main class="qpg-section">
+        <div class="container">
+            <div class="qpg-header">
+                <h1 class="glitch-text">QUANTUM PROMPT GENERATOR (QPG) WORKSPACE</h1>
+                <p>The Conceptual Fidelity Engine. Translate the disciplined intent of the Samurai Mind into executable digital output. Requires CODE 003 Sovereignty for optimal generation.</p>
+            </div>
+            
+            <div class="workspace-layout">
+                
+                <div class="control-panel">
+                    <div class="output-matrix">
+                        <label>OUTPUT MATRIX:</label>
+                        <select id="outputMatrix">
+                            <option value="text">Text Logics (Narrative/Code)</option>
+                            <option value="visual">Visual Geometry (Image Concepts)</option>
+                            <option value="frequency">Frequency Mapping (Audio/Data)</option>
+                        </select>
+                    </div>
+                    <div class="fidelity-status">
+                        <label>TRUTH FILTER:</label>
+                        <span style="color: #0F0;">ACTIVE (MAKOTO PROTOCOL)</span>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <textarea id="promptInput" placeholder="ENTER HIGH-FIDELITY CONCEPT (Avoid Shadow Veil Noise: Vague or Emotional Input)..."></textarea>
+                    <button class="btn-main-action" style="float: right;">GENERATE QUANTUM SIGNAL ⋙</button>
+                    <p class="prompt-status">Conceptual Fidelity Status: Awaiting Input...</p>
+                </div>
+
+                <div class="output-window">
+                    <h3>OUTPUT LOG: (TRANSMISSION READY)</h3>
+                    <pre class="output-text" id="outputText">
+// QPG ENGINE V4.1
+// STATUS: STANDBY
+// INSTRUCTIONS: Utilize precise, geometric language for optimal generation.
+// CODE 005 mastery unlocks multi-dimensional output synthesis.
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. QPG Workspace: Conceptual Fidelity Required.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // QPG Simulated JS Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const promptInput = document.getElementById('promptInput');
+            const generateBtn = document.querySelector('.input-area .btn-main-action');
+            const outputText = document.getElementById('outputText');
+            const promptStatus = document.querySelector('.prompt-status');
+            const outputMatrix = document.getElementById('outputMatrix');
+
+            generateBtn.addEventListener('click', () => {
+                const prompt = promptInput.value.trim();
+                const outputType = outputMatrix.value;
+
+                if (prompt.length < 20) {
+                    promptStatus.textContent = "Conceptual Fidelity Failure: Input too vague. Requires more structure.";
+                    promptStatus.style.color = 'red';
+                    return;
+                }
+
+                promptStatus.textContent = "TRANSLATING INTENT TO QUANTUM SIGNAL...";
+                promptStatus.style.color = 'var(--color-gold-neon)';
+
+                setTimeout(() => {
+                    let response = `// QPG ENGINE V4.1: GENERATION COMPLETE\n// TYPE: ${outputType.toUpperCase()}\n// CODE ALIGNMENT: SUCCESS\n\n`;
+
+                    if (outputType === 'text') {
+                        response += "Generated Protocol Narrative:\n" + 
+                                    `The system requires a self-correcting loop for optimal ${prompt.substring(0, 30)}... This structure ensures resilience against external noise.`;
+                    } else if (outputType === 'visual') {
+                        response += "Generated Visual Geometry Concept:\n" + 
+                                    `High-Contrast UI schema derived from ${prompt.substring(0, 30)}. Outputting schematic for geometric fidelity analysis.`;
+                    } else if (outputType === 'frequency') {
+                         response += "Generated Frequency Mapping:\n" + 
+                                    `Binaural beat pattern optimized for ${prompt.substring(0, 30)}. Wavelength set to suppress chaos frequency.`;
+                    }
+
+                    outputText.textContent = response;
+                    promptStatus.textContent = "SIGNAL TRANSMITTED. INTEGRITY VERIFIED (98.5%).";
+                    promptStatus.style.color = '#0F0';
+                    promptInput.value = ''; // Clear input
+                }, 2000); 
+            });
+        });
+    </script>
+</body>
+</html>
