@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | SHADOWFALL PROTOCOL INITIATION</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* SPIP GAME LAUNCHER SPECIFIC STYLING */
+        .spip-section {
+            padding: 5rem 0;
+            min-height: 90vh;
+            background-color: var(--color-black-obsidian);
+        }
+        .spip-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .spip-header h1 {
+            font-size: 4rem;
+            color: var(--color-gold-neon);
+            animation: glitch-text 0.6s infinite;
+        }
+        .spip-header p {
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        .specialization-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .spec-card {
+            background-color: #1A1A1E;
+            border: 2px solid var(--color-blue-deep);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 191, 255, 0.3);
+            border-color: var(--color-gold-neon);
+        }
+        .spec-card h3 {
+            font-family: var(--font-primary);
+            color: var(--color-gold-neon);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .spec-card p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .system-diagnostics {
+            background-color: var(--color-grey-dark);
+            padding: 25px;
+            border: 1px solid var(--color-blue-deep);
+            font-family: var(--font-mono);
+            margin-top: 30px;
+        }
+        .diag-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .diag-status {
+            color: #0F0;
+        }
+        .diag-status.fail {
+            color: red;
+            animation: pulse-red 0.5s infinite alternate;
+        }
+        
+        .launch-btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .launch-btn {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background-color: var(--color-gold-neon);
+            color: var(--color-black-obsidian);
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .launch-btn:hover {
+            background-color: #fff;
+        }
+
+        @keyframes pulse-red {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="uam-universe-map.html">UAM MAP</a></li>
+                <li><a href="dlp-marketplace.html">DLP MARKETPLACE</a></li>
+                <li><a href="sil-coding-lab.html">CODING LAB</a></li>
+            </ul>
+            <button class="btn-revive-code">VIEW CODE PROGRESS</button>
+        </nav>
+    </header>
+
+    <main class="spip-section">
+        <div class="container">
+            <header class="spip-header">
+                <h1 class="glitch-text">SHADOWFALL PROTOCOL INITIATION POINT</h1>
+                <p>Welcome to the City of Chronos. Prepare for Grand Heists and the Shadow Veil Collapse. Your specialization defines your mission.</p>
+            </header>
+            
+            <h2 style="color: var(--color-blue-deep); text-align: center; margin-bottom: 20px;">PROTAGONIST SPECIALIZATION SELECTION</h2>
+            
+            <div class="specialization-grid">
+                
+                <div class="spec-card">
+                    <h3>THE ECHO</h3>
+                    <p>CODE 003: Sovereignty. Master of electronic warfare. Disrupts enemy targeting and provides tactical bypass for security systems.</p>
+                    <p style="color: var(--color-gold-neon); font-weight: bold;">Tactical: Refusal Node Deployment</p>
+                </div>
+
+                <div class="spec-card">
+                    <h3>THE IRONCLAD</h3>
+                    <p>CODE 004: Frequency. Unrivaled physical resilience. Focuses on rapid biological regeneration and temporal speed bursts.</p>
+                    <p style="color: var(--color-gold-neon); font-weight: bold;">Tactical: Vessel Calibration</p>
+                </div>
+
+                <div class="spec-card">
+                    <h3>THE PROPHET</h3>
+                    <p>CODE 005: Creation. System engineer and tactical deployer. Builds and maintains automated turrets and battlefield surveillance.</p>
+                    <p style="color: var(--color-gold-neon); font-weight: bold;">Tactical: Node Deployment</p>
+                </div>
+            </div>
+
+            <div class="system-diagnostics">
+                <h2 style="color: var(--color-gold-neon); margin-bottom: 15px; font-family: var(--font-primary);">SYSTEM DIAGNOSTICS & PROTOCOL VERIFICATION</h2>
+                
+                <div class="diag-line">
+                    <span>CODE PROGRESS STATUS (MINIMUM 001 REQUIRED):</span>
+                    <span class="diag-status">VERIFIED (CODE 003)</span>
+                </div>
+                <div class="diag-line">
+                    <span>SHADOWFALL CLIENT INTEGRITY CHECK:</span>
+                    <span class="diag-status">PASS</span>
+                </div>
+                <div class="diag-line">
+                    <span>REQUIRED MEMORY ALLOCATION (16GB):</span>
+                    <span class="diag-status">PASS</span>
+                </div>
+                <div class="diag-line">
+                    <span>GRAPHICS DRIVER FREQUENCY MATCH:</span>
+                    <span class="diag-status fail">STRUCTURAL FAILURE (DRIVER OUTDATED)</span>
+                </div>
+                <div class="diag-line">
+                    <span>CONNECTION LATENCY TO CHRONOS SERVER:</span>
+                    <span class="diag-status">PASS</span>
+                </div>
+            </div>
+
+            <div class="launch-btn-container">
+                <button class="launch-btn" id="launchButton">INITIATE SHADOWFALL PROTOCOL</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                <p>Need Upgrades? <a href="dlp-marketplace.html" style="color: var(--color-gold-neon);">Access DLP Logistics</a> | Need Mods? <a href="sil-coding-lab.html" style="color: var(--color-gold-neon);">Access SIL Lab</a></p>
+            </div>
+
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Shadowfall Protocol: Execution Commences.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Simulated launch logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const launchButton = document.getElementById('launchButton');
+            const driverStatus = document.querySelector('.diag-status.fail');
+            
+            // Disable launch button if failure detected
+            if (driverStatus) {
+                launchButton.disabled = true;
+                launchButton.textContent = "PROTOCOL BLOCKED: FIX ANOMALY";
+                launchButton.style.backgroundColor = 'red';
+            }
+            
+            launchButton.addEventListener('click', () => {
+                alert("Initiating Shadowfall Protocol... Welcome to the City of Chronos.");
+                // In a real application, this would launch the game client
+            });
+        });
+    </script>
+</body>
+</html>
