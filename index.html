@@ -1,163 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡ KRREVIVEÉLITE Universe - Main Hub</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
-
-  <style>
-    body {
-      margin:0;
-      font-family:'Orbitron', sans-serif;
-      background: linear-gradient(to bottom, #001a00, #004d00);
-      color:#00ffea;
-      text-align:center;
-    }
-
-    h1 {margin-top:20px;}
-
-    #token-display {
-      color:#ffcc00;
-      font-weight:bold;
-      margin-top:10px;
-      font-size:1.2em;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% {transform: scale(1);}
-      50% {transform: scale(1.1);}
-    }
-
-    #portal-container {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:30px;
-    }
-
-    .portal-card {
-      background: rgba(0,255,234,0.1);
-      border:2px solid #00ffea;
-      border-radius:15px;
-      width:220px;
-      height:150px;
-      margin:15px;
-      padding:10px;
-      cursor:pointer;
-      transition:0.3s;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      font-weight:bold;
-      font-size:1.05em;
-    }
-
-    .portal-card:hover {
-      box-shadow: 0 0 25px #00ffea;
-      transform: scale(1.05) rotateX(5deg);
-    }
-
-    iframe {
-      width:90%;
-      height:600px;
-      border:none;
-      margin-top:20px;
-      border-radius:12px;
-      transition: all 0.5s ease-in-out;
-      opacity:0;
-    }
-
-    iframe.active {opacity:1;}
-
-    .notifications {
-      position:fixed;
-      top:80px;
-      right:20px;
-      width:250px;
-      z-index:999;
-    }
-
-    .notif {
-      background: rgba(0,255,234,0.1);
-      border:1px solid #00ffea;
-      border-radius:10px;
-      margin:5px;
-      padding:8px;
-      color:#00ffea;
-      font-size:0.9em;
-      animation: fadein 0.5s, fadeout 0.5s 4.5s forwards;
-    }
-
-    @keyframes fadein {from {opacity:0;} to {opacity:1;}}
-    @keyframes fadeout {to {opacity:0;}}
-  </style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | The Universe Gate</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"> </head>
 <body>
+    <header id="header-protocol">
+        <nav>
+            <div class="logo">KRREVIVEÉLITE</div>
+            <ul class="nav-links">
+                <li><a href="about.html">Lore + Origin</a></li>
+                <li><a href="universe.html">Universe Map</a></li>
+                <li><a href="academy.html">Academy Protocol</a></li>
+                <li><a href="tools.html">AI Augmentation</a></li>
+                <li><a href="products.html">Elite Gear</a></li>
+            </ul>
+            <a href="#" class="btn-revive-code">ACCESS REVIVE CODE 001</a>
+        </nav>
+    </header>
 
-  <h1>⚡ KRREVIVEÉLITE Universe</h1>
-  <div id="token-display">💎 Tokens: 0</div>
-  <div class="notifications" id="notifications"></div>
+    <main class="universe-gate-section">
+        <div class="cosmic-header">
+            <h1>INITIATE THE SAMURAI PROTOCOL.</h1>
+            <h2>AWAKENING IS NOT AN OPTION. IT IS THE COMMAND.</h2>
+            <p>A multi-dimensional universe engineered for spiritual sovereignty, elite discipline, and cosmic advancement.</p>
+            <a href="universe.html" class="btn-main-action">ENTER THE NETWORK</a>
+        </div>
+    </main>
 
-  <div id="portal-container">
-    <div class="portal-card" data-src="mini-game.html">🎮 Games Hub</div>
-    <div class="portal-card" data-src="playground.html">💻 Creative Lab</div>
-    <div class="portal-card" data-src="library.html">📚 Learning Hub</div>
-    <div class="portal-card" data-src="kids.html">🧒 Kids Zone</div>
-    <div class="portal-card" data-src="meditation.html">🧘 Meditation Garden</div>
-    <div class="portal-card" data-src="marketplace.html">🛒 Marketplace</div>
-    <div class="portal-card" data-src="cyber-bank.html">💳 Cyber & Bank Zone</div>
-    <div class="portal-card" data-src="legal-automation.html">⚖️ Legal & Automation</div>
-    <div class="portal-card" data-src="services.html">🌎 Global & Local Services</div>
-  </div>
+    <footer class="footer-protocol">
+        <p>&copy; 2025 KRREVIVEÉLITE Universe. Engineered for Awakening.</p>
+        <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a>
+    </footer>
 
-  <iframe id="portal-frame"></iframe>
-
-  <!-- JS Scripts -->
-  <script src="assets/js/token-system.js"></script>
-  <script src="assets/js/dashboard.js"></script>
-  <script src="assets/js/ai-universe.js"></script>
-
-  <script>
-    const portalCards = document.querySelectorAll('.portal-card');
-    const portalFrame = document.getElementById('portal-frame');
-    const tokenDisplay = document.getElementById('token-display');
-    const notifications = document.getElementById('notifications');
-
-    // Initialize dashboard
-    window.addEventListener('load', ()=>dashboard.init());
-
-    portalCards.forEach(card => {
-      card.addEventListener('click', ()=>{
-        const src = card.dataset.src;
-        portalFrame.src = src;
-        portalFrame.classList.remove('active');
-        setTimeout(()=>portalFrame.classList.add('active'), 50);
-        dashboard.addNotification(`🌌 Entered ${card.innerText} portal`);
-      });
-    });
-
-    // Token display updates
-    setInterval(() => {
-      tokenDisplay.innerText = `💎 Tokens: ${tokenSystem.getTokens()}`;
-    }, 1000);
-
-    // Example of notification function if needed outside dashboard
-    function addNotification(msg) {
-      const notif = document.createElement('div');
-      notif.className = 'notif';
-      notif.innerText = msg;
-      notifications.appendChild(notif);
-      setTimeout(()=>notif.remove(), 5000);
-    }
-  </script>
-
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
