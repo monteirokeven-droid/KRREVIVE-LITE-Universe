@@ -1,250 +1,253 @@
-/* KRREVIVEÉLITE — Global Stylesheet
-   Place as assets/css/style.css
-   Responsive, neon/holographic look, accessible defaults.
-*/
-
-/* Reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html,body { height: 100%; }
-
-/* Variables (fallbacks) */
-:root{
-  --bg-dark: #0a0a0a;
-  --accent-cyan: #00d9ff;
-  --accent-gold: #f0b700;
-  --accent-purple: #8e44ad;
-  --muted: #9aa3b2;
-  --panel: rgba(255,255,255,0.02);
-  --glass: rgba(255,255,255,0.03);
-  --radius: 12px;
-  --max-width: 1200px;
-  --shadow-neon: 0 10px 30px rgba(0,217,255,0.06);
-  --ease: cubic-bezier(.2,.9,.2,1);
+/* --- 0. Core Variables and Reset --- */
+:root {
+    --color-black-obsidian: #0A0A0E;
+    --color-gold-neon: #FFD700; /* Pure Neon Gold */
+    --color-blue-deep: #00BFFF; /* Deep Cyan/Sky Blue for accent */
+    --color-grey-dark: #1A1A1E;
+    --font-primary: 'Orbitron', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+    --transition-speed: 0.3s ease-in-out;
 }
 
-/* Base */
-body{
-  font-family: 'Lato', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: linear-gradient(180deg, var(--bg-dark) 0%, #071017 100%);
-  color: var(--muted);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height: 1.6;
-  padding-bottom: 60px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Layout container */
+body {
+    background-color: var(--color-black-obsidian);
+    color: #f0f0f0;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
 .container {
-  width: 92%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 36px 0;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Header */
-.header {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(180deg, rgba(124,58,237,0.06), rgba(0,217,255,0.03));
-  border-bottom: 1px solid rgba(240,183,0,0.06);
-  margin-bottom: 22px;
+a {
+    color: var(--color-gold-neon);
+    text-decoration: none;
+    transition: var(--transition-speed);
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: 0 0 5px var(--color-gold-neon);
+}
+
+/* --- 1. Header Protocol (Navigation) --- */
+#header-protocol {
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 10, 14, 0.8); /* Semi-transparent obsidian */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-  display:block;
-  margin: 0 auto 12px;
-  max-width: 220px;
-  height: auto;
-  filter: drop-shadow(0 8px 30px rgba(0,217,255,0.06));
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-gold-neon);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
-.header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  color: var(--accent-gold);
-  margin-bottom: 8px;
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
-.header p {
-  color: var(--muted);
-  font-size: 15px;
-  max-width: 900px;
-  margin: 0 auto;
+/* Elite Button Style */
+.btn-revive-code {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--color-blue-deep);
+    color: var(--color-blue-deep);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: var(--transition-speed);
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
 }
 
-/* Navigation */
-.nav {
-  background: transparent;
-  padding: 12px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.02);
+.btn-revive-code:hover {
+    background-color: var(--color-blue-deep);
+    color: var(--color-black-obsidian);
+    box-shadow: 0 0 20px var(--color-blue-deep);
 }
 
-.nav ul {
-  list-style: none;
-  display:flex;
-  gap: 12px;
-  justify-content:center;
-  flex-wrap:wrap;
+/* --- 2. Universe Gate Section (Main Content) --- */
+.universe-gate-section {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Cosmic Gradient Background Effect */
+    background: radial-gradient(circle at center, rgba(0, 191, 255, 0.03), rgba(10, 10, 14, 1) 70%);
+    padding: 4rem 0;
 }
 
-.nav a {
-  color: #dff7ff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: transform 200ms var(--ease), background 200ms var(--ease), color 200ms var(--ease);
-  background: transparent;
+.cosmic-header {
+    max-width: 800px;
 }
 
-.nav a:hover {
-  transform: translateY(-3px);
-  background: rgba(0,217,255,0.06);
-  color: var(--accent-cyan);
-  box-shadow: var(--shadow-neon);
+.transmission-status {
+    color: var(--color-blue-deep);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
 }
 
-.nav a.active {
-  background: linear-gradient(90deg, rgba(240,183,0,0.12), rgba(142,68,173,0.06));
-  color: var(--accent-gold);
-  border: 1px solid rgba(240,183,0,0.06);
+h1 {
+    font-family: var(--font-primary);
+    font-size: 4.5rem;
+    color: var(--color-gold-neon);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
 }
 
-/* Hero / Intro */
-.hero {
-  text-align:center;
-  padding: 36px 12px;
-  margin-bottom: 28px;
+.glitch-text {
+    /* Simple glitch simulation for effect */
+    text-shadow: 
+        2px 2px 0 var(--color-blue-deep), 
+        -2px -2px 0 var(--color-gold-neon);
 }
 
-.hero h2 {
-  font-size: 22px;
-  color: var(--accent-cyan);
-  margin-bottom: 8px;
-  font-weight: 700;
+.sub-header {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
 }
 
-.hero p {
-  max-width: 900px;
-  margin: 0 auto;
-  color: var(--muted);
-  font-size: 15px;
+.mission-statement {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    color: #aaa;
 }
 
-/* Features grid */
-.features {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-  margin: 28px 0 40px;
+.btn-main-action {
+    display: inline-block;
+    padding: 1.2rem 4rem;
+    background: linear-gradient(45deg, var(--color-gold-neon), #FFEA80);
+    border: none;
+    color: var(--color-black-obsidian);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 0 20px var(--color-gold-neon);
+    cursor: pointer;
 }
 
-.feature {
-  background: linear-gradient(180deg, var(--panel), rgba(0,0,0,0.04));
-  border-radius: var(--radius);
-  padding: 18px;
-  border: 1px solid rgba(255,255,255,0.02);
-  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+.btn-main-action:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--color-gold-neon);
 }
 
-.feature h3 {
-  color: var(--accent-gold);
-  font-size: 16px;
-  margin-bottom: 8px;
+.btn-main-action.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background: var(--color-grey-dark);
+    color: #555;
+    box-shadow: none;
 }
 
-.feature p {
-  color: var(--muted);
-  font-size: 14px;
+.status-message {
+    margin-top: 1.5rem;
+    min-height: 20px; /* Reserve space */
+    font-family: var(--font-mono);
+    color: var(--color-blue-deep);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
 }
 
-.feature:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 80px rgba(142,68,173,0.04);
+
+/* --- 3. Dimension Grid (Universe Structure) --- */
+.dimension-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem 5%;
+    background-color: var(--color-black-obsidian);
+    border-top: 1px solid rgba(255, 215, 0, 0.05);
 }
 
-/* Buttons and links */
-a.download-btn {
-  display:inline-block;
-  padding: 12px 18px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple));
-  color: #071017;
-  font-weight: 800;
-  margin-top: 14px;
-  text-decoration: none;
-  box-shadow: 0 8px 30px rgba(240,183,0,0.06);
-  transition: transform 180ms var(--ease);
-}
-a.download-btn:hover { transform: translateY(-4px); }
-
-/* Page content utility */
-.page-content {
-  padding: 20px;
-  background: transparent;
-  max-width: 1100px;
-  margin: 0 auto 28px;
+.dimension-box {
+    flex: 1;
+    max-width: 250px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-grey-dark);
+    background-color: var(--color-grey-dark);
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Tables */
-.table-wrapper { overflow-x:auto; margin-bottom: 24px; }
-table {
-  width:100%; border-collapse: collapse; min-width: 560px;
-  background: rgba(255,255,255,0.01);
-}
-th,td {
-  padding: 12px 14px; text-align:left; border-bottom: 1px solid rgba(255,255,255,0.02);
-  color: var(--muted); font-size: 14px;
-}
-th { color: var(--accent-gold); background: rgba(240,183,0,0.03); font-weight:700; }
-
-/* Code block */
-.code-block {
-  background: rgba(0,0,0,0.35);
-  border-left: 3px solid var(--accent-gold);
-  color: var(--accent-cyan);
-  padding: 12px;
-  border-radius: 6px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-  font-size: 13px;
-  overflow-x:auto;
+.dimension-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-gold-neon);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.15);
 }
 
-/* Badges */
-.badge {
-  display:inline-block; padding:6px 8px; border-radius: 6px; font-size:11px; font-weight:700;
-  color: var(--accent-gold); background: rgba(240,183,0,0.08); text-transform:uppercase;
-  margin-right:6px;
-}
-.badge.new { background: rgba(0,217,255,0.08); color: var(--accent-cyan); }
-.badge.tools { background: rgba(0,217,255,0.06); color: var(--accent-cyan); }
-.badge.game { background: rgba(142,68,173,0.06); color: var(--accent-purple); }
-.badge.docs { background: rgba(240,183,0,0.06); color: var(--accent-gold); }
-
-/* Stats grid */
-.stats { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); margin-bottom:22px; }
-.stat { background: var(--glass); border-radius:10px; padding:12px; text-align:center; border:1px solid rgba(255,255,255,0.02); }
-.stat-value { color: var(--accent-gold); font-weight:800; font-size:20px; }
-.stat-label { font-size:12px; color:#7f8b97; }
-
-/* Quick links grid */
-.quick-links { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); margin-bottom:28px; }
-.link-btn {
-  display:block; padding:14px; border-radius:10px; text-align:center; font-weight:800;
-  background: linear-gradient(90deg,var(--accent-gold),var(--accent-purple)); color:#071017;
-  transition: transform 200ms var(--ease);
-}
-.link-btn:hover { transform: scale(1.03); }
-
-/* Footer */
-.footer {
-  text-align:center; padding: 26px 12px; color:#7b8896; border-top: 1px solid rgba(255,255,255,0.02); margin-top: 34px;
+.dimension-box h3 {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    color: var(--color-gold-neon);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
 }
 
-/* Responsive tweaks */
-@media (max-width: 880px) {
-  .header h1 { font-size: 26px; }
-  .hero h2 { font-size: 18px; }
-  .logo { max-width: 160px; }
-  .nav ul { gap:8px; justify-content:center; padding: 6px; }
+.dimension-box p {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* Dimension-specific accents */
+.physical-dim { border-left: 3px solid #f00; } /* Red for action/energy */
+.digital-dim { border-left: 3px solid var(--color-blue-deep); } 
+.cosmic-dim { border-left: 3px solid #0f0; } /* Green for wisdom/growth */
+.shadow-dim { border-left: 3px solid #555; } /* Grey for suppression */
+
+
+/* --- 4. Footer Protocol --- */
+.footer-protocol {
+    padding: 1.5rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    background-color: var(--color-black-obsidian);
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.footer-links a {
+    color: #888;
+    margin: 0 0.5rem;
+}
+.footer-links a:hover {
+    color: #fff;
+    text-shadow: none;
 }
