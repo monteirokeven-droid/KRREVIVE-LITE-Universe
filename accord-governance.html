@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | WATCHERS' ACCORD</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ACCORD GOVERNANCE SPECIFIC STYLING */
+        .accord-section { padding: 5rem 0; min-height: 95vh; }
+        .accord-header { text-align: center; margin-bottom: 3rem; }
+        .accord-header h1 { font-size: 3rem; }
+        
+        .accord-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr; /* Delegation/Expulsion and Reputation Status */
+            gap: 30px;
+        }
+
+        /* Reputation Status Panel */
+        .reputation-panel {
+            background-color: var(--color-grey-dark);
+            padding: 20px;
+            border-left: 5px solid var(--color-blue-deep);
+        }
+        .reputation-panel h2 { color: var(--color-blue-deep); font-size: 1.5rem; margin-bottom: 20px; }
+        .rs-metric {
+            border: 1px solid var(--color-gold-neon);
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .rs-metric .value { font-size: 3.5rem; font-family: var(--font-mono); color: var(--color-gold-neon); }
+        .rs-metric .rank { font-size: 1.1rem; color: #0F0; }
+        
+        /* Delegation and Logs Panel */
+        .delegation-logs {
+            background-color: var(--color-black-obsidian);
+            padding: 20px;
+            border: 2px solid var(--color-gold-neon);
+        }
+        .delegation-logs h2 { color: var(--color-gold-neon); font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* Protocol Delegation Board */
+        .delegation-board { margin-bottom: 40px; }
+        .delegation-item {
+            background: #1A1A1E;
+            padding: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--color-blue-deep);
+        }
+        .delegation-item span { font-family: var(--font-mono); font-size: 0.9rem; }
+        
+        /* Expulsion Log */
+        .expulsion-log { border-top: 2px solid red; padding-top: 20px; }
+        .expulsion-log h2 { color: red; }
+        .expulsion-list { height: 200px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.8rem; background: #300505; padding: 10px; }
+        .expulsion-entry { margin-bottom: 5px; color: #FF7777; }
+        .expulsion-entry.severe { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="uam-universe-map.html">UAM MAP</a></li>
+                <li><a href="sxe-exchange.html">SYNTHESIS EXCHANGE</a></li>
+                <li><a href="msl-sovereignty-lodge.html">SOVEREIGNTY LODGE</a></li>
+            </ul>
+            <button class="btn-revive-code">CODE 003 JIN</button>
+        </nav>
+    </header>
+
+    <main class="accord-section">
+        <div class="container accord-layout">
+            
+            <div class="delegation-logs">
+                
+                <div class="delegation-board">
+                    <h2>PROTOCOL DELEGATION BOARD (CODE 004+ ACCESS)</h2>
+                    <p style="color: #ccc; margin-bottom: 15px;">Accept temporary administrative duties to maintain the integrity of the architecture. Requires high Reputation Score ($RS$).</p>
+                    
+                    <div id="delegationList">
+                        </div>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="btn-main-action">VIEW ALL DELEGATIONS</button>
+                    </div>
+                </div>
+
+                <div class="expulsion-log">
+                    <h2>PERMANENT EXPULSION LOG: STRUCTURAL FAILURE</h2>
+                    <p style="color: #FF7777; margin-bottom: 10px;">Warning: These Protagonists failed to maintain Rectitude (Gi) and were removed from Chronos. Learn from their chaos.</p>
+                    
+                    <div class="expulsion-list" id="expulsionList">
+                        </div>
+                </div>
+            </div>
+
+            <div class="reputation-panel">
+                
+                <h2>REPUTATION SCORE ($RS$)</h2>
+                <div class="rs-metric">
+                    <div class="value" id="reputationScore">91.4</div>
+                    <div class="rank" id="reputationRank">WATCHER'S APPRENTICE</div>
+                </div>
+
+                <h2 style="margin-top: 30px;">THE REVIEW PROTOCOL</h2>
+                <p style="color: #aaa; margin-bottom: 10px; font-size: 0.9rem;">Validate submitted assets from other Protagonists to earn $RS$ and maintain **Signal Integrity Score (SIS)**.</p>
+                
+                <div class="delegation-item" style="border-left-color: var(--color-gold-neon);">
+                    <span>QPG Prompt: "Geometric Fractal Design"</span>
+                    <button class="btn-revive-code">REVIEW</button>
+                </div>
+                <div class="delegation-item" style="border-left-color: var(--color-gold-neon);">
+                    <span>FCL Soundscape: "Alpha Wave 10Hz Protocol"</span>
+                    <button class="btn-revive-code">REVIEW</button>
+                </div>
+
+                <h2 style="margin-top: 30px;">CODE ALIGNMENT SCORE</h2>
+                <div class="rs-metric" style="border-left-color: #0F0; border-color: #0F0;">
+                    <div class="value" style="color: #0F0;">98%</div>
+                    <div class="rank">MAXIMIZING JIN PROTOCOL</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Watchers' Accord: Integrity Maintained.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // WATCHERS' ACCORD Simulated JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            const delegationList = document.getElementById('delegationList');
+            const expulsionList = document.getElementById('expulsionList');
+
+            const delegations = [
+                { title: "Academy Module 003-01 Content Audit", req: "CODE 004", status: "PENDING" },
+                { title: "QPG Prompt Repository Vetting", req: "CODE 005", status: "PENDING" },
+                { title: "BEP User Data Privacy Check", req: "CODE 004", status: "PENDING" }
+            ];
+
+            const expulsions = [
+                { id: "User: Xaos_Breaker", reason: "Malicious Code Deployment (CODE 005 Breach)", severe: true },
+                { id: "User: Low_Signal_10", reason: "Persistent Low Rectitude (CODE 001 Failure)", severe: false },
+                { id: "User: Shadow_Veil_Agent", reason: "Cheating in SHADOWFALL (CODE 002 Dishonor)", severe: true }
+            ];
+
+            // Render Delegation Board
+            delegations.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'delegation-item';
+                div.innerHTML = `
+                    <span>${item.title}</span>
+                    <span>REQ: ${item.req}</span>
+                    <button class="btn-revive-code" style="padding: 5px 10px;">APPLY</button>
+                `;
+                delegationList.appendChild(div);
+            });
+
+            // Render Expulsion Log
+            expulsions.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `expulsion-entry ${item.severe ? 'severe' : ''}`;
+                div.textContent = `[FAILURE] ${item.id} - REASON: ${item.reason}`;
+                expulsionList.appendChild(div);
+            });
+
+            // Simulate Reputation Score updates
+            const updateRS = () => {
+                const rsElement = document.getElementById('reputationScore');
+                let currentRS = parseFloat(rsElement.textContent);
+                // Simulate slow, earned growth
+                const change = (Math.random() * 0.1) - 0.05; 
+                currentRS = (currentRS + change).toFixed(1);
+                
+                rsElement.textContent = currentRS;
+                
+                // Update rank based on score
+                if (currentRS > 95) {
+                    document.getElementById('reputationRank').textContent = "THE WATCHER'S HAND (MAX HONOR)";
+                } else if (currentRS > 85) {
+                    document.getElementById('reputationRank').textContent = "WATCHER'S APPRENTICE";
+                } else {
+                    document.getElementById('reputationRank').textContent = "PROTOCOL ALIGNED";
+                }
+            };
+
+            setInterval(updateRS, 15000); // Update RS every 15 seconds
+        });
+    </script>
+</body>
+</html>
