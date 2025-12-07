@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | DLP MARKETPLACE</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* DLP MARKETPLACE SPECIFIC STYLING */
+        .dlp-section {
+            padding: 5rem 0;
+            min-height: 80vh;
+        }
+        .dlp-header h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .dlp-header p {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #aaa;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* More items per row for an Amazon feel */
+            gap: 30px;
+        }
+        .dlp-card {
+            background-color: var(--color-grey-dark);
+            border: 1px solid rgba(0, 191, 255, 0.1);
+            padding: 15px;
+            transition: box-shadow 0.3s;
+            position: relative;
+        }
+        .dlp-card:hover {
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+        .dlp-card .product-image {
+            height: 150px;
+            background-color: var(--color-black-obsidian);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+        .dlp-card h3 {
+            font-size: 1.1rem;
+            color: var(--color-gold-neon);
+            margin-bottom: 5px;
+            min-height: 40px;
+        }
+        .dlp-card .score {
+            font-size: 0.8rem;
+            color: var(--color-blue-deep);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .dlp-card .price {
+            font-family: var(--font-primary);
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .buy-btn-dlp {
+            display: block;
+            width: 100%;
+            padding: 0.6rem;
+            background-color: var(--color-blue-deep);
+            color: var(--color-black-obsidian);
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+        .buy-btn-dlp:hover {
+            background-color: #fff;
+        }
+        
+        .code-filter-bar {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
+        }
+        .code-filter-bar button {
+            background: none;
+            border: 1px solid var(--color-gold-neon);
+            color: var(--color-gold-neon);
+            padding: 8px 15px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: var(--font-primary);
+        }
+        .code-filter-bar button.active {
+            background-color: var(--color-gold-neon);
+            color: var(--color-black-obsidian);
+        }
+        .code-filter-bar button.locked {
+            border-color: #555;
+            color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="tools.html">AI AUGMENTATION</a></li>
+                <li><a href="universe.html">UNIVERSE MAP</a></li>
+                <li><a href="products.html">ELITE GEAR</a></li>
+            </ul>
+            <button class="btn-revive-code">VIEW LOGISTICS STATUS</button>
+        </nav>
+    </header>
+
+    <main class="dlp-section">
+        <div class="container">
+            <div class="dlp-header">
+                <h1 class="glitch-text">DIMENSIONAL LOGISTICS PROTOCOL (DLP)</h1>
+                <p>The curated supply line for Protagonist optimization. Only products scoring high on Samurai Virtue alignment are listed. Filter by your current Code clearance.</p>
+            </div>
+            
+            <div class="code-filter-bar">
+                <button class="active">CODE 001: GI</button>
+                <button>CODE 002: MEIYO</button>
+                <button>CODE 003: JIN</button>
+                <button class="locked">CODE 004: MAKOTO [CLASSIFIED]</button>
+            </div>
+            
+            <div class="product-grid">
+
+                <div class="dlp-card" data-code-req="001">
+                    <div class="product-image">IMAGE PENDING: STRUCTURED PLANNER</div>
+                    <h3>Gi Protocol Planner (Hardcopy)</h3>
+                    <p class="score">Gi (Rectitude) Alignment: 9.8/10</p>
+                    <p class="price">$45.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+
+                <div class="dlp-card" data-code-req="002">
+                    <div class="product-image">IMAGE PENDING: FOCUS DESK</div>
+                    <h3>Meiyo Focus Desk (Ergonomic)</h3>
+                    <p class="score">Meiyo (Honor) Alignment: 9.5/10</p>
+                    <p class="price">$799.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+
+                <div class="dlp-card" data-code-req="003">
+                    <div class="product-image">IMAGE PENDING: LIGHTING</div>
+                    <h3>Jin-Mode Lighting System (Circadian)</h3>
+                    <p class="score">Jin (Benevolence) Alignment: 8.9/10</p>
+                    <p class="price">$249.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+
+                <div class="dlp-card locked" data-code-req="004">
+                    <div class="product-image">TRANSMISSION CLASSIFIED</div>
+                    <h3>Advanced HRV Tracker (Model E4)</h3>
+                    <p class="score">Makoto (Honesty) Alignment: 10.0/10</p>
+                    <p class="price">[CLASSIFIED]</p>
+                    <a href="#" class="buy-btn-dlp disabled">CODE 004 REQUIRED</a>
+                </div>
+                
+                <div class="dlp-card" data-code-req="001">
+                    <div class="product-image">IMAGE PENDING: SLEEP MASK</div>
+                    <h3>Blackout Sleep Visor (Total Light Suppression)</h3>
+                    <p class="score">Gi (Rectitude) Alignment: 9.2/10</p>
+                    <p class="price">$75.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+
+                <div class="dlp-card" data-code-req="003">
+                    <div class="product-image">IMAGE PENDING: NUTRITION</div>
+                    <h3>Cognitive Enhancement Stack (Single Source)</h3>
+                    <p class="score">Jin (Benevolence) Alignment: 9.4/10</p>
+                    <p class="price">$119.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+                
+                <div class="dlp-card" data-code-req="002">
+                    <div class="product-image">IMAGE PENDING: SUPPLEMENTS</div>
+                    <h3>The Chronos Protocol Supplement Kit</h3>
+                    <p class="score">Meiyo (Honor) Alignment: 9.6/10</p>
+                    <p class="price">$150.00</p>
+                    <a href="#" class="buy-btn-dlp">DEPLOY NOW</a>
+                </div>
+
+                <div class="dlp-card locked" data-code-req="005">
+                    <div class="product-image">TRANSMISSION CLASSIFIED</div>
+                    <h3>Quantum Server Hosting License (1YR)</h3>
+                    <p class="score">Yu (Courage) Alignment: 10.0/10</p>
+                    <p class="price">[CLASSIFIED]</p>
+                    <a href="#" class="buy-btn-dlp disabled">CODE 005 REQUIRED</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Dimensional Logistics Protocol: Verified Supply Chain.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
