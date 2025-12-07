@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | UNIVERSAL ARCHITECTURE MAP</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* UAM MAP SPECIFIC STYLING */
+        .uam-section {
+            padding: 5rem 0;
+            min-height: 95vh;
+            background-color: var(--color-black-obsidian);
+            position: relative;
+            overflow: hidden;
+        }
+        .uam-header h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            z-index: 10;
+            position: relative;
+        }
+        .uam-header p {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #aaa;
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* Main Map Container */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            margin: 0 auto;
+            border: 2px solid var(--color-blue-deep);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Schematic Nodes (The Hubs) */
+        .node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid var(--color-blue-deep);
+            color: #fff;
+            text-align: center;
+            line-height: 1.2;
+            padding: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.5s;
+            box-shadow: 0 0 10px var(--color-blue-deep);
+            z-index: 20;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 0 5px #000;
+        }
+        .node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--color-gold-neon);
+            border-color: var(--color-gold-neon);
+            color: var(--color-gold-neon);
+        }
+        
+        /* Node Status Modifiers */
+        .node.anomaly {
+            border-color: red;
+            box-shadow: 0 0 15px red;
+            animation: pulse-red 1s infinite alternate;
+        }
+        .node.locked {
+            border-color: #555;
+            box-shadow: 0 0 5px #333;
+            color: #777;
+            background: #111;
+        }
+
+        /* Dimension Labels */
+        .dimension-label {
+            position: absolute;
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+        
+        /* Code Path Conduits (Lines - simplified with CSS for visual effect) */
+        .conduit {
+            position: absolute;
+            background: rgba(0, 191, 255, 0.4);
+            z-index: 10;
+            box-shadow: 0 0 5px var(--color-blue-deep);
+        }
+
+        /* Custom animation for warning */
+        @keyframes pulse-red {
+            from { box-shadow: 0 0 10px red; }
+            to { box-shadow: 0 0 25px red; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="engineering.html">ENGINEERING HUB</a></li>
+                <li><a href="signal-exchange.html">SIGNAL EXCHANGE</a></li>
+                <li><a href="bep-center.html">BEP CENTER</a></li>
+            </ul>
+            <button class="btn-revive-code">VIEW PROGRESS LOG</button>
+        </nav>
+    </header>
+
+    <main class="uam-section">
+        <div class="container">
+            <div class="uam-header">
+                <h1 class="glitch-text">UNIVERSAL ARCHITECTURE MAP (UAM)</h1>
+                <p>The operational schematic for the KRREVIVEÉLITE Universe. View the four dimensions, connected Protocol Hubs, and your current Code Path Conduits.</p>
+            </div>
+            
+            <div class="map-container">
+                
+                <div class="dimension-label" style="top: 10%; left: 5%;">PHYSICAL DIMENSION</div>
+                <div class="dimension-label" style="bottom: 10%; left: 5%;">DIGITAL DIMENSION</div>
+                <div class="dimension-label" style="top: 10%; right: 5%;">COSMIC DIMENSION</div>
+                <div class="dimension-label" style="bottom: 10%; right: 5%;">SHADOW VEIL (THREAT)</div>
+                
+                <div class="node" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; font-size: 1rem; border-color: var(--color-gold-neon); box-shadow: 0 0 25px var(--color-gold-neon);">
+                    PROTAGONIST CORE <br> (CODE 003)
+                </div>
+
+                <a href="bep-center.html" class="node anomaly" style="top: 20%; left: 20%;">
+                    BEP CENTER (HEALTH)
+                </a>
+                <a href="dlp-marketplace.html" class="node" style="top: 40%; left: 15%;">
+                    DLP MARKETPLACE (GEAR)
+                </a>
+                
+                <a href="sil-coding-lab.html" class="node" style="bottom: 20%; left: 20%;">
+                    SIL CODING LAB
+                </a>
+                <a href="qpg-workspace.html" class="node" style="bottom: 40%; left: 30%;">
+                    QPG WORKSPACE (AI)
+                </a>
+                
+                <a href="console.html" class="node" style="top: 25%; right: 25%;">
+                    COSMIC CONSOLE (LORE)
+                </a>
+                <a href="signal-exchange.html" class="node" style="top: 45%; right: 18%;">
+                    SEP (COMMUNICATION)
+                </a>
+                
+                <a href="engineering.html" class="node" style="bottom: 20%; right: 40%; width: 90px; height: 90px; border-color: var(--color-gold-neon);">
+                    ENGINEERING HUB
+                </a>
+                
+                <div class="node locked" style="bottom: 40%; right: 10%; border-style: dashed; animation: none;">
+                    SHADOW VEIL CORE (LOCKED)
+                </div>
+
+                <div class="conduit" style="top: 35%; left: 35%; width: 100px; height: 3px; transform: rotate(-45deg);"></div>
+                <div class="conduit" style="top: 60%; left: 45%; width: 100px; height: 3px; transform: rotate(45deg);"></div>
+                <div class="conduit" style="top: 45%; left: 55%; width: 100px; height: 3px; transform: rotate(10deg);"></div>
+                <div class="conduit" style="top: 55%; left: 65%; width: 100px; height: 3px; transform: rotate(-10deg);"></div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Universal Architecture Map: Operational Integrity.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
