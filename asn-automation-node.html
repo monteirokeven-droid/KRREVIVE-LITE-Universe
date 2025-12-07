@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | AUTONOMOUS SOVEREIGNTY NODE (ASN)</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ASN NODE SPECIFIC STYLING */
+        .asn-section {
+            padding: 5rem 0;
+            min-height: 90vh;
+        }
+        .asn-header h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .asn-header p {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #aaa;
+        }
+        
+        .asn-dashboard {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Workflows and Status Monitor */
+            gap: 30px;
+        }
+
+        /* Left Panel: Workflow Builder */
+        .workflow-builder {
+            background-color: var(--color-black-obsidian);
+            border: 2px solid var(--color-gold-neon);
+            padding: 20px;
+            min-height: 450px;
+        }
+        .workflow-builder h2 {
+            font-family: var(--font-primary);
+            color: var(--color-blue-deep);
+            margin-bottom: 15px;
+        }
+        .flow-schematic {
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+            position: relative;
+        }
+        .flow-node {
+            background-color: var(--color-grey-dark);
+            border: 2px solid var(--color-gold-neon);
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            width: 120px;
+            cursor: move;
+            z-index: 10;
+        }
+        .flow-arrow {
+            position: absolute;
+            background-color: var(--color-blue-deep);
+            height: 2px;
+            box-shadow: 0 0 5px var(--color-blue-deep);
+            z-index: 5;
+        }
+
+        /* Right Panel: Status Monitor */
+        .status-monitor {
+            background-color: var(--color-grey-dark);
+            padding: 20px;
+            border-left: 5px solid var(--color-blue-deep);
+        }
+        .metric-card {
+            background-color: #1A1A1E;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--color-gold-neon);
+        }
+        .metric-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--color-gold-neon);
+        }
+        .metric-card .value {
+            font-size: 2.2rem;
+            color: #0F0; /* Default green for success */
+        }
+        .deployment-log {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #ccc;
+            height: 150px;
+            overflow-y: auto;
+            background: #0d0d10;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="uam-universe-map.html">UAM MAP</a></li>
+                <li><a href="engineering.html">ENGINEERING HUB</a></li>
+                <li><a href="sil-coding-lab.html">CODING LAB</a></li>
+            </ul>
+            <button class="btn-revive-code">VIEW NODE HEALTH</button>
+        </nav>
+    </header>
+
+    <main class="asn-section">
+        <div class="container">
+            <div class="asn-header">
+                <h1 class="glitch-text">AUTONOMOUS SOVEREIGNTY NODE (ASN)</h1>
+                <p>The operational brain for Protagonist autonomy. Design and deploy self-managing, cross-platform workflows. Master the art of automated existence (CODE 005 Mastery).</p>
+            </div>
+            
+            <div class="asn-dashboard">
+                
+                <div class="workflow-builder">
+                    <h2>WORKFLOW SCHEMATIC BUILDER: BIO-CHRONOS PROTOCOL</h2>
+                    
+                    <div class="flow-schematic">
+                        <div class="flow-node" style="left: 10%; top: 50%;">BEP CENTER (Trigger)</div>
+                        <div class="flow-node" style="left: 45%; top: 50%;">LOGIC GATE (IF/THEN)</div>
+                        <div class="flow-node" style="left: 80%; top: 50%;">MSL LODGE (Action)</div>
+
+                        <div class="flow-arrow" style="width: 130px; transform: translateX(100px); top: 55%;"></div>
+                        <div class="flow-arrow" style="width: 120px; transform: translateX(250px); top: 55%;"></div>
+                        
+                        <p style="position: absolute; top: 10%; left: 30%; font-family: var(--font-mono); color: var(--color-gold-neon);">IF Bio-Score < 7.0 THEN Initiate Refusal Node</p>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="btn-main-action">TEST INTEGRITY</button>
+                        <button class="btn-revive-code">DEPLOY PROTOCOL ⋙</button>
+                    </div>
+                </div>
+
+                <div class="status-monitor">
+                    <div class="metric-card">
+                        <h3>MENTAL BANDWIDTH SAVED (WEEKLY)</h3>
+                        <div class="value">+18.5 HOURS</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>ACTIVE PROTOCOLS DEPLOYED</h3>
+                        <div class="value" style="color: var(--color-gold-neon);">7/12 NODES</div>
+                    </div>
+                    
+                    <h2>DEPLOYMENT LOG</h2>
+                    <div class="deployment-log">
+                        [09:15:30 Z-1] Protocol I: BIO-CHRONOS | STATUS: EXECUTION SUCCESSFUL.<br>
+                        [10:01:12 Z-1] Protocol II: KNOWLEDGE LOGISTICS | STATUS: EXECUTION SUCCESSFUL.<br>
+                        [11:45:01 Z-1] Protocol IV: MARKETPLACE RESUPPLY | STATUS: EXECUTION SUCCESSFUL.<br>
+                        [12:00:00 Z-1] Protocol III: CREATION DEPLOYER | STATUS: STRUCTURAL FAILURE. CHECK SIL LOG.<br>
+                        [12:01:00 Z-1] Protocol I: BIO-CHRONOS | STATUS: EXECUTION SUCCESSFUL.<br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Autonomous Sovereignty Node: Total Autonomy Achieved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
