@@ -3,10 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE | CODE 001: AWARENESS</title>
+    <title>KRREVIVEÉLITE | OPERATIONAL NEXUS DASHBOARD</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* DASHBOARD SPECIFIC STYLING */
+        .nexus-section {
+            padding-top: 5rem;
+            min-height: 90vh;
+        }
+        .nexus-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Sidebar and Main Content */
+            gap: 20px;
+        }
+        
+        /* Unified Navigation Protocol (UNP) Sidebar */
+        .unp-sidebar {
+            background-color: var(--color-grey-dark);
+            padding: 20px;
+            border-right: 2px solid var(--color-gold-neon);
+        }
+        .unp-sidebar h3 {
+            font-family: var(--font-primary);
+            color: var(--color-blue-deep);
+            margin-top: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+            padding-bottom: 5px;
+        }
+        .unp-sidebar ul {
+            list-style: none;
+            padding: 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        .unp-sidebar ul li a {
+            display: block;
+            padding: 8px 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .unp-sidebar ul li a:hover {
+            color: var(--color-gold-neon);
+            background-color: rgba(255, 215, 0, 0.05);
+        }
+
+        /* Main Dashboard Content */
+        .dashboard-main {
+            padding: 20px;
+        }
+        .metric-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card-small {
+            background-color: var(--color-grey-dark);
+            padding: 15px;
+            border-left: 5px solid var(--color-blue-deep);
+        }
+        .metric-card-small h4 {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        .metric-card-small .value {
+            font-size: 1.5rem;
+            color: var(--color-gold-neon);
+            font-family: var(--font-mono);
+        }
+
+        /* Activity Feed/Map Widget */
+        .dashboard-panels {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+        }
+        .activity-feed {
+            background-color: #1A1A1E;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .activity-feed h2, .map-widget h2 {
+            font-family: var(--font-primary);
+            color: var(--color-blue-deep);
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 191, 255, 0.2);
+            padding-bottom: 5px;
+        }
+        .feed-item {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 10px;
+            border-left: 3px solid transparent;
+            padding-left: 5px;
+        }
+        .feed-item.alert { border-left-color: red; color: red; }
+        .feed-item.signal { border-left-color: var(--color-gold-neon); }
+        .feed-item.deploy { border-left-color: #0F0; }
+
+        .map-widget {
+            background-color: #1A1A1E;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .map-widget .placeholder {
+            height: 250px;
+            background: rgba(0, 191, 255, 0.05);
+            border: 1px dashed var(--color-blue-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-blue-deep);
+            font-family: var(--font-mono);
+        }
+    </style>
 </head>
 <body>
 
@@ -14,54 +131,99 @@
         <nav class="container">
             <a href="index.html" class="logo">KRREVIVEÉLITE</a>
             <ul class="nav-links">
-                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
-                <li><a href="tools.html">AI AUGMENTATION</a></li>
-                <li><a href="universe.html">UNIVERSE MAP</a></li>
-                <li><a href="products.html">ELITE GEAR</a></li>
+                <li><a href="uam-universe-map.html">UAM MAP</a></li>
+                <li><a href="signal-exchange.html">SEP COMMS</a></li>
+                <li><a href="shadowfall-initiation.html">SHADOWFALL</a></li>
             </ul>
-            <button id="codeCheckBtn" class="btn-revive-code">CODE 001 STATUS CHECK</button>
+            <button class="btn-revive-code">CODE STATUS: 003 JIN</button>
         </nav>
     </header>
 
-    <main class="universe-gate-section">
-        <div class="cosmic-header">
-            <span class="transmission-status">TRANSMISSION PENDING [STATUS: AWAKENING]</span>
-            <h1 class="glitch-text">INITIATE THE SAMURAI PROTOCOL.</h1>
-            <h2 class="sub-header">SOVEREIGNTY IS NOT AN OPTION. IT IS THE COMMAND.</h2>
-            <p class="mission-statement">A multi-dimensional universe engineered for elite discipline, spiritual sovereignty, and cosmic advancement. The network awaits your frequency.</p>
+    <main class="nexus-section">
+        <div class="container nexus-layout">
             
-            <a href="#" id="enterNetworkBtn" class="btn-main-action disabled">ENTER THE NETWORK ⋙</a>
-            
-            <div id="statusMessage" class="status-message"></div>
+            <aside class="unp-sidebar">
+                <h3 style="color: var(--color-gold-neon);">I. MASTERY PROTOCOL</h3>
+                <ul>
+                    <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                    <li><a href="qke-knowledge-engine.html">QUANTUM KNOWLEDGE ENGINE (QKE)</a></li>
+                    <li><a href="msl-sovereignty-lodge.html">SOVEREIGNTY LODGE (MSL)</a></li>
+                </ul>
 
+                <h3>II. DIGITAL CREATION</h3>
+                <ul>
+                    <li><a href="engineering.html">ENGINEERING HUB</a></li>
+                    <li><a href="sil-coding-lab.html">STRUCTURAL LAB (SIL)</a></li>
+                    <li><a href="qpg-workspace.html">QUANTUM PROMPT GENERATOR (QPG)</a></li>
+                    <li><a href="fcl-calibration-lab.html">FREQUENCY CALIBRATION LAB (FCL)</a></li>
+                    <li><a href="asn-automation-node.html">AUTONOMY NODE (ASN)</a></li>
+                </ul>
+
+                <h3>III. SYSTEM INTEGRITY</h3>
+                <ul>
+                    <li><a href="bep-center.html">BIO-ENHANCEMENT PROTOCOL (BEP)</a></li>
+                    <li><a href="dlp-marketplace.html">DIGITAL LOGISTICS (DLP)</a></li>
+                </ul>
+
+                <h3>IV. COMMAND & STATUS</h3>
+                <ul>
+                    <li><a href="uam-universe-map.html">UNIVERSAL ARCHITECTURE MAP (UAM)</a></li>
+                    <li><a href="console.html">COSMIC CONSOLE (LORE)</a></li>
+                    <li><a href="signal-exchange.html">SIGNAL EXCHANGE (SEP)</a></li>
+                    <li><a href="shadowfall-initiation.html">SHADOWFALL INITIATION (SPIP)</a></li>
+                </ul>
+            </aside>
+            
+            <section class="dashboard-main">
+                <h1 class="glitch-text" style="text-align: left; margin-bottom: 20px;">OPERATIONAL NEXUS: SYSTEM STATUS</h1>
+
+                <div class="metric-bar">
+                    <div class="metric-card-small">
+                        <h4>MENTAL BANDWIDTH SAVED (ASN)</h4>
+                        <div class="value">**+15.7 Hrs**</div>
+                    </div>
+                    <div class="metric-card-small">
+                        <h4>HRV FREQUENCY (BEP)</h4>
+                        <div class="value" style="color: #0F0;">**71 ms**</div>
+                    </div>
+                    <div class="metric-card-small">
+                        <h4>ACTIVE PROTOCOL DEPLOYMENTS</h4>
+                        <div class="value">**7/9 NODES**</div>
+                    </div>
+                    <div class="metric-card-small">
+                        <h4>SIGNAL INTEGRITY SCORE (SEP)</h4>
+                        <div class="value">**9.4 / 10**</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-panels">
+                    
+                    <div class="activity-feed">
+                        <h2>ACTIVITY LOG / SIGNAL FEED</h2>
+                        <div class="feed-item alert">[10:01:12 BEP] **ANOMALY ALERT**: Sleep Score 6.1. Initiate MSL Refusal Node.</div>
+                        <div class="feed-item deploy">[09:55:00 ASN] Protocol I: BIO-CHRONOS | EXECUTION SUCCESSFUL.</div>
+                        <div class="feed-item signal">[09:45:30 SEP] @MasterBuilder7: Node Deployment 4.0 achieved 99.99% autonomy. #CODE_005</div>
+                        <div class="feed-item deploy">[09:30:15 SIL] Blueprint `/Chaos_Filter_Script.py` DEPLOYMENT SUCCESSFUL.</div>
+                        <div class="feed-item signal">[09:15:00 SEP] @SovereigntyPilot: Geometry Meditation held for 7 min. JIN is the defense.</div>
+                        <div class="feed-item">[09:00:00 DLP] Order #45037 placed: Micro-Nutrient Resupply (Automated).</div>
+                    </div>
+                    
+                    <div class="map-widget">
+                        <h2>UNIVERSAL ARCHITECTURE STATUS</h2>
+                        <div class="placeholder">
+                            UAM SCHEMATIC WIDGET <br> (VISUALIZING NODE STATUS)
+                        </div>
+                        <a href="uam-universe-map.html" class="btn-main-action" style="margin-top: 15px;">FULL UAM DIAGRAM ⋙</a>
+                    </div>
+                </div>
+
+            </section>
         </div>
     </main>
     
-    <section class="dimension-grid">
-        <div class="dimension-box physical-dim">
-            <h3>[01] PHYSICAL DIMENSION</h3>
-            <p>Mastery. Engineering. Bio-Enhancement.</p>
-        </div>
-        <div class="dimension-box digital-dim">
-            <h3>[02] DIGITAL DIMENSION</h3>
-            <p>AI Tools. Network Logic. Automation Systems.</p>
-        </div>
-        <div class="dimension-box cosmic-dim">
-            <h3>[03] COSMIC DIMENSION</h3>
-            <p>Higher Intelligence. Universal Codes. The Watchers.</p>
-        </div>
-        <div class="dimension-box shadow-dim">
-            <h3>[04] SHADOW DIMENSION</h3>
-            <p>Opposition Forces. Suppression Veil. The Conflict.</p>
-        </div>
-    </section>
-
     <footer class="footer-protocol">
         <div class="container">
-            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Engineered for Precision.</p>
-            <div class="footer-links">
-                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
-            </div>
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Operational Nexus: Optimal Complexity Achieved.</p>
         </div>
     </footer>
 
