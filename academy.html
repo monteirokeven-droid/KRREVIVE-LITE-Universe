@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | ACADEMY PROTOCOL</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ACADEMY SPECIFIC STYLING - Adding minor overrides/sections unique to this page */
+        .academy-section {
+            padding: 5rem 0;
+            background-color: var(--color-black-obsidian);
+        }
+        .academy-header h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .academy-header p {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #ccc;
+        }
+        .code-path {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .code-module {
+            background-color: var(--color-grey-dark);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 2.5rem;
+            position: relative;
+            transition: box-shadow 0.4s;
+        }
+        .code-module:hover {
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+        }
+        .code-module::before {
+            content: attr(data-code);
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0.5rem 1rem;
+            background-color: var(--color-gold-neon);
+            color: var(--color-black-obsidian);
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .code-details h2 {
+            font-family: var(--font-primary);
+            color: var(--color-gold-neon);
+            margin-top: 0;
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+            padding-top: 1rem;
+        }
+        .code-details h3 {
+            color: var(--color-blue-deep);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+        .code-details ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+        .code-details ul li {
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .code-details ul li:last-child {
+            border-bottom: none;
+        }
+        .code-unlock-btn {
+            float: right;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--color-blue-deep);
+            color: var(--color-black-obsidian);
+            border: none;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .code-unlock-btn:hover {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
+                <li><a href="tools.html">AI AUGMENTATION</a></li>
+                <li><a href="universe.html">UNIVERSE MAP</a></li>
+                <li><a href="products.html">ELITE GEAR</a></li>
+            </ul>
+            <button id="codeCheckBtn" class="btn-revive-code">VIEW CODE STATUS</button>
+        </nav>
+    </header>
+
+    <main class="academy-section">
+        <div class="container">
+            <div class="academy-header">
+                <h1 class="glitch-text">ACADEMY PROTOCOL: MASTERY PATH</h1>
+                <p>The path to sovereignty is achieved through structured discipline. Each Code unlocks a higher operational state and prepares the Protagonist for the next dimension of conflict. Begin your mastery.</p>
+            </div>
+            
+            <div class="code-path">
+
+                <div class="code-module" data-code="CODE 001 | GI (RECTITUDE)">
+                    <div class="code-details">
+                        <h2>[AWARENESS]: The Inner Map</h2>
+                        <h3>PHYSICAL DIMENSION: SELF-AUDIT & DISCIPLINE</h3>
+                        <ul>
+                            <li>**CORE COURSE:** 7-Day Discipline Initiation</li>
+                            <li>**VIRTUE:** Gi (Rectitude)</li>
+                            <li>**UNLOCK CRITERIA:** Document 7 consecutive days of self-imposed, non-negotiable protocol.</li>
+                            <li>**DIGITAL UNLOCK:** Data Echo Scanner Access</li>
+                        </ul>
+                        <button class="code-unlock-btn">INITIATE COURSE</button>
+                    </div>
+                </div>
+
+                <div class="code-module" data-code="CODE 002 | MEIYO (HONOR)">
+                    <div class="code-details">
+                        <h2>[ALIGNMENT]: The Anchor Protocol</h2>
+                        <h3>PHYSICAL DIMENSION: HABIT ENGINEERING</h3>
+                        <ul>
+                            <li>**CORE COURSE:** The 30-Day Chronos Protocol</li>
+                            <li>**VIRTUE:** Meiyo (Honor)</li>
+                            <li>**UNLOCK CRITERIA:** Consistent 30-day mastery of a specific physical habit (e.g., 5 AM rise) with Bio-Feedback verification.</li>
+                            <li>**DIGITAL UNLOCK:** Bio-Feedback Loop Access</li>
+                        </ul>
+                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                    </div>
+                </div>
+
+                <div class="code-module" data-code="CODE 003 | JIN (BENEVOLENCE)">
+                    <div class="code-details">
+                        <h2>[SOVEREIGNTY]: The Samurai Mind</h2>
+                        <h3>COSMIC DIMENSION: EMOTIONAL CONTROL</h3>
+                        <ul>
+                            <li>**CORE COURSE:** Geometry of Self Meditation</li>
+                            <li>**VIRTUE:** Jin (Benevolence)</li>
+                            <li>**UNLOCK CRITERIA:** Successfully navigate and neutralize three high-frequency emotional triggers (Shadow Veil attacks) without reaction.</li>
+                            <li>**COSMIC UNLOCK:** Jesus Cartoon Transmission Access</li>
+                        </ul>
+                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                    </div>
+                </div>
+
+                <div class="code-module" data-code="CODE 004 | MAKOTO (HONESTY)">
+                    <div class="code-details">
+                        <h2>[FREQUENCY]: Energy Calibration</h2>
+                        <h3>PHYSICAL/DIGITAL DIMENSION: BIO-ENHANCEMENT</h3>
+                        <ul>
+                            <li>**CORE COURSE:** The Bio-Signature Optimization Protocol</li>
+                            <li>**VIRTUE:** Makoto (Honesty)</li>
+                            <li>**UNLOCK CRITERIA:** Achieve a quantified metric of physical/mental enhancement (e.g., a 20% increase in average HRV score).</li>
+                            <li>**DIGITAL UNLOCK:** Quantum Prompt Generator License</li>
+                        </ul>
+                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                    </div>
+                </div>
+
+                <div class="code-module" data-code="CODE 005 | YU (COURAGE)">
+                    <div class="code-details">
+                        <h2>[CREATION]: Structural Engineering</h2>
+                        <h3>DIGITAL/GAME DIMENSION: BUILDING SYSTEMS</h3>
+                        <ul>
+                            <li>**CORE COURSE:** Automation Node Deployment Strategy</li>
+                            <li>**VIRTUE:** Yu (Courage)</li>
+                            <li>**UNLOCK CRITERIA:** Develop and execute a self-sustaining external system (e.g., a fully organized knowledge system or passive income pilot).</li>
+                            <li>**GAME UNLOCK:** In-Game Item Crafting & Full Tools Section Access</li>
+                        </ul>
+                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Academy Protocol: Non-Negotiable.</p>
+            <div class="footer-links">
+                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
