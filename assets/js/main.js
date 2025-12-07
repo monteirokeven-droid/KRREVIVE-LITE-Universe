@@ -1,119 +1,92 @@
-/**
- * assets/js/main.js
- * Lightweight site JS: mobile menu toggle, active nav links,
- * download tracking (localStorage), simple notifications.
- */
+document.addEventListener('DOMContentLoaded', () => {
+    const codeCheckBtn = document.getElementById('codeCheckBtn');
+    const enterNetworkBtn = document.getElementById('enterNetworkBtn');
+    const statusMessage = document.getElementById('statusMessage');
 
-(function () {
-  'use strict';
+    // Assume the user starts without Code 001 access
+    let hasCode001 = localStorage.getItem('krrevive_code_001') === 'true';
 
-  /* ---- Utilities ---- */
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+    // Initial state check
+    if (hasCode001) {
+        unlockNetworkAccess();
+        statusMessage.textContent = '[CODE 001: AWARENESS] Protocol Verified. Access Granted.';
+        codeCheckBtn.style.display = 'none'; // Hide the check button once verified
+    } else {
+        enterNetworkBtn.classList.add('disabled');
+        statusMessage.textContent = 'INITIATING CODE CHECK... AWAITING USER INPUT.';
+    }
 
-  /* ---- Active link highlight ---- */
-  function highlightActiveLink() {
-    const links = $$('nav a');
-    const path = location.pathname.split('/').pop() || 'index.html';
-    links.forEach(a => {
-      const href = a.getAttribute('href') || '';
-      if (href === path || (href === 'index.html' && path === '')) {
-        a.classList.add('active');
-      } else {
-        a.classList.remove('active');
-      }
+    // --- Core Function: The CODE 001 Check Simulation ---
+    codeCheckBtn.addEventListener('click', () => {
+        // Prevent multiple checks while processing
+        if (codeCheckBtn.disabled) return;
+
+        codeCheckBtn.disabled = true;
+        codeCheckBtn.textContent = 'VERIFYING SIGNATURE...';
+        statusMessage.textContent = 'ACCESSING CENTRAL NETWORK DATABASE... STAND BY.';
+
+        // Simulate a complex, high-latency verification process
+        setTimeout(() => {
+            // --- LOGIC GATE: In a real system, this checks server credentials ---
+            const success = Math.random() > 0.3; // Simulate 70% chance of success for initial access
+
+            if (success) {
+                // SUCCESS: CODE 001 ACQUIRED
+                hasCode001 = true;
+                localStorage.setItem('krrevive_code_001', 'true');
+                unlockNetworkAccess();
+                
+                statusMessage.innerHTML = '[<span style="color:var(--color-gold-neon);">CODE 001: AWARENESS</span>] PROTOCOL VERIFIED. ACCESS GRANTED.';
+                codeCheckBtn.textContent = 'ACCESS GRANTED';
+                codeCheckBtn.style.backgroundColor = 'var(--color-gold-neon)';
+                codeCheckBtn.style.color = 'var(--color-black-obsidian)';
+                codeCheckBtn.style.borderColor = 'var(--color-gold-neon)';
+                
+            } else {
+                // FAILURE: CODE 001 PENDING
+                statusMessage.innerHTML = '[<span style="color:#f00;">ACCESS DENIED</span>] CODE 001 PENDING. INITIATE THE 7-DAY DISCIPLINE PROTOCOL VIA THE ACADEMY.';
+                codeCheckBtn.textContent = 'CHECK FAILED. RETRY.';
+                codeCheckBtn.disabled = false; // Allow retry
+            }
+        }, 3000); // 3-second cinematic delay
     });
-  }
 
-  /* ---- Simple notification (non-blocking) ---- */
-  function notify(message, timeout = 4200) {
-    const containerId = '__kr_notify_container';
-    let container = document.getElementById(containerId);
-    if (!container) {
-      container = document.createElement('div');
-      container.id = containerId;
-      container.style.position = 'fixed';
-      container.style.right = '18px';
-      container.style.top = '80px';
-      container.style.zIndex = 9999;
-      document.body.appendChild(container);
+
+    // --- Function to Unlock the Main CTA ---
+    function unlockNetworkAccess() {
+        enterNetworkBtn.classList.remove('disabled');
+        enterNetworkBtn.href = 'universe.html'; // Set the actual link
+        enterNetworkBtn.addEventListener('click', () => {
+             // Optional: Add a transition animation here before navigating
+             console.log("Entering the KRREVIVEÉLITE Universe...");
+        });
     }
-    const el = document.createElement('div');
-    el.textContent = message;
-    el.style.background = 'rgba(0,0,0,0.6)';
-    el.style.color = '#e6fbff';
-    el.style.padding = '10px 14px';
-    el.style.borderRadius = '8px';
-    el.style.marginTop = '8px';
-    el.style.boxShadow = '0 8px 30px rgba(0,217,255,0.06)';
-    el.style.fontWeight = '700';
-    container.appendChild(el);
-    setTimeout(() => {
-      el.style.transition = 'opacity 300ms';
-      el.style.opacity = '0';
-      setTimeout(() => el.remove(), 320);
-    }, timeout);
-  }
 
-  /* ---- Download counter (localStorage) ---- */
-  const DOWNLOAD_KEY = 'krrevive_download_count';
-  function incrementDownloadCounter() {
-    try {
-      const current = parseInt(localStorage.getItem(DOWNLOAD_KEY) || '0', 10);
-      localStorage.setItem(DOWNLOAD_KEY, (current + 1).toString());
-      notify('Download started — thank you for trying KRREVIVEÉLITE!');
-    } catch (e) {
-      // localStorage may be blocked — ignore
+    // --- Glitch Effect on H1 (Aesthetic Enhancement) ---
+    const h1 = document.querySelector('h1.glitch-text');
+    let glitchInterval;
+
+    function applyGlitch() {
+        const originalText = h1.textContent;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=';
+        let iterations = 0;
+
+        glitchInterval = setInterval(() => {
+            h1.textContent = originalText.split('').map((char, index) => {
+                if (index < iterations) {
+                    return originalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            }).join('');
+
+            iterations += 1;
+            if (iterations >= originalText.length + 5) {
+                clearInterval(glitchInterval);
+                h1.textContent = originalText; // Reset to the correct text
+            }
+        }, 75);
     }
-  }
-
-  function getDownloadCount() {
-    try {
-      return parseInt(localStorage.getItem(DOWNLOAD_KEY) || '0', 10);
-    } catch (e) {
-      return 0;
-    }
-  }
-
-  /* ---- Wire up download link(s) ---- */
-  function wireDownloadLinks() {
-    const links = $$('a[download]');
-    links.forEach(a => {
-      a.addEventListener('click', () => {
-        incrementDownloadCounter();
-      });
-    });
-  }
-
-  /* ---- Accessibility: focus outlines for keyboard users ---- */
-  function enableFocusOutlineOnKeyboard() {
-    function handleFirstTab(e) {
-      if (e.key === 'Tab') {
-        document.documentElement.classList.add('show-focus-outline');
-        window.removeEventListener('keydown', handleFirstTab);
-      }
-    }
-    window.addEventListener('keydown', handleFirstTab);
-  }
-
-  /* ---- Init ---- */
-  function init() {
-    highlightActiveLink();
-    wireDownloadLinks();
-    enableFocusOutlineOnKeyboard();
-
-    // small friendly message when site loads
-    setTimeout(() => {
-      const count = getDownloadCount();
-      if (count > 0) notify(`You have downloaded the game ${count} time(s) on this device.`);
-    }, 800);
-  }
-
-  /* DOM ready */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
-})();
+    
+    // Apply the glitch once on page load for cinematic effect
+    applyGlitch(); 
+});
