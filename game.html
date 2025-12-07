@@ -1,38 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game — KRREVIVEÉLITE Universe</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+<main class="war-room-dashboard">
+    <div class="container">
+        
+        <header class="wr-header">
+            <h1 class="glitch-text">THE WAR ROOM (WR)</h1>
+            <p>Shadow Dimension Interface. Access to the Conflict Library and Protagonist Dossier. Initiate Protocol.</p>
+        </header>
 
-<body>
-  <header class="header">
-    <h1>KRREVIVEÉLITE Game Center</h1>
-  </header>
+        <section id="protagonist-dossier" class="wr-panel" data-code-min="001">
+            <h2>I. PROTAGONIST DOSSIER</h2>
+            <div class="stat-grid">
+                <div><span class="stat-label">REVIVE CODE LEVEL:</span> <span id="userCodeLevel" class="stat-value">CODE 002</span></div>
+                <div><span class="stat-label">ATTRIBUTE: DISCIPLINE:</span> <span class="stat-value">25 POINTS</span></div>
+                <div><span class="stat-label">CHRONOS BALANCE:</span> <span class="stat-value">C-875</span></div>
+            </div>
+            <button id="protocolCheckLaunch" class="btn-main-action">INITIATE GAME PROTOCOL CHECK ⋙</button>
+        </section>
 
-  <nav class="nav">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="universe.html">Universe</a></li>
-      <li><a href="game.html" class="active">Game</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="terms.html">Terms</a></li>
-    </ul>
-  </nav>
+        <hr>
 
-  <section class="page-content">
-    <h2>Download the Game</h2>
-    <p>Windows, Mac, Linux and Mobile builds available soon.</p>
+        <section id="conflict-library" class="wr-panel" data-code-min="003">
+            <h2>III. THE CONFLICT LIBRARY</h2>
+            <div class="game-listing">
+                <h3>KRREVIVEÉLITE: WAR FOR HUMAN PROGRESS (Core Title)</h3>
+                <p>The definitive multi-dimensional conflict experience. Requires CODE 003 Sovereignty to access full skill tree.</p>
+                <a href="#" class="buy-btn">OWNED / INSTALL</a>
+            </div>
+            </section>
 
-    <a class="download-btn" href="assets/downloads/game.zip" download>Download Game</a>
-  </section>
+        <hr>
 
-  <footer class="footer">
-    <p>© 2025 KRREVIVEÉLITE Universe. All Rights Reserved.</p>
-  </footer>
-</body>
-</html>
+        <section id="cipher-market" class="wr-panel" data-code-min="005">
+            <h2>IV. THE CIPHER MARKET</h2>
+            <p>Trade high-tier, player-crafted assets. Exclusive access for Master Builders.</p>
+            <a href="#" class="btn-revive-code">ENTER MARKETPLACE</a>
+        </section>
+
+    </div>
+</main>
