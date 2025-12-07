@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <style>
-        /* ACADEMY SPECIFIC STYLING - Adding minor overrides/sections unique to this page */
+        /* ACADEMY SPECIFIC STYLING - Focusing on flow, geometry, and status */
         .academy-section {
-            padding: 5rem 0;
+            padding: 5rem 0 8rem 0;
             background-color: var(--color-black-obsidian);
         }
         .academy-header h1 {
@@ -21,76 +21,135 @@
         .academy-header p {
             text-align: center;
             margin-bottom: 4rem;
-            color: #ccc;
+            color: #aaa;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .code-path {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
         }
+        
+        /* 1. Module Base Style */
         .code-module {
             background-color: var(--color-grey-dark);
             border: 1px solid rgba(255, 215, 0, 0.1);
             padding: 2.5rem;
             position: relative;
-            transition: box-shadow 0.4s;
+            transition: box-shadow 0.4s, transform 0.2s;
+            overflow: hidden; /* For the status badge */
+            min-height: 450px;
         }
         .code-module:hover {
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.15);
+            transform: translateY(-5px);
         }
+        
+        /* 2. Status Badge - UX Indicator */
+        .code-status {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+            transition: opacity 0.4s;
+        }
+
+        .status-locked {
+            background-color: #555;
+            color: #1A1A1E;
+        }
+        .status-active {
+            background-color: var(--color-blue-deep);
+            color: var(--color-black-obsidian);
+            animation: pulse-active 1.5s infinite;
+        }
+        .status-verified {
+            background-color: var(--color-gold-neon);
+            color: var(--color-black-obsidian);
+            box-shadow: 0 0 10px var(--color-gold-neon);
+        }
+
+        /* 3. Aesthetic Focus */
         .code-module::before {
-            content: attr(data-code);
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            padding: 0.5rem 1rem;
-            background-color: var(--color-gold-neon);
-            color: var(--color-black-obsidian);
-            font-family: var(--font-primary);
-            font-weight: 700;
-            font-size: 1.2rem;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-gold-neon), transparent);
+            opacity: 0.3;
         }
+
         .code-details h2 {
             font-family: var(--font-primary);
             color: var(--color-gold-neon);
             margin-top: 0;
             font-size: 1.8rem;
             letter-spacing: 0.1em;
-            padding-top: 1rem;
+            margin-bottom: 0.5rem;
         }
         .code-details h3 {
             color: var(--color-blue-deep);
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .lore-transmission {
+            font-style: italic;
+            color: #999;
+            margin-bottom: 2rem;
+            border-left: 2px solid var(--color-blue-deep);
+            padding-left: 10px;
+            font-size: 0.9rem;
         }
         .code-details ul {
             list-style: none;
             padding-left: 0;
             margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
         }
         .code-details ul li {
-            padding: 0.4rem 0;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding: 0.6rem 0;
             display: flex;
             justify-content: space-between;
+            font-size: 0.95rem;
         }
-        .code-details ul li:last-child {
-            border-bottom: none;
-        }
+        
         .code-unlock-btn {
-            float: right;
-            padding: 0.5rem 1.5rem;
-            background-color: var(--color-blue-deep);
+            display: block;
+            width: 100%;
+            padding: 1rem 0;
+            margin-top: 1.5rem;
+            background-color: var(--color-gold-neon);
             color: var(--color-black-obsidian);
             border: none;
             font-family: var(--font-primary);
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
+            text-transform: uppercase;
+            font-weight: 700;
         }
         .code-unlock-btn:hover {
             background-color: #fff;
+            transform: scale(1.01);
+        }
+        
+        /* Pulse animation for active state */
+        @keyframes pulse-active {
+            0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 191, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); }
         }
     </style>
 </head>
@@ -113,78 +172,98 @@
         <div class="container">
             <div class="academy-header">
                 <h1 class="glitch-text">ACADEMY PROTOCOL: MASTERY PATH</h1>
-                <p>The path to sovereignty is achieved through structured discipline. Each Code unlocks a higher operational state and prepares the Protagonist for the next dimension of conflict. Begin your mastery.</p>
+                <p>The universe operates on codes, and the Code is not given; it is earned through rigorous self-engineering. This path is your Ascension Matrix, detailing the fusion of Samurai Virtue and Dimensional Mastery required to defeat the Shadow Veil.</p>
             </div>
             
-            <div class="code-path">
+            <div class="code-path" id="codePath">
 
-                <div class="code-module" data-code="CODE 001 | GI (RECTITUDE)">
+                <div class="code-module" data-code="001" data-status="verified">
+                    <div class="code-status status-verified">VERIFIED</div>
                     <div class="code-details">
-                        <h2>[AWARENESS]: The Inner Map</h2>
+                        <h2>[AWARENESS] Gi (Rectitude)</h2>
                         <h3>PHYSICAL DIMENSION: SELF-AUDIT & DISCIPLINE</h3>
+                        <p class="lore-transmission">"The Watchers note the primary failure of Target: Inability to perceive self with objective truth. Before war, one must map the territory. Begin with the rigid assessment of the inner terrain."</p>
                         <ul>
-                            <li>**CORE COURSE:** 7-Day Discipline Initiation</li>
-                            <li>**VIRTUE:** Gi (Rectitude)</li>
-                            <li>**UNLOCK CRITERIA:** Document 7 consecutive days of self-imposed, non-negotiable protocol.</li>
+                            <li>**CORE COURSE:** The 7-Day Discipline Initiation</li>
+                            <li>**UNLOCK CRITERIA:** Document 7 consecutive days of non-negotiable, self-imposed protocol.</li>
                             <li>**DIGITAL UNLOCK:** Data Echo Scanner Access</li>
                         </ul>
-                        <button class="code-unlock-btn">INITIATE COURSE</button>
+                        <button class="code-unlock-btn" disabled>AWARENESS PROTOCOL COMPLETE</button>
                     </div>
                 </div>
 
-                <div class="code-module" data-code="CODE 002 | MEIYO (HONOR)">
+                <div class="code-module" data-code="002" data-status="active">
+                    <div class="code-status status-active">ACTIVE</div>
                     <div class="code-details">
-                        <h2>[ALIGNMENT]: The Anchor Protocol</h2>
+                        <h2>[ALIGNMENT] Meiyo (Honor)</h2>
                         <h3>PHYSICAL DIMENSION: HABIT ENGINEERING</h3>
+                        <p class="lore-transmission">"Honor is the congruence between one's proclaimed map and one's actual trajectory. Eliminate chaotic drift. Install the Anchor Protocol to lock your energy signature to the mission."</p>
                         <ul>
                             <li>**CORE COURSE:** The 30-Day Chronos Protocol</li>
-                            <li>**VIRTUE:** Meiyo (Honor)</li>
-                            <li>**UNLOCK CRITERIA:** Consistent 30-day mastery of a specific physical habit (e.g., 5 AM rise) with Bio-Feedback verification.</li>
+                            <li>**UNLOCK CRITERIA:** Consistent 30-day mastery of a key biological habit (e.g., 5 AM rise) with Bio-Feedback verification.</li>
                             <li>**DIGITAL UNLOCK:** Bio-Feedback Loop Access</li>
                         </ul>
-                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                        <button class="code-unlock-btn">PROCEED TO COURSE: INITIATE</button>
                     </div>
                 </div>
 
-                <div class="code-module" data-code="CODE 003 | JIN (BENEVOLENCE)">
+                <div class="code-module" data-code="003" data-status="locked">
+                    <div class="code-status status-locked">LOCKED</div>
                     <div class="code-details">
-                        <h2>[SOVEREIGNTY]: The Samurai Mind</h2>
+                        <h2>[SOVEREIGNTY] Jin (Benevolence)</h2>
                         <h3>COSMIC DIMENSION: EMOTIONAL CONTROL</h3>
+                        <p class="lore-transmission">"The Shadow Veil attacks the internal frequency with fear and rage. Sovereignty is the geometric refusal to turn the key of the trigger. Internal command is the ultimate defense."</p>
                         <ul>
                             <li>**CORE COURSE:** Geometry of Self Meditation</li>
-                            <li>**VIRTUE:** Jin (Benevolence)</li>
-                            <li>**UNLOCK CRITERIA:** Successfully navigate and neutralize three high-frequency emotional triggers (Shadow Veil attacks) without reaction.</li>
+                            <li>**UNLOCK CRITERIA:** Successfully neutralize three high-frequency emotional triggers without deviation.</li>
                             <li>**COSMIC UNLOCK:** Jesus Cartoon Transmission Access</li>
                         </ul>
-                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                        <button class="code-unlock-btn" disabled>CODE 003 ACCESS PENDING</button>
                     </div>
                 </div>
 
-                <div class="code-module" data-code="CODE 004 | MAKOTO (HONESTY)">
+                <div class="code-module" data-code="004" data-status="locked">
+                    <div class="code-status status-locked">LOCKED</div>
                     <div class="code-details">
-                        <h2>[FREQUENCY]: Energy Calibration</h2>
+                        <h2>[FREQUENCY] Makoto (Honesty)</h2>
                         <h3>PHYSICAL/DIGITAL DIMENSION: BIO-ENHANCEMENT</h3>
+                        <p class="lore-transmission">"Honesty to self requires an optimal power source. Elevate the body and mind's operational frequency. Weak signals attract static. Strong signals cut through the Veil."</p>
                         <ul>
                             <li>**CORE COURSE:** The Bio-Signature Optimization Protocol</li>
-                            <li>**VIRTUE:** Makoto (Honesty)</li>
-                            <li>**UNLOCK CRITERIA:** Achieve a quantified metric of physical/mental enhancement (e.g., a 20% increase in average HRV score).</li>
+                            <li>**UNLOCK CRITERIA:** Achieve quantified metric enhancement (e.g., 20% increase in average HRV score).</li>
                             <li>**DIGITAL UNLOCK:** Quantum Prompt Generator License</li>
                         </ul>
-                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                        <button class="code-unlock-btn" disabled>CODE 004 ACCESS PENDING</button>
                     </div>
                 </div>
-
-                <div class="code-module" data-code="CODE 005 | YU (COURAGE)">
+                
+                <div class="code-module" data-code="005" data-status="locked">
+                    <div class="code-status status-locked">LOCKED</div>
                     <div class="code-details">
-                        <h2>[CREATION]: Structural Engineering</h2>
+                        <h2>[CREATION] Yu (Courage)</h2>
                         <h3>DIGITAL/GAME DIMENSION: BUILDING SYSTEMS</h3>
+                        <p class="lore-transmission">"The highest act of courage is to build. The universe rewards structural integrity. Design and launch a system that sustains itself, independent of the Shadow's infrastructure."</p>
                         <ul>
                             <li>**CORE COURSE:** Automation Node Deployment Strategy</li>
-                            <li>**VIRTUE:** Yu (Courage)</li>
-                            <li>**UNLOCK CRITERIA:** Develop and execute a self-sustaining external system (e.g., a fully organized knowledge system or passive income pilot).</li>
+                            <li>**UNLOCK CRITERIA:** Develop and execute a self-sustaining external system (e.g., knowledge system or passive income pilot).</li>
                             <li>**GAME UNLOCK:** In-Game Item Crafting & Full Tools Section Access</li>
                         </ul>
-                        <button class="code-unlock-btn">PROCEED TO COURSE</button>
+                        <button class="code-unlock-btn" disabled>CODE 005 ACCESS PENDING</button>
+                    </div>
+                </div>
+                
+                <div class="code-module" data-code="000" data-status="future">
+                    <div class="code-status status-locked">CLASSIFIED</div>
+                    <div class="code-details">
+                        <h2>[TRANSCENDENCE] Rei (Respect)</h2>
+                        <h3>ARC 3: WAR FOR HUMAN PROGRESS</h3>
+                        <p class="lore-transmission">"The highest protocol is currently classified. Only upon successful integration of the five core codes will the path to the War for Human Progress be revealed. Initiate the sequence."</p>
+                        <ul>
+                            <li>**CORE COURSE:** [DATA INFLUX PENDING]</li>
+                            <li>**UNLOCK CRITERIA:** Full mastery of CODE 001-005.</li>
+                            <li>**COSMIC UNLOCK:** ARC 3 Activation</li>
+                        </ul>
+                        <button class="code-unlock-btn" disabled>INITIATE ARC 3 SEQUENCE</button>
                     </div>
                 </div>
 
@@ -202,5 +281,66 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // ACADEMY SPECIFIC JAVASCRIPT LOGIC
+        // This simulates persistent user progress and updates the visual status.
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Function to retrieve the current highest verified code (e.g., from local storage simulation)
+            function getVerifiedCodeLevel() {
+                // In a real application, this would query the server-side user database.
+                // We'll simulate: assuming CODE 001 is done, and CODE 002 is active.
+                return localStorage.getItem('krrevive_highest_code') || '001'; 
+            }
+
+            const highestCode = getVerifiedCodeLevel();
+            const codeModules = document.querySelectorAll('.code-module');
+            
+            let currentCodeIndex = parseInt(highestCode);
+
+            codeModules.forEach(module => {
+                const codeNumber = parseInt(module.getAttribute('data-code'));
+                const statusBadge = module.querySelector('.code-status');
+                const unlockBtn = module.querySelector('.code-unlock-btn');
+
+                if (isNaN(codeNumber)) return; // Skip the classified placeholder
+
+                // Logic based on current user level
+                if (codeNumber < currentCodeIndex) {
+                    // Previous codes are VERIFIED
+                    module.setAttribute('data-status', 'verified');
+                    statusBadge.className = 'code-status status-verified';
+                    statusBadge.textContent = 'VERIFIED';
+                    unlockBtn.disabled = true;
+                } else if (codeNumber === currentCodeIndex) {
+                    // Current Code is ACTIVE (User needs to work on this one)
+                    module.setAttribute('data-status', 'active');
+                    statusBadge.className = 'code-status status-active';
+                    statusBadge.textContent = 'ACTIVE';
+                    unlockBtn.disabled = false;
+                    unlockBtn.textContent = 'INITIATE COURSE: ACTIVE PROTOCOL';
+                } else {
+                    // Future Codes are LOCKED
+                    module.setAttribute('data-status', 'locked');
+                    statusBadge.className = 'code-status status-locked';
+                    statusBadge.textContent = 'LOCKED';
+                    unlockBtn.disabled = true;
+                }
+
+                // Add an engaging click listener for the active code
+                if (module.getAttribute('data-status') === 'active') {
+                    unlockBtn.addEventListener('click', () => {
+                        alert(`// TRANSMISSION: Initiating CODE 00${currentCodeIndex} Protocol. Redirecting to courseware...`);
+                        // In a real app, this redirects to the specific course URL.
+                    });
+                }
+            });
+            
+            // Ensure the general Code Check button uses the updated status logic
+            const codeCheckBtn = document.getElementById('codeCheckBtn');
+            codeCheckBtn.textContent = `CODE ${highestCode} STATUS: ${highestCode === '005' ? 'MAX' : 'ACTIVE'}`;
+
+        });
+    </script>
 </body>
 </html>
