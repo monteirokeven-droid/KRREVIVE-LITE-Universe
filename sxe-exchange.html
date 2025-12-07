@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE | SYNTHESIS EXCHANGE (SXE)</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* SXE EXCHANGE SPECIFIC STYLING */
+        .sxe-section { padding: 5rem 0; min-height: 95vh; }
+        .sxe-header { text-align: center; margin-bottom: 3rem; }
+        .sxe-header h1 { font-size: 3rem; }
+        
+        .sxe-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Bounty Board and Financial Status */
+            gap: 30px;
+        }
+
+        /* Financial Status Panel */
+        .financial-panel {
+            background-color: var(--color-grey-dark);
+            padding: 20px;
+            border-left: 5px solid var(--color-gold-neon);
+        }
+        .financial-panel h2 { color: var(--color-gold-neon); font-size: 1.5rem; margin-bottom: 20px; }
+        .cp-metric {
+            border: 1px solid var(--color-blue-deep);
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .cp-metric .value { font-size: 3.5rem; font-family: var(--font-mono); color: var(--color-gold-neon); }
+        .cp-metric .sub-status { font-size: 0.9rem; color: #0F0; }
+        
+        .resource-inventory {
+            font-family: var(--font-mono);
+            background: #1A1A1E;
+            padding: 15px;
+        }
+        .resource-inventory h3 { color: var(--color-blue-deep); margin-bottom: 10px; }
+        .resource-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); }
+        
+        /* Bounty Protocol Board */
+        .bounty-board {
+            background-color: var(--color-black-obsidian);
+            padding: 20px;
+            border: 2px solid var(--color-blue-deep);
+        }
+        .bounty-board h2 { color: var(--color-blue-deep); font-size: 1.5rem; margin-bottom: 20px; }
+        .bounty-list { height: 500px; overflow-y: auto; }
+        .bounty-card {
+            background: var(--color-grey-dark);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid transparent;
+            transition: all 0.3s;
+        }
+        .bounty-card:hover {
+            border-left-color: var(--color-gold-neon);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        .bounty-card h4 { color: #fff; font-size: 1.1rem; margin-bottom: 5px; }
+        .bounty-card p { font-size: 0.8rem; color: #aaa; margin-bottom: 10px; }
+        .bounty-details { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header id="header-protocol">
+        <nav class="container">
+            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
+            <ul class="nav-links">
+                <li><a href="uam-universe-map.html">UAM MAP</a></li>
+                <li><a href="accord-governance.html">WATCHERS' ACCORD</a></li>
+                <li><a href="dlp-marketplace.html">DLP MARKETPLACE</a></li>
+            </ul>
+            <button class="btn-revive-code">CODE 003 JIN</button>
+        </nav>
+    </header>
+
+    <main class="sxe-section">
+        <div class="container">
+            <header class="sxe-header">
+                <h1 class="glitch-text">SYNTHESIS EXCHANGE (SXE) PROTOCOL</h1>
+                <p>The central hub for financial rectitude. Manage $CP$, synthesize dimensional resources, and accept Bounties for system maintenance (CODE 002 Mastery).</p>
+            </header>
+            
+            <div class="sxe-layout">
+                
+                <div class="bounty-board">
+                    <h2>BOUNTY PROTOCOL BOARD</h2>
+                    <p style="color: #ccc; margin-bottom: 15px;">Accept contracts for system stabilization and resource extraction. (Urgency reflects Shadow Veil proximity).</p>
+                    
+                    <div class="bounty-list" id="bountyList">
+                        </div>
+                </div>
+
+                <div class="financial-panel">
+                    
+                    <h2>CHRONOS POINTS ($CP$) STATUS</h2>
+                    <div class="cp-metric">
+                        <div class="value" id="chronosPoints">15,842 $CP$</div>
+                        <div class="sub-status" id="cpStatus">DYNAMIC VALUATION: STABLE (+0.05% / Hr)</div>
+                    </div>
+
+                    <div class="resource-inventory">
+                        <h3>RESOURCE INVENTORY</h3>
+                        <div class="resource-item">
+                            <span>FREQUENCY SHARDS (FCL)</span>
+                            <span id="freqShards">256 Units</span>
+                        </div>
+                        <div class="resource-item">
+                            <span>DATA SHARDS (SIL/QPG)</span>
+                            <span id="dataShards">1,104 Units</span>
+                        </div>
+                        <div class="resource-item">
+                            <span>BIOMETRIC FLUIDS (BEP)</span>
+                            <span id="bioFluids">48 Units</span>
+                        </div>
+                        <div style="text-align: right; margin-top: 20px;">
+                            <button class="btn-main-action">INITIATE RESOURCE SYNTHESIS ⋙</button>
+                        </div>
+                    </div>
+
+                    <h2 style="margin-top: 30px;">FINANCIAL RECTITUDE SCORE</h2>
+                    <div class="cp-metric" style="border-left-color: #0F0;">
+                        <div class="value" style="color: #0F0;">8.9 / 10</div>
+                        <div class="sub-status">RECTITUDE HIGH: DLP DISCOUNT ACTIVE</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer-protocol">
+        <div class="container">
+            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Synthesis Exchange: Economy Aligned.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // SXE Simulated JavaScript for interactivity and dynamic data
+        document.addEventListener('DOMContentLoaded', () => {
+            const bountyList = document.getElementById('bountyList');
+            const bounties = [
+                { title: "QKE Anomaly Diagnostics", codeReq: "004", reward: 2500, hub: "QKE", urgency: "HIGH" },
+                { title: "SIL Code Security Audit", codeReq: "005", reward: 4100, hub: "SIL", urgency: "CRITICAL" },
+                { title: "SEP Shadow Veil Signal Filtering", codeReq: "003", reward: 1800, hub: "SEP", urgency: "MEDIUM" },
+                { title: "BEP Micro-Nutrient Formula Review", codeReq: "004", reward: 3300, hub: "BEP", urgency: "HIGH" },
+                { title: "DLP Logistics Optimization Script", codeReq: "005", reward: 5500, hub: "DLP", urgency: "MEDIUM" }
+            ];
+
+            const renderBounties = () => {
+                bounties.forEach(bounty => {
+                    const card = document.createElement('div');
+                    card.className = 'bounty-card';
+                    const urgencyColor = bounty.urgency === 'CRITICAL' ? 'red' : bounty.urgency === 'HIGH' ? 'yellow' : '#00BFFF';
+                    
+                    card.innerHTML = `
+                        <h4 style="color: ${urgencyColor};">${bounty.title} (${bounty.urgency})</h4>
+                        <p>Objective: ${bounty.hub} requires maintenance on its core protocol to stabilize system integrity.</p>
+                        <div class="bounty-details">
+                            <span>**REWARD:** ${bounty.reward} $CP$</span>
+                            <span>**CODE REQ:** ${bounty.codeReq}</span>
+                            <button class="btn-revive-code" style="padding: 5px 10px;">ACCEPT</button>
+                        </div>
+                    `;
+                    bountyList.appendChild(card);
+                });
+            };
+
+            const updateCPValue = () => {
+                const cpValueElement = document.getElementById('chronosPoints');
+                let currentCP = parseInt(cpValueElement.textContent.replace(/[^\d]/g, ''));
+                // Simulate a slight, dynamic change based on a hidden server score
+                const change = (Math.random() - 0.5) * 5; // +/- 5 CP
+                currentCP = Math.round(currentCP + change);
+                
+                cpValueElement.textContent = `${currentCP.toLocaleString()} $CP$`;
+                
+                if (change > 0) {
+                    document.getElementById('cpStatus').textContent = `DYNAMIC VALUATION: RISING (+${Math.abs(change).toFixed(2)} / Min)`;
+                    document.getElementById('cpStatus').style.color = '#0F0';
+                } else if (change < 0) {
+                    document.getElementById('cpStatus').textContent = `DYNAMIC VALUATION: FALLING (-${Math.abs(change).toFixed(2)} / Min)`;
+                    document.getElementById('cpStatus').style.color = 'red';
+                } else {
+                    document.getElementById('cpStatus').textContent = `DYNAMIC VALUATION: STABLE (0.00 / Min)`;
+                    document.getElementById('cpStatus').style.color = '#ccc';
+                }
+            };
+
+            renderBounties();
+            setInterval(updateCPValue, 5000); // Update CP every 5 seconds for dynamic feel
+        });
+    </script>
+</body>
+</html>
