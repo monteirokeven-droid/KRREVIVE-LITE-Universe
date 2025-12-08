@@ -1,378 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE | Holographic Store</title>
-    <style>
-        /* --- IMPORTS & VARIABLES --- */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&display=swap');
+<div class="product-detail-view" id="productDetail">
+        <div class="pdv-close" onclick="closeProductDetail()">✖ CLOSE DATA STREAM</div>
+        <div class="pdv-container">
+            
+            <div class="pdv-visual-panel">
+                <div class="pdv-energy-pad">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&auto=format&fit=crop&q=60" alt="Zoomed Product" class="pdv-main-img">
+                </div>
+                <div class="pdv-spec-line">
+                    DATA STREAM: ENGAGED | MODEL: V1.4
+                </div>
+            </div>
 
-        :root {
-            --neon-cyan: #00f3ff;
-            --neon-white: #ffffff;
-            --bg-dark: #0a0a0a;
-            --glass-panel: rgba(20, 20, 25, 0.6);
-            --border-glow: rgba(255, 255, 255, 0.15);
-        }
+            <div class="pdv-info-panel">
+                <h2 id="pdv-name">NEURO-LINK V1</h2>
+                <div class="pdv-price-tag" id="pdv-price">Ξ 0.45 ETH</div>
+                
+                <p class="description">
+                    The Neuro-Link V1 provides seamless, high-bandwidth connection to the KRREVIVEÉLITE Network. Crafted from single-crystal black titanium, it features advanced noise cancellation and bio-feedback integration. Experience sound and communication with ultra-low latency, designed for elite efficiency. Unit includes quantum-dot charging coil.
+                </p>
 
-        body {
-            margin: 0;
-            background-color: var(--bg-dark);
-            color: var(--neon-white);
-            font-family: 'Rajdhani', sans-serif;
-            overflow: hidden; /* No scroll for the main container */
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            perspective: 1500px; /* Essential for 3D feel */
-        }
+                <div class="pdv-attributes">
+                    <div>**MATERIAL:** Black Titanium</div>
+                    <div>**LATENCY:** < 1ms</div>
+                    <div>**RATING:** ELITE-A</div>
+                </div>
 
-        /* --- CANVAS PARTICLES --- */
-        #particle-canvas {
-            position: absolute;
+                <button class="btn-buy-holo">PURCHASE & INTEGRATE</button>
+            </div>
+        </div>
+    </div>
+    ```
+
+<hr>
+
+### Step 2: Add the New CSS Styles
+
+Add the following CSS styles **within the `<style>` block** of your `shop.html` (you can place them right after the `/* --- ANIMATIONS --- */` section).
+
+```css
+        /* --- PRODUCT DETAIL VIEW STYLES --- */
+        .product-detail-view {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1a1a20 0%, #000 90%);
-        }
-
-        /* --- THE HOLOGRAPHIC TABLET CONTAINER --- */
-        .holo-interface {
-            width: 90vw;
-            height: 85vh;
-            background: rgba(10, 10, 10, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            box-shadow: 
-                0 0 50px rgba(0, 0, 0, 0.8),
-                inset 0 0 20px rgba(255, 255, 255, 0.05);
-            display: grid;
-            grid-template-rows: 80px 1fr 60px;
-            padding: 20px;
-            transform-style: preserve-3d;
-            animation: floatInterface 6s ease-in-out infinite;
-            position: relative;
-        }
-
-        /* Decorative Laser Lines (Scanning Drones) */
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-white), transparent);
-            opacity: 0.3;
-            animation: scan 4s linear infinite;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        /* --- HEADER --- */
-        header {
-            display: flex;
-            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: none; /* Hidden by default */
             align-items: center;
-            border-bottom: 1px solid var(--border-glow);
-            padding: 0 20px;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .brand-seal {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        .product-detail-view.active {
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-seal::before {
-            content: '';
-            display: block;
-            width: 10px;
-            height: 10px;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
-            border-radius: 50%;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li {
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            opacity: 0.6;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        nav ul li:hover, nav ul li.active {
             opacity: 1;
-            text-shadow: 0 0 8px var(--neon-white);
         }
 
-        nav ul li.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--neon-white);
-            box-shadow: 0 0 5px var(--neon-white);
-        }
-
-        /* --- MAIN PRODUCT GRID --- */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+        .pdv-container {
+            width: 80%;
+            max-width: 1200px;
+            height: 70%;
+            background: var(--glass-panel);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.3);
+            display: flex;
             padding: 40px;
-            overflow-y: auto;
+            transform-style: preserve-3d;
+            animation: holoAppear 0.8s forwards;
         }
 
-        /* Custom Scrollbar */
-        .product-grid::-webkit-scrollbar { width: 5px; }
-        .product-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-
-        /* --- 3D PRODUCT ISLANDS --- */
-        .product-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
+        .pdv-close {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            color: var(--neon-cyan);
             cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            text-shadow: 0 0 5px var(--neon-cyan);
+            z-index: 1001;
+        }
+
+        .pdv-close:hover {
+            color: var(--neon-white);
+        }
+
+        .pdv-visual-panel {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            transform: translateZ(50px); /* Pushes the visual panel forward in 3D space */
         }
 
-        .product-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--neon-white);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        /* The Energy Pad (Floor under item) */
-        .energy-pad {
-            width: 100px;
-            height: 100px;
+        .pdv-energy-pad {
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border: 1px dashed rgba(255,255,255,0.2);
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            border: 2px solid var(--neon-cyan);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: rotatePad 10s linear infinite;
+            animation: rotatePad 15s linear infinite reverse;
         }
 
-        .product-img {
-            width: 140px;
-            height: 140px;
+        .pdv-main-img {
+            width: 90%;
+            height: 90%;
             object-fit: contain;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
-            transition: 0.5s;
-            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+            animation: productRotate 10s linear infinite;
         }
 
-        .product-card:hover .product-img {
-            transform: scale(1.1) translateZ(30px); /* 3D Pop effect */
-        }
-
-        .product-info {
-            text-align: center;
-            width: 100%;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 15px;
-        }
-
-        .p-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .p-price {
-            font-family: 'Orbitron', sans-serif;
+        .pdv-spec-line {
             color: var(--neon-cyan);
-            font-size: 0.9rem;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            border-top: 1px solid var(--border-glow);
+            font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
-            opacity: 0.5;
+            opacity: 0.7;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes floatInterface {
-            0%, 100% { transform: translateY(0) rotateX(0); }
-            50% { transform: translateY(-15px) rotateX(1deg); }
+        .pdv-info-panel {
+            flex: 1.2;
+            padding: 0 40px;
         }
 
-        @keyframes scan {
-            0% { top: 0; opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { top: 100%; opacity: 0; }
+        .pdv-info-panel h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 10px;
         }
 
-        @keyframes rotatePad {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .pdv-price-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--neon-cyan);
+            margin-bottom: 25px;
         }
-
-    </style>
-</head>
-<body>
-
-    <canvas id="particle-canvas"></canvas>
-
-    <div class="holo-interface">
-        <div class="scan-line"></div>
-
-        <header>
-            <div class="brand-seal">KRREVIVEÉLITE</div>
-            <nav>
-                <ul>
-                    <li class="active">Apparel</li>
-                    <li>Tech Gear</li>
-                    <li>Elite Tools</li>
-                    <li>Digital</li>
-                </ul>
-            </nav>
-            <div style="font-family: 'Orbitron'">CART [0]</div>
-        </header>
-
-        <main class="product-grid">
-            <article class="product-card">
-                <div class="energy-pad">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" alt="Tech" class="product-img">
-                </div>
-                <div class="product-info">
-                    <div class="p-name">NEURO-LINK V1</div>
-                    <div class="p-price">Ξ 0.45 ETH</div>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="energy-pad">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" alt="Watch" class="product-img">
-                </div>
-                <div class="product-info">
-                    <div class="p-name">CHRONO-X TITAN</div>
-                    <div class="p-price">Ξ 1.20 ETH</div>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="energy-pad">
-                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" alt="Shoes" class="product-img">
-                </div>
-                <div class="product-info">
-                    <div class="p-name">GRAV-LEAP SNEAKERS</div>
-                    <div class="p-price">Ξ 0.08 ETH</div>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="energy-pad">
-                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&auto=format&fit=crop&q=60" alt="Lens" class="product-img">
-                </div>
-                <div class="product-info">
-                    <div class="p-name">OPTIC SENSOR 9000</div>
-                    <div class="p-price">Ξ 2.50 ETH</div>
-                </div>
-            </article>
-        </main>
-
-        <footer>
-            <span>SYSTEM STATUS: ONLINE</span>
-            <span>SECURE CONNECTION: ENCRYPTED</span>
-        </footer>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
         
-        let width, height;
-        let particles = [];
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+        .description {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
         }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2;
-                this.alpha = Math.random();
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if(this.x < 0) this.x = width;
-                if(this.x > width) this.x = 0;
-                if(this.y < 0) this.y = height;
-                if(this.y > height) this.y = 0;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha * 0.5})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        .pdv-attributes div {
+            padding: 5px 0;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
         }
 
-        function init() {
-            for(let i = 0; i < 150; i++) {
-                particles.push(new Particle());
-            }
+        .btn-buy-holo {
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-cyan);
+            transition: all 0.3s;
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
+        .btn-buy-holo:hover {
+            box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px rgba(0, 243, 255, 0.8);
+            transform: scale(1.03);
+        }
+        
+        /* New Animations */
+        @keyframes holoAppear {
+            0% { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+            100% { opacity: 1; transform: translateY(0) rotateX(0); }
         }
 
-        window.addEventListener('resize', resize);
-        resize();
-        init();
-        animate();
-    </script>
-</body>
-</html>
+        @keyframes productRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
