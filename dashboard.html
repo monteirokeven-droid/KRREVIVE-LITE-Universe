@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVÉELITE | User Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <h1 class="main-logo">KRREVIVÉELITE</h1>
+            </div>
+
+            <nav class="nav-bar">
+                <a href="index.html">Universe</a>
+                <a href="shop.html">Shop</a>
+                <a href="media.html">Media</a>
+                <a href="games.html">Games</a>
+                <a href="dashboard.html" class="active">Dashboard</a> <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <h2 class="section-title">SYSTEM MONITOR & USER METRICS</h2>
+        
+        <div class="dashboard-grid">
+            
+            <div style="grid-column: 1 / 2; display: flex; flex-direction: column; gap: 20px;">
+                
+                <div class="sub-grid-3">
+                    <div class="glass-panel metric-box">
+                        <i class="fas fa-microchip fa-2x" style="color: var(--neon-cyan);"></i>
+                        <span class="metric-value">98.5%</span>
+                        <span class="metric-label">NEURAL STABILITY</span>
+                    </div>
+                    <div class="glass-panel metric-box">
+                        <i class="fas fa-star-half-alt fa-2x" style="color: var(--neon-pink);"></i>
+                        <span class="metric-value">LVL 42</span>
+                        <span class="metric-label">ELITE RANK</span>
+                    </div>
+                    <div class="glass-panel metric-box">
+                        <i class="fas fa-coins fa-2x" style="color: #ffd700;"></i>
+                        <span class="metric-value">12,500</span>
+                        <span class="metric-label">CREDITS AVAILABLE</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel metric-box" style="flex-grow: 1;">
+                    <h3 class="card-title" style="text-align: left; margin: 0 0 20px 0;">WEEKLY OBJECTIVE COMPLETION</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span class="metric-label">DATA HARVEST</span>
+                            <span class="metric-value" style="font-size: 1.5rem;">78%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-fill" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span class="metric-label">COMBAT PROFICIENCY</span>
+                            <span class="metric-value" style="font-size: 1.5rem;">92%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-fill" style="width: 92%; background: linear-gradient(90deg, var(--neon-pink), #ff0050);"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span class="metric-label">EXPLORATION LOGS</span>
+                            <span class="metric-value" style="font-size: 1.5rem;">45%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-fill" style="width: 45%; background: linear-gradient(90deg, #ffd700, #ff8c00);"></div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn-glow" style="margin-top: 20px; text-align: center;">VIEW FULL LOGS</a>
+                </div>
+            </div>
+            
+            <div style="grid-column: 2 / 3; display: flex; flex-direction: column; gap: 20px;">
+                
+                <div class="glass-panel card-content">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--neon-cyan); overflow: hidden; margin-bottom: 15px;">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%; height:100%; object-fit: cover;">
+                    </div>
+                    <h3 class="card-title" style="margin-bottom: 5px; font-size: 1.2rem;">AGENT_KRYIVA_7</h3>
+                    <span style="font-size: 0.8rem; color: var(--neon-pink); font-family: 'Orbitron', sans-serif;">Status: Active / Biometric Lock</span>
+                    <a href="#" class="btn-glow">Edit Profile</a>
+                </div>
+
+                <div class="glass-panel metric-box" style="flex-grow: 1;">
+                    <h3 class="card-title" style="text-align: left; margin: 0 0 15px 0;">SYSTEM ALERTS</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #ff5050; border-bottom: 1px dotted rgba(255,255,255,0.1); padding-bottom: 5px;">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <span>CRITICAL: Firewall integrity at 75%.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--neon-cyan); border-bottom: 1px dotted rgba(255,255,255,0.1); padding-bottom: 5px;">
+                            <i class="fas fa-bell"></i> 
+                            <span>NEW MESSAGE: Sector 4 operational report ready.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #ccc; padding-bottom: 5px;">
+                            <i class="fas fa-info-circle"></i> 
+                            <span>INFO: Next maintenance cycle in 48 hrs.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">REAL-TIME DATA STREAM</h2>
+        
+        <div class="glass-panel" style="padding: 20px; height: 200px; margin-bottom: 60px;">
+             <div style="height: 100%; background: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Blue_bar_chart_template.svg') no-repeat center center; background-size: cover; opacity: 0.5; filter: hue-rotate(180deg) drop-shadow(0 0 10px var(--neon-cyan));">
+                
+            </div>
+            <div style="position: absolute; top: 10px; right: 20px; font-size: 0.7rem; color: var(--neon-cyan); font-family: 'Orbitron', sans-serif;">
+                [DATA_FEED_01_ACTIVE]
+            </div>
+        </div>
+        
+        <footer>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">ABOUT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">CONTACT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">TERMS</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">PRIVACY</a>
+            </div>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-twitch"></i>
+                <i class="fab fa-discord"></i>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
