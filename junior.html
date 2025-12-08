@@ -1,41 +1,106 @@
-<main class="junior-protocol-section">
-    <div class="container">
-        <header class="junior-header">
-            <h1 class="glitch-text">PROTOCOL JUNIOR: CODE IMMERSION</h1>
-            <p>Initiate the foundation. Discipline is the first defense against the Shadow Veil. These modules are engineered for awareness, focus, and mastery of internal control.</p>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRREVIVEÉLITE Universe - Futuristic Cockpit</title>
+<style>
+body, html { margin:0; padding:0; overflow:hidden; background:#000010; font-family:Arial,sans-serif; }
+#logo { position:absolute; top:20px; left:50%; transform:translateX(-50%); color:#00ffff; font-size:2.5em; text-shadow:0 0 20px #00ffff,0 0 40px #ff00ff; z-index:10; }
+#nav { position:absolute; top:20px; right:50px; z-index:10; display:flex; gap:25px; }
+#nav a { color:#00ffff; text-decoration:none; font-weight:bold; font-size:1.1em; text-shadow:0 0 10px #00ffff; transition:0.3s; }
+#nav a:hover { color:#ff00ff; text-shadow:0 0 20px #ff00ff; }
+.panel { position:absolute; width:220px; height:140px; background:rgba(0,255,255,0.05); border:2px solid #00ffff; border-radius:12px; backdrop-filter:blur(5px); box-shadow:0 0 15px #00ffff; transition: transform 0.3s, box-shadow 0.3s; color:#00ffff; padding:10px; font-size:0.9em; }
+.panel:hover { transform: translateZ(20px) rotateY(5deg) rotateX(5deg); box-shadow:0 0 30px #ff00ff; }
+canvas { display:block; }
+</style>
+</head>
+<body>
 
-        <section id="junior-games" class="game-grid">
-            <div class="game-card">
-                <h2>THE GEOMETRY BUILDER</h2>
-                <p>Stabilize your emotions. Sort the colors before the shape shatters. (CODE 003)</p>
-                <a href="#" class="play-btn">INITIATE SEQUENCE</a>
-            </div>
+<div id="logo">KRREVIVEÉLITE</div>
+<div id="nav">
+<a href="#games">Games</a>
+<a href="#media">Media</a>
+<a href="#products">Products</a>
+<a href="#contact">Contact</a>
+</div>
 
-            <div class="game-card">
-                <h2>7-DAY GI TRACKER</h2>
-                <p>Master Rectitude. Log 7 small victories to earn your Awareness Code Patch. (CODE 001)</p>
-                <a href="#" class="play-btn">OPEN PROTOCOL LOG</a>
-            </div>
+<!-- Floating Panels -->
+<div class="panel" id="panel1" style="top:150px; left:100px;">Live Video Stream</div>
+<div class="panel" id="panel2" style="top:300px; left:400px;">3D Product Model</div>
+<div class="panel" id="panel3" style="top:500px; left:150px;">Music Visualizer</div>
+<div class="panel" id="panel4" style="top:350px; left:700px;">Universe Map</div>
 
-            <div class="game-card">
-                <h2>LITTLE WATCHER MISSIONS</h2>
-                <p>Execute your daily orders. Simple tasks for essential alignment. Earn Chronos points. (CODE 002)</p>
-                <a href="#" class="play-btn">VIEW MISSIONS</a>
-            </div>
+<!-- Three.js Canvas -->
+<canvas id="bgCanvas"></canvas>
 
-            <div class="game-card">
-                <h2>FREQUENCY SOUND LAB</h2>
-                <p>Generate pure focus sounds. Calibrate your mind without distraction. (CODE 004)</p>
-                <a href="#" class="play-btn">ACTIVATE LAB</a>
-            </div>
-        </section>
+<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+<script>
+// Scene setup
+const canvas = document.getElementById('bgCanvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 5000);
+camera.position.z = 600;
 
-        <section id="parent-protocol">
-            <h2 class="section-title">GUARDIAN PROTOCOL</h2>
-            <p>Access the parent dashboard for progress review and safety settings. Zero external ads. Focus on mastery.</p>
-            <a href="#" class="btn-revive-code">ACCESS PARENT DASHBOARD</a>
-        </section>
+const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias:true, alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 
-    </div>
-</main>
+// Particles for stars & trails
+let particles = [];
+const particleCount = 500;
+const particleGeometry = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+for(let i=0;i<particleCount;i++){
+    positions[i*3] = (Math.random()-0.5)*2000;
+    positions[i*3+1] = (Math.random()-0.5)*2000;
+    positions[i*3+2] = (Math.random()-0.5)*2000;
+}
+particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+const particleMaterial = new THREE.PointsMaterial({color:0x00ffff,size:2,transparent:true,opacity:0.7});
+const particleSystem = new THREE.Points(particleGeometry,particleMaterial);
+scene.add(particleSystem);
+
+// Animate particle system
+function animateParticles(){
+    const positions = particleGeometry.attributes.position.array;
+    for(let i=0;i<particleCount;i++){
+        positions[i*3+2] += 1.2;
+        if(positions[i*3+2]>1000) positions[i*3+2] = -1000;
+    }
+    particleGeometry.attributes.position.needsUpdate = true;
+}
+
+// Floating panels interaction
+const panels = [document.getElementById('panel1'),document.getElementById('panel2'),document.getElementById('panel3'),document.getElementById('panel4')];
+let panelOffsets = panels.map(p=>({x:p.offsetLeft,y:p.offsetTop,rx:Math.random()*0.02,ry:Math.random()*0.02}));
+
+// Animate panels
+function animatePanels(){
+    panels.forEach((p,i)=>{
+        const offset = panelOffsets[i];
+        offset.x += (Math.sin(Date.now()*0.0005 + i) * 0.5);
+        offset.y += (Math.cos(Date.now()*0.0005 + i) * 0.5);
+        p.style.left = offset.x + 'px';
+        p.style.top = offset.y + 'px';
+    });
+}
+
+// Render loop
+function animate(){
+    requestAnimationFrame(animate);
+    animateParticles();
+    animatePanels();
+    renderer.render(scene,camera);
+}
+animate();
+
+// Handle resize
+window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
