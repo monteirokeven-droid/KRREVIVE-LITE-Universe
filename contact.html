@@ -1,36 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — KRREVIVEÉLITE Universe</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVÉELITE | Contact Nexus</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Specific CSS for the Contact Form */
+        .contact-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .contact-form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .contact-form-container input[type="text"],
+        .contact-form-container input[type="email"],
+        .contact-form-container textarea,
+        .contact-form-container select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--neon-blue);
+            color: white;
+            border-radius: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-form-container input:focus,
+        .contact-form-container textarea:focus,
+        .contact-form-container select:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+        }
+        
+        .contact-info-panel {
+            grid-column: 2 / 3;
+            grid-row: 1 / span 3;
+            padding: 20px;
+            border-left: 1px solid var(--glass-border);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+
+        /* Responsive adjustment for contact form */
+        @media (max-width: 850px) {
+            .contact-form-container {
+                grid-template-columns: 1fr;
+            }
+            .contact-info-panel {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                border-left: none;
+                border-top: 1px solid var(--glass-border);
+                margin-top: 20px;
+                padding-left: 0;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <header class="header">
-    <h1>Contact Us</h1>
-  </header>
 
-  <nav class="nav">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="universe.html">Universe</a></li>
-      <li><a href="game.html">Game</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-      <li><a href="privacy.html">Privacy</a></li>
-      <li><a href="terms.html">Terms</a></li>
-    </ul>
-  </nav>
+    <div class="container">
+        
+        <header>
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <h1 class="main-logo">KRREVIVÉELITE</h1>
+            </div>
 
-  <section class="page-content">
-    <p>Email: support@krreviveelite.com (placeholder)</p>
-    <p>More contact features coming soon.</p>
-  </section>
+            <nav class="nav-bar">
+                <a href="index.html">Universe</a>
+                <a href="shop.html">Shop</a>
+                <a href="media.html">Media</a>
+                <a href="games.html">Games</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a> </nav>
+        </header>
 
-  <footer class="footer">
-    <p>© 2025 KRREVIVEÉLITE Universe. All Rights Reserved.</p>
-  </footer>
+        <h2 class="section-title">INITIATE DATA TRANSFER: CONTACT</h2>
+        
+        <div class="glass-panel contact-form-container">
+            
+            <form action="#" method="POST" style="grid-column: 1 / 2; padding-right: 20px;">
+                <h3 class="card-title" style="text-align: left; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 30px;">
+                    SECURE INQUIRY FORM
+                </h3>
+                
+                <div class="form-group">
+                    <label for="name">AGENT DESIGNATION / NAME</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your registered designation">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">NEURAL ADDRESS / EMAIL</label>
+                    <input type="email" id="email" name="email" required placeholder="Example: agent_x@krreviveelite.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="topic">INQUIRY CATEGORY</label>
+                    <select id="topic" name="topic" required>
+                        <option value="">-- Select Data Stream Topic --</option>
+                        <option value="technical">Technical / Bug Report</option>
+                        <option value="billing">Billing / Marketplace Inquiry</option>
+                        <option value="partner">Partnership / Alliance</option>
+                        <option value="general">General Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="message">MESSAGE/DATA PAYLOAD</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Enter your detailed transmission..."></textarea>
+                </div>
+
+                <div class="form-group full-width" style="text-align: right; margin-top: 30px;">
+                    <button type="submit" class="btn-glow" style="padding: 12px 40px; font-size: 1rem; border-radius: 30px; background: var(--neon-pink); border-color: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink);">
+                        <i class="fas fa-paper-plane"></i> SEND TRANSMISSION
+                    </button>
+                </div>
+            </form>
+
+            <div class="contact-info-panel">
+                <h3 class="card-title" style="text-align: left; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 30px;">
+                    CORE CONTACT PROTOCOLS
+                </h3>
+
+                <div class="contact-item">
+                    <i class="fas fa-comment-alt"></i>
+                    <div>
+                        <span style="font-weight: bold; color: white;">LIVE SUPPORT CHANNEL</span><br>
+                        <a href="#" style="color: var(--neon-cyan); text-decoration: none; font-size: 0.9rem;">Initiate Live Chat Protocol</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span style="font-weight: bold; color: white;">PHYSICAL NODE LOCATION</span><br>
+                        <span style="font-size: 0.9rem; color: #aaa;">Sector 09, Neo-Kyoto, Earth 2.0</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fab fa-discord"></i>
+                    <div>
+                        <span style="font-weight: bold; color: white;">COMMUNITY NEXUS</span><br>
+                        <a href="#" style="color: var(--neon-cyan); text-decoration: none; font-size: 0.9rem;">Join the Elite Discord Server</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <footer>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">ABOUT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">CONTACT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">TERMS</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">PRIVACY</a>
+            </div>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-twitch"></i>
+                <i class="fab fa-discord"></i>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // NOTE: The audio paths must be correct.
+            const hoverSound = new Audio('assets/media/hover.wav');
+            const clickSound = new Audio('assets/media/click.wav');
+
+            // Apply hover/click sounds to all product cards and buttons
+            document.querySelectorAll('.product-item, .btn-glow').forEach(item => {
+                item.addEventListener('mouseover', () => {
+                    hoverSound.currentTime = 0; // Reset sound if hovering quickly
+                    hoverSound.play().catch(e => console.log('Audio playback prevented:', e));
+                });
+
+                item.addEventListener('click', () => {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(e => console.log('Audio playback prevented:', e));
+                });
+            });
+
+            // Performance optimization for low-end devices
+            // Note: This assumes you will add a background video to index.html with id="background-video"
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                const video = document.querySelector('#background-video');
+                if (video) {
+                    video.remove();
+                    console.log("Background video removed for mobile performance.");
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
