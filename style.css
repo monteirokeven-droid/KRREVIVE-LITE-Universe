@@ -1,102 +1,500 @@
+/*
+ * KRREVIVEÉLITE - Global Stylesheet
+ * Contains variables, imports, and core aesthetics for a futuristic UI.
+ */
+
+/* --- IMPORTS & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;600&display=swap');
+
 :root {
-    --color-black-obsidian: #0A0A0E;
-    --color-gold-neon: #FFD700;
-    --color-blue-deep: #00BFFF;
-    --font-primary: 'Orbitron', sans-serif;
+    --neon-cyan: #00f3ff;
+    --neon-white: #ffffff;
+    --titanium-dark: #050505; /* Deep Black/Background */
+    --bg-dark: #0a0a0a;
+    --glass-panel: rgba(20, 20, 25, 0.6);
+    --border-glow: rgba(255, 255, 255, 0.1);
 }
 
+/* --- CORE BODY STYLES --- */
 body {
-    background-color: var(--color-black-obsidian);
-    color: #f0f0f0;
-    font-family: var(--font-primary);
     margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll from effects */
+    background-color: var(--titanium-dark);
+    color: var(--neon-white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* --- Header Protocol --- */
-#header-protocol {
-    padding: 1.5rem 5%;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    position: sticky;
+/* --- LANDING PAGE BACKGROUND FX --- */
+.ambient-light {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+    z-index: -2;
+}
+
+.grid-floor {
+    position: absolute;
+    bottom: -20%;
+    width: 200%;
+    height: 50%;
+    background-image: linear-gradient(var(--border-glow) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(500px) rotateX(60deg);
+    opacity: 0.2;
+    animation: gridMove 20s linear infinite;
+    z-index: -1;
+}
+
+/* --- LANDING PAGE UI ELEMENTS --- */
+.brand-container {
+    text-align: center;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.brand-container h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    letter-spacing: 0.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(to bottom, #fff, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.3rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 3rem;
+}
+
+/* --- LANDING PAGE SHOP BUTTON --- */
+.btn-shop {
+    position: relative;
+    padding: 15px 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    color: var(--neon-white);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--neon-white);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+.btn-shop::before {
+    content: '';
+    position: absolute;
     top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: 0.5s;
 }
 
-nav {
+.btn-shop:hover {
+    background: var(--neon-white);
+    color: var(--titanium-dark);
+    box-shadow: 0 0 30px rgba(224, 250, 255, 0.6);
+}
+
+.btn-shop:hover::before {
+    left: 100%;
+}
+
+/* --- SHOP PAGE CORE LAYOUT --- */
+.shop-body-layout {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1500px;
+    overflow: hidden;
+}
+
+/* --- SHOP PAGE BACKGROUND FX --- */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #1a1a20 0%, #000 90%);
+}
+
+/* --- HOLOGRAPHIC TABLET CONTAINER --- */
+.holo-interface {
+    width: 90vw;
+    height: 85vh;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-rows: 80px 1fr 60px;
+    padding: 20px;
+    transform-style: preserve-3d;
+    animation: floatInterface 6s ease-in-out infinite;
+    position: relative;
+}
+
+/* Scanning Drone Laser Line */
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-white), transparent);
+    opacity: 0.3;
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* --- SHOP HEADER --- */
+.holo-interface header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0 20px;
 }
 
-.logo {
+.brand-seal {
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-gold-neon);
-    letter-spacing: 0.15em;
-}
-
-.nav-links {
-    list-style: none;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     display: flex;
-    gap: 2.5rem;
-}
-
-.nav-links a, .btn-revive-code {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
-    text-transform: uppercase;
-}
-
-.nav-links a:hover {
-    color: var(--color-gold-neon);
-    text-shadow: 0 0 5px var(--color-gold-neon);
-}
-
-/* --- Main Gate Section --- */
-.universe-gate-section {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 10px;
+}
+
+.brand-seal::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+    border-radius: 50%;
+}
+
+.holo-interface nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.holo-interface nav ul li {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
+
+.holo-interface nav ul li:hover, .holo-interface nav ul li.active {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--neon-white);
+}
+
+.holo-interface nav ul li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--neon-white);
+    box-shadow: 0 0 5px var(--neon-white);
+}
+
+/* --- PRODUCT GRID & CARDS --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.product-grid::-webkit-scrollbar { width: 5px; }
+.product-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+.product-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--neon-white);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.energy-pad {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border: 1px dashed rgba(255,255,255,0.2);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotatePad 10s linear infinite;
+}
+
+.product-img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+    transition: 0.5s;
+    z-index: 2;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1) translateZ(30px);
+}
+
+.product-info {
     text-align: center;
-    /* Simulate a cosmic gradient background layer */
-    background: radial-gradient(circle at center, rgba(0, 191, 255, 0.05), rgba(10, 10, 14, 1) 70%);
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
 }
 
-.cosmic-header h1 {
-    font-size: 4.5rem;
-    color: var(--color-gold-neon);
-    text-transform: uppercase;
-    text-shadow: 0 0 15px var(--color-gold-neon);
-    margin-bottom: 0.5rem;
+.p-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
 }
 
-.cosmic-header h2 {
-    font-size: 2rem;
-    color: var(--color-blue-deep);
+.p-price {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    font-size: 0.9rem;
+}
+
+/* --- SHOP FOOTER --- */
+.holo-interface footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+/* --- PRODUCT DETAIL VIEW (PDV) STYLES --- */
+.product-detail-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    display: none; 
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.product-detail-view.active {
+    display: flex;
+    opacity: 1;
+}
+
+.pdv-container {
+    width: 80%;
+    max-width: 1200px;
+    height: 70%;
+    background: var(--glass-panel);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 50px rgba(0, 243, 255, 0.3);
+    display: flex;
+    padding: 40px;
+    transform-style: preserve-3d;
+    animation: holoAppear 0.8s forwards;
+}
+
+.pdv-close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: var(--neon-cyan);
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+    text-shadow: 0 0 5px var(--neon-cyan);
+    z-index: 1001;
+}
+
+.pdv-close:hover {
+    color: var(--neon-white);
+}
+
+.pdv-visual-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: translateZ(50px);
+}
+
+.pdv-energy-pad {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+    border: 2px solid var(--neon-cyan);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotatePad 15s linear infinite reverse;
+}
+
+.pdv-main-img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    animation: productRotate 10s linear infinite;
+}
+
+.pdv-spec-line {
+    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.pdv-info-panel {
+    flex: 1.2;
+    padding: 0 40px;
+}
+
+.pdv-info-panel h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     margin-top: 0;
-    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
 }
 
-.btn-main-action {
-    display: inline-block;
-    padding: 1rem 3rem;
-    margin-top: 2rem;
-    background: transparent;
-    border: 2px solid var(--color-gold-neon);
-    color: var(--color-gold-neon);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+.pdv-price-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: var(--neon-cyan);
+    margin-bottom: 25px;
 }
 
-.btn-main-action:hover {
-    background-color: var(--color-gold-neon);
-    color: var(--color-black-obsidian);
-    box-shadow: 0 0 20px var(--color-gold-neon);
+.description {
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+.pdv-attributes div {
+    padding: 5px 0;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+}
+
+.btn-buy-holo {
+    margin-top: 40px;
+    padding: 15px 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--neon-cyan);
+    transition: all 0.3s;
+}
+
+.btn-buy-holo:hover {
+    box-shadow: 0 0 30px var(--neon-cyan), 0 0 50px rgba(0, 243, 255, 0.8);
+    transform: scale(1.03);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes gridMove {
+    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+    100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+}
+
+@keyframes floatInterface {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-15px) rotateX(1deg); }
+}
+
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { top: 100%; opacity: 0; }
+}
+
+@keyframes rotatePad {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes holoAppear {
+    0% { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+    100% { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+@keyframes productRotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
