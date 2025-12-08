@@ -3,178 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE | COSMIC TRANSMISSIONS</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <style>
-        /* MEDIA PAGE SPECIFIC STYLING */
-        .media-section {
-            padding: 5rem 0;
-            min-height: 80vh;
-        }
-        .media-header h1 {
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        .media-header p {
-            text-align: center;
-            margin-bottom: 4rem;
-            color: #aaa;
-        }
-        .transmission-category {
-            margin-bottom: 4rem;
-        }
-        .transmission-category h2 {
-            font-family: var(--font-primary);
-            color: var(--color-blue-deep);
-            border-left: 5px solid var(--color-gold-neon);
-            padding-left: 15px;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
-        .asset-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-        .asset-card {
-            background-color: var(--color-grey-dark);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .asset-card .type-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            background-color: var(--color-black-obsidian);
-            color: var(--color-gold-neon);
-            padding: 3px 8px;
-            margin-right: 15px;
-        }
-        .asset-info {
-            flex-grow: 1;
-        }
-        .asset-info h3 {
-            font-size: 1.1rem;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-        .asset-info p {
-            font-size: 0.85rem;
-            color: #ccc;
-        }
-        .download-btn {
-            background: transparent;
-            border: 1px solid var(--color-blue-deep);
-            color: var(--color-blue-deep);
-            padding: 8px 15px;
-            margin-left: 20px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-        }
-        .download-btn:hover {
-            background-color: var(--color-blue-deep);
-            color: var(--color-black-obsidian);
-        }
-    </style>
+    <title>KRREVIVÉELITE | Media Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header id="header-protocol">
-        <nav class="container">
-            <a href="index.html" class="logo">KRREVIVEÉLITE</a>
-            <ul class="nav-links">
-                <li><a href="academy.html">ACADEMY PROTOCOL</a></li>
-                <li><a href="tools.html">AI AUGMENTATION</a></li>
-                <li><a href="universe.html">UNIVERSE MAP</a></li>
-                <li><a href="products.html">ELITE GEAR</a></li>
-            </ul>
-            <button class="btn-revive-code">VIEW MEDIA STATUS</button>
-        </nav>
-    </header>
-
-    <main class="media-section">
-        <div class="container">
-            <div class="media-header">
-                <h1 class="glitch-text">CLASSIFIED TRANSMISSIONS LOG</h1>
-                <p>The universe communicates through frequency and signal. Access the latest cinematic, musical, and narrative assets from the Watchers' central database. All files are high-fidelity, high-contrast assets.</p>
+    <div class="container">
+        
+        <header>
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <h1 class="main-logo">KRREVIVÉELITE</h1>
             </div>
 
-            <div class="transmission-category">
-                <h2>[01] CINEMATIC ASSETS (VIDEO)</h2>
-                <div class="asset-list">
-                    <div class="asset-card">
-                        <span class="type-tag">TRAILER</span>
-                        <div class="asset-info">
-                            <h3>The Veil Breach (60s Trailer)</h3>
-                            <p>Shadow Dimension exposure. Defeating digital noise with disciplined focus (CODE 003 theme).</p>
-                        </div>
-                        <a href="assets/video/veil-breach.mp4" class="download-btn">DOWNLOAD</a>
-                    </div>
-                    <div class="asset-card">
-                        <span class="type-tag">LORE</span>
-                        <div class="asset-info">
-                            <h3>The Logic of Gold (Cosmic Law)</h3>
-                            <p>A Watcher transmission explaining the immutable $L_U$ of Cause and Effect via Divine Geometry.</p>
-                        </div>
-                        <a href="assets/video/logic-gold.mp4" class="download-btn">STREAM</a>
-                    </div>
-                    <div class="asset-card">
-                        <span class="type-tag">TUTORIAL</span>
-                        <div class="asset-info">
-                            <h3>Code 005 Creation: Node Deployment</h3>
-                            <p>Instructional video on utilizing the Automation Node Deployment tool for real-world optimization.</p>
-                        </div>
-                        <a href="assets/video/node-deployment.mp4" class="download-btn">ACCESS</a>
-                    </div>
+            <nav class="nav-bar">
+                <a href="index.html">Universe</a>
+                <a href="shop.html">Shop</a>
+                <a href="media.html" class="active">Media</a> <a href="#">Games</a>
+                <a href="#">Dashboard</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+
+        <h2 class="section-title">LIVE BROADCAST: PROJECT NOVA</h2>
+        
+        <div class="dashboard-container" style="grid-template-columns: 3fr 1fr; margin-bottom: 60px;">
+            <div class="glass-panel main-video" style="height: 450px;">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b2527266?auto=format&fit=crop&w=1200&q=80" alt="Live Stream Background" style="opacity: 1; filter: brightness(0.7);">
+                <div class="play-overlay" style="font-size: 4rem;"><i class="fas fa-satellite-dish"></i></div>
+                <div style="position: absolute; top: 15px; left: 15px; background: var(--neon-cyan); color: #000; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-size: 1rem;">FEATURED STREAM</div>
+                <div style="position: absolute; bottom: 15px; left: 20px;">
+                    <h3 class="neon-text-cyan" style="font-size: 1.5rem;">NEXT-GEN SIMULATION REVIEW</h3>
+                    <p style="font-size: 0.9rem; color: #ccc;">Host: Xylos | Viewers: 12.4k</p>
                 </div>
             </div>
 
-            <div class="transmission-category">
-                <h2>[02] FREQUENCY ASSETS (MUSIC)</h2>
-                <div class="asset-list">
-                    <div class="asset-card">
-                        <span class="type-tag">EP/ALBUM</span>
-                        <div class="asset-info">
-                            <h3>Obsidian Frequency (Ambient EP)</h3>
-                            <p>Deep bass and synth waves. Engineered for focus and high-quality lossless audio. CODE 004 support.</p>
-                        </div>
-                        <a href="products.html" class="download-btn">PURCHASE</a>
-                    </div>
-                    <div class="asset-card">
-                        <span class="type-tag">TRACK</span>
-                        <div class="asset-info">
-                            <h3>Samurai Mind Protocol (Binaural)</h3>
-                            <p>Binaural beats overlaid with the cosmic hum soundscape for enhanced mental sovereignty (CODE 003).</p>
-                        </div>
-                        <a href="#" class="download-btn">MEMBER ACCESS</a>
-                    </div>
-                    <div class="asset-card">
-                        <span class="type-tag">SCORE</span>
-                        <div class="asset-info">
-                            <h3>War for Human Progress (Full Score)</h3>
-                            <p>Cinematic orchestral synths for Arc 3 Conflict Zones. Sample pack available for download.</p>
-                        </div>
-                        <a href="assets/music/arc3-sample.mp3" class="download-btn">DOWNLOAD</a>
-                    </div>
+            <div class="social-feed" style="grid-column: 2 / 3; grid-row: 1 / 2; padding: 15px;">
+                <h3 class="card-title" style="text-align: left; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">📡 NEWS PULSE</h3>
+                <div class="feed-item" style="border-left: 3px solid var(--neon-cyan);">
+                    <i class="fas fa-bolt" style="color: var(--neon-cyan);"></i>
+                    <span style="font-size: 0.8rem;">**[UPDATE]:** Firmware 2.1 deployment complete.</span>
+                </div>
+                <div class="feed-item" style="border-left: 3px solid var(--neon-pink);">
+                    <i class="fas fa-users" style="color: var(--neon-pink);"></i>
+                    <span style="font-size: 0.8rem;">**[COMMUNITY]:** Discord event initiated.</span>
+                </div>
+                <div class="feed-item" style="border-left: 3px solid #ccc;">
+                    <i class="fas fa-calendar-alt" style="color: #ccc;"></i>
+                    <span style="font-size: 0.8rem;">**[EVENTS]:** New Galaxy Preview tomorrow.</span>
+                </div>
+                <div class="feed-item" style="flex-grow: 1; border: none; padding-top: 20px;">
+                    <a href="#" class="btn-glow" style="width: 100%; text-align: center;">View All News Feeds</a>
                 </div>
             </div>
-
         </div>
-    </main>
-    
-    <footer class="footer-protocol">
-        <div class="container">
-            <p>&copy; 2025 KRREVIVEÉLITE UNIVERSE. Transmissions Log: Verified.</p>
-            <div class="footer-links">
-                <a href="privacy.html">PRIVACY PROTOCOL</a> | <a href="terms.html">TERMS OF USE</a>
+        
+        <h2 class="section-title">VIDEO ARCHIVE</h2>
+        
+        <div class="grid-4">
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Video 1">
+                    <h3 class="card-title">DEEP DIVE: QUANTUM ENGINE</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">32 min | 1.2M Views</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-eye"></i> View Stream</a>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1550009159-f30807b55f19?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Video 2">
+                    <h3 class="card-title">PROJECT: ZERO HOUR TRAILER</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">0:58 min | 5.8M Views</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-eye"></i> View Stream</a>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1541804919-b5d1e2e987c6?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Video 3">
+                    <h3 class="card-title">MEET THE DEV TEAM: Q&A</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">64 min | 350K Views</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-eye"></i> View Stream</a>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1549490216-0e9224424759?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Video 4">
+                    <h3 class="card-title">FAN CREATIONS SHOWCASE</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">15 min | 89K Views</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-eye"></i> View Stream</a>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <script src="assets/js/main.js"></script>
+        <h2 class="section-title">HIGH-REZ GALLERIES</h2>
+        
+        <div class="grid-3">
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1531771686035-ceac878b2c4e?auto=format&fit=crop&w=400&q=80" class="card-img" alt="Gallery 1" style="height: 200px;">
+                    <h3 class="card-title">CONCEPT ART: DISTRICT 7</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">42 Images</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-images"></i> View Gallery</a>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1582299887752-ce3738096f43?auto=format&fit=crop&w=400&q=80" class="card-img" alt="Gallery 2" style="height: 200px;">
+                    <h3 class="card-title">CHARACTER MODELS: CYGNUS</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">18 Models</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-images"></i> View Gallery</a>
+                </div>
+            </div>
+            <div class="glass-panel">
+                <div class="card-content">
+                    <img src="https://images.unsplash.com/photo-1541804928739-16ec6f3e7e22?auto=format&fit=crop&w=400&q=80" class="card-img" alt="Gallery 3" style="height: 200px;">
+                    <h3 class="card-title">FAN SCREENSHOTS VOLUME II</h3>
+                    <p style="font-size: 0.7rem; color: #aaa;">80+ Submissions</p>
+                    <a href="#" class="btn-glow"><i class="fas fa-images"></i> View Gallery</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">ABOUT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">CONTACT</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">TERMS</a>
+                <a href="#" style="color: #ccc; text-decoration: none; font-size: 0.8rem;">PRIVACY</a>
+            </div>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-twitch"></i>
+                <i class="fab fa-discord"></i>
+            </div>
+        </footer>
+
+    </div>
+
 </body>
 </html>
