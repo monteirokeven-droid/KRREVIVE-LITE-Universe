@@ -1,106 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KRREVIVEÉLITE Universe - Futuristic Cockpit</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>KRREVIVEÉLITE — Cinematic Cockpit (Audio-Enabled)</title>
 <style>
-body, html { margin:0; padding:0; overflow:hidden; background:#000010; font-family:Arial,sans-serif; }
-#logo { position:absolute; top:20px; left:50%; transform:translateX(-50%); color:#00ffff; font-size:2.5em; text-shadow:0 0 20px #00ffff,0 0 40px #ff00ff; z-index:10; }
-#nav { position:absolute; top:20px; right:50px; z-index:10; display:flex; gap:25px; }
-#nav a { color:#00ffff; text-decoration:none; font-weight:bold; font-size:1.1em; text-shadow:0 0 10px #00ffff; transition:0.3s; }
-#nav a:hover { color:#ff00ff; text-shadow:0 0 20px #ff00ff; }
-.panel { position:absolute; width:220px; height:140px; background:rgba(0,255,255,0.05); border:2px solid #00ffff; border-radius:12px; backdrop-filter:blur(5px); box-shadow:0 0 15px #00ffff; transition: transform 0.3s, box-shadow 0.3s; color:#00ffff; padding:10px; font-size:0.9em; }
-.panel:hover { transform: translateZ(20px) rotateY(5deg) rotateX(5deg); box-shadow:0 0 30px #ff00ff; }
-canvas { display:block; }
+  :root{
+    --cyan:#00f0ff;
+    --mag:#ff2ee8;
+    --bg:#000010;
+    --panel-w:260px;
+    --panel-h:160px;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,Arial,Helvetica,sans-serif;overflow:hidden;color:white}
+  #canvas3d{position:fixed; inset:0; z-index:0; display:block;}
+  .ui{
+    position:relative; z-index:5; pointer-events:none;
+  }
+  #topbar{position:fixed;left:0;right:0;top:14px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;pointer-events:auto;z-index:10}
+  #logo{font-weight:800; font-size:28px; color:var(--cyan); text-shadow:0 0 10px rgba(0,240,255,.35),0 0 30px rgba(255,46,232,.08)}
+  #nav{display:flex;gap:18px;align-items:center}
+  #nav a{color:rgba(0,240,255,.85);text-decoration:none;padding:8px 12px;border-radius:8px;backdrop-filter:blur(4px);transition:all .18s; font-weight:600; pointer-events:auto;}
+  #nav a:hover{color:var(--mag); box-shadow:0 0 18px rgba(255,46,232,.12); transform:translateY(-2px)}
+  /* Activate sound button */
+  #activateSound {
+    background:linear-gradient(90deg,var(--cyan),var(--mag));
+    color:#001; border:none; padding:8px 12px; border-radius:20px; font-weight:700; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.6);
+    pointer-events:auto;
+  }
+  /* Panels */
+  .panel{
+    position: absolute;
+    width:var(--panel-w);
+    height:var(--panel-h);
+    border-radius:14px;
+    backdrop-filter: blur(6px) saturate(140%);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+    border:1px solid rgba(0,240,255,0.14);
+    box-shadow:0 8px 30px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,240,255,0.02);
+    color:var(--cyan);
+    display:flex; align-items:center; justify-content:center; text-align:center; pointer-events:auto;
+    transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .18s;
+    transform-origin:center;
+  }
+  .panel:hover{ transform: translateY(-8px) scale(1.03); box-shadow: 0 18px 40px rgba(0,240,255,0.08), 0 0 40px rgba(255,46,232,0.06)}
+  .panel .title{font-weight:700; font-size:14px}
+  /* small labels */
+  .label{position: absolute; bottom:10px; left:10px; font-size:12px; color:rgba(255,255,255,.8)}
+  /* layout of panels (positions chosen for cinematic feel) */
+  #panel1{left:80px; top:140px}
+  #panel2{left:420px; top:220px}
+  #panel3{left:120px; top:420px}
+  #panel4{right:140px; top:260px}
+  /* visualizer */
+  #musicVisualizer{width:200px;height:120px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(255,255,255,0.01)); display:block}
+  /* universe map canvas */
+  #universeMap{width:200px;height:120px;border-radius:10px; display:block}
+  /* small help text */
+  #help{position:fixed;right:18px;bottom:18px;z-index:20;color:rgba(255,255,255,.65);font-size:12px;pointer-events:none}
+  /* small footer nav icons (placeholder) */
+  #footer{position:fixed;left:20px;bottom:20px;z-index:6;color:rgba(255,255,255,.6); font-size:13px}
+  /* make responsive: reduce panel sizes on small screens */
+  @media (max-width:900px){
+    :root{--panel-w:220px; --panel-h:140px}
+    #panel2{left:50px; top:260px}
+    #panel3{left:50px; top:420px}
+    #panel4{right:30px; top:420px}
+  }
 </style>
 </head>
 <body>
+  <!-- Top UI -->
+  <div id="topbar" class="ui">
+    <div id="logo">KRREVIVEÉLITE</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <nav id="nav">
+        <a href="#universe">UNIVERSE</a>
+        <a href="#shop">SHOP</a>
+        <a href="#media">MEDIA</a>
+        <a href="#games">GAMES</a>
+        <a href="#dashboard">DASHBOARD</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <button id="activateSound">Activate Sound</button>
+    </div>
+  </div>
 
-<div id="logo">KRREVIVEÉLITE</div>
-<div id="nav">
-<a href="#games">Games</a>
-<a href="#media">Media</a>
-<a href="#products">Products</a>
-<a href="#contact">Contact</a>
-</div>
+  <!-- Panels -->
+  <div class="panel" id="panel1"><div><div style="font-weight:800;color:var(--mag);">LIVE</div><div class="title" style="margin-top:8px">Explore the Journey</div></div></div>
+  <div class="panel" id="panel2"><div id="product3d" style="width:220px;height:120px"></div></div>
+  <div class="panel" id="panel3"><canvas id="musicVisualizer" width="200" height="120"></canvas></div>
+  <div class="panel" id="panel4"><canvas id="universeMap" width="200" height="120"></canvas></div>
 
-<!-- Floating Panels -->
-<div class="panel" id="panel1" style="top:150px; left:100px;">Live Video Stream</div>
-<div class="panel" id="panel2" style="top:300px; left:400px;">3D Product Model</div>
-<div class="panel" id="panel3" style="top:500px; left:150px;">Music Visualizer</div>
-<div class="panel" id="panel4" style="top:350px; left:700px;">Universe Map</div>
+  <!-- help -->
+  <div id="help" class="ui">Hover panels — click to interact. Activate sound to enable audio.</div>
+  <div id="footer">© KRREVIVEÉLITE</div>
 
-<!-- Three.js Canvas -->
-<canvas id="bgCanvas"></canvas>
+  <!-- Three.js canvas -->
+  <canvas id="canvas3d"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
 <script>
-// Scene setup
-const canvas = document.getElementById('bgCanvas');
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 5000);
-camera.position.z = 600;
+/* -------------------------
+   Lightweight Audio Engine
+   - Uses WebAudio API
+   - Ambient bed + hover/click/pulse synths
+   - Requires user gesture to start (Activate Sound button)
+   ------------------------- */
+let audioCtx=null;
+let masterGain=null;
+let ambientNode=null;
+let enabledAudio=false;
 
-const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias:true, alpha:true});
+const AudioEngine = {
+  init(){
+    if(audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.9;
+    masterGain.connect(audioCtx.destination);
+
+    // Ambient - gentle detuned pad using two oscillators + lowpass + gain
+    const o1 = audioCtx.createOscillator(), o2 = audioCtx.createOscillator();
+    const padGain = audioCtx.createGain();
+    const lp = audioCtx.createBiquadFilter();
+    o1.type='sine'; o2.type='sine';
+    o1.frequency.value = 76; o2.frequency.value = 79;
+    padGain.gain.value = 0.03; lp.frequency.value = 800;
+    o1.connect(padGain); o2.connect(padGain); padGain.connect(lp); lp.connect(masterGain);
+    o1.start(); o2.start();
+    ambientNode = {o1,o2,padGain,lp};
+    enabledAudio = true;
+  },
+  setAmbientVolume(v){
+    if(!ambientNode) return;
+    ambientNode.padGain.gain.linearRampToValueAtTime(v, audioCtx.currentTime + 0.2);
+  },
+  playHover(){
+    if(!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const g = audioCtx.createGain(); g.gain.value = 0.0001; g.connect(masterGain);
+    const o = audioCtx.createOscillator(); o.type='sine';
+    o.frequency.setValueAtTime(660, now);
+    o.frequency.exponentialRampToValueAtTime(880, now+0.12);
+    o.connect(g);
+    g.gain.linearRampToValueAtTime(0.05, now+0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, now+0.45);
+    o.start(now); o.stop(now+0.6);
+  },
+  playClick(){
+    if(!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const g = audioCtx.createGain(); g.gain.value = 0.0001; g.connect(masterGain);
+    const o = audioCtx.createOscillator(); o.type='triangle';
+    o.frequency.setValueAtTime(200, now);
+    o.frequency.exponentialRampToValueAtTime(110, now+0.12);
+    o.connect(g);
+    g.gain.linearRampToValueAtTime(0.08, now+0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, now+0.6);
+    o.start(now); o.stop(now+0.6);
+  },
+  playPulse(x=440, duration=0.5){
+    if(!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const g = audioCtx.createGain(); g.gain.value = 0.0001; g.connect(masterGain);
+    const o = audioCtx.createOscillator();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(x, now);
+    g.gain.linearRampToValueAtTime(0.09, now+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0005, now+duration);
+    o.connect(g);
+    o.start(now); o.stop(now+duration+0.05);
+  }
+};
+
+// Attach to Activate button: start audio context on user gesture
+document.getElementById('activateSound').addEventListener('click', async ()=>{
+  if(!audioCtx){
+    AudioEngine.init();
+    // set subtle ambient
+    AudioEngine.setAmbientVolume(0.03);
+    // small click to indicate activation
+    AudioEngine.playClick();
+    document.getElementById('activateSound').innerText = 'Sound Active';
+    document.getElementById('activateSound').disabled = true;
+  }
+});
+
+/* -------------------------
+   Three.js Scene & Objects
+   - Particle starfield
+   - Rotating cube as product
+   - Simple line between panels (particle trail)
+   ------------------------- */
+const canvas = document.getElementById('canvas3d');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
 
-// Particles for stars & trails
-let particles = [];
-const particleCount = 500;
-const particleGeometry = new THREE.BufferGeometry();
-const positions = new Float32Array(particleCount * 3);
-for(let i=0;i<particleCount;i++){
-    positions[i*3] = (Math.random()-0.5)*2000;
-    positions[i*3+1] = (Math.random()-0.5)*2000;
-    positions[i*3+2] = (Math.random()-0.5)*2000;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 4000);
+camera.position.z = 700;
+
+// star particles
+const PCOUNT = 360;
+const positions = new Float32Array(PCOUNT * 3);
+for(let i=0;i<PCOUNT;i++){
+  positions[i*3] = (Math.random()-0.5)*2400;
+  positions[i*3+1] = (Math.random()-0.5)*1400;
+  positions[i*3+2] = (Math.random()-0.5)*2600;
 }
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
-const particleMaterial = new THREE.PointsMaterial({color:0x00ffff,size:2,transparent:true,opacity:0.7});
-const particleSystem = new THREE.Points(particleGeometry,particleMaterial);
-scene.add(particleSystem);
+const geo = new THREE.BufferGeometry();
+geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+const mat = new THREE.PointsMaterial({color:0x00f0ff, size:1.7, transparent:true, opacity:0.85});
+const stars = new THREE.Points(geo, mat);
+scene.add(stars);
 
-// Animate particle system
-function animateParticles(){
-    const positions = particleGeometry.attributes.position.array;
-    for(let i=0;i<particleCount;i++){
-        positions[i*3+2] += 1.2;
-        if(positions[i*3+2]>1000) positions[i*3+2] = -1000;
+// cube product placeholder
+const boxGeo = new THREE.BoxGeometry(120,120,120);
+const boxMat = new THREE.MeshStandardMaterial({color:0x00e6ff, metalness:0.2, roughness:0.5, emissive:0x001122, emissiveIntensity:0.6});
+const productCube = new THREE.Mesh(boxGeo, boxMat);
+productCube.position.set(280, -40, -80);
+productCube.scale.set(0.68,0.68,0.68);
+scene.add(productCube);
+
+// soft light for cinematic feel
+const ambient = new THREE.AmbientLight(0x223344, 0.7);
+scene.add(ambient);
+const point = new THREE.PointLight(0x00f0ff, 1.0, 2000);
+point.position.set(200,100,200);
+scene.add(point);
+
+// line trail connecting two panels, represented in 3D space relative to screen center
+const lineMat = new THREE.LineBasicMaterial({color:0x00e6ff, transparent:true, opacity:0.5});
+const linePos = new Float32Array(6);
+const lineGeo = new THREE.BufferGeometry();
+lineGeo.setAttribute('position', new THREE.BufferAttribute(linePos,3));
+const trailLine = new THREE.Line(lineGeo, lineMat);
+scene.add(trailLine);
+
+/* -------------------------
+   Panel animations / interactions
+   - Panels float slowly
+   - hover -> play hover sound
+   - click -> play click sound + pulse
+   ------------------------- */
+const panels = Array.from(document.querySelectorAll('.panel'));
+let panelState = panels.map(p => ({x: p.offsetLeft, y: p.offsetTop, ox: p.offsetLeft, oy: p.offsetTop, hover:false}));
+
+panels.forEach((el, idx) => {
+  el.addEventListener('mouseenter', () => {
+    panelState[idx].hover = true;
+    el.style.transform = 'translateY(-12px) scale(1.035)';
+    if(enabledAudio) AudioEngine.playHover();
+  });
+  el.addEventListener('mouseleave', () => {
+    panelState[idx].hover = false;
+    el.style.transform = '';
+  });
+  el.addEventListener('click', () => {
+    if(enabledAudio) {
+      AudioEngine.playClick();
+      // pulse note depends on panel index
+      const note = 300 + idx*80;
+      AudioEngine.playPulse(note, 0.6);
     }
-    particleGeometry.attributes.position.needsUpdate = true;
+    // small interactive action: briefly enlarge cube or animate panel content
+    if(idx === 1){ // product panel clicked -> quick cube burst
+      productCube.scale.set(0.86,0.86,0.86);
+      setTimeout(()=>productCube.scale.set(0.68,0.68,0.68), 260);
+    }
+  });
+});
+
+/* -------------------------
+   Music Visualizer Placeholder
+   - Uses simple generated waveform to animate canvas
+   ------------------------- */
+const mv = document.getElementById('musicVisualizer');
+const mvCtx = mv.getContext('2d');
+function drawVisualizer(){
+  const w = mv.width, h = mv.height;
+  mvCtx.clearRect(0,0,w,h);
+  // simulate bands
+  const t = performance.now() * 0.002;
+  for(let i=0;i<32;i++){
+    const amp = (Math.sin(t + i*0.45) + 1) * 0.4;
+    const barH = amp * (h*0.5) + 6;
+    mvCtx.fillStyle = `rgba(${Math.floor(0+amp*255)}, ${Math.floor(240)}, ${Math.floor(255-amp*120)}, 1)`;
+    mvCtx.fillRect(6 + i*5, h - barH - 6, 4, barH);
+  }
 }
 
-// Floating panels interaction
-const panels = [document.getElementById('panel1'),document.getElementById('panel2'),document.getElementById('panel3'),document.getElementById('panel4')];
-let panelOffsets = panels.map(p=>({x:p.offsetLeft,y:p.offsetTop,rx:Math.random()*0.02,ry:Math.random()*0.02}));
-
-// Animate panels
-function animatePanels(){
-    panels.forEach((p,i)=>{
-        const offset = panelOffsets[i];
-        offset.x += (Math.sin(Date.now()*0.0005 + i) * 0.5);
-        offset.y += (Math.cos(Date.now()*0.0005 + i) * 0.5);
-        p.style.left = offset.x + 'px';
-        p.style.top = offset.y + 'px';
-    });
+/* -------------------------
+   Universe Map Placeholder
+   - Simple orbiting dot planets
+   ------------------------- */
+const um = document.getElementById('universeMap');
+const uc = um.getContext('2d');
+function drawUniverse(){
+  const w = um.width, h = um.height;
+  uc.clearRect(0,0,w,h);
+  const t = performance.now()*0.0007;
+  // background nebula
+  const grad = uc.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0, "rgba(0,0,16,0.6)");
+  grad.addColorStop(1, "rgba(0,0,32,0.45)");
+  uc.fillStyle = grad; uc.fillRect(0,0,w,h);
+  // planets
+  for(let i=0;i<4;i++){
+    const rx = Math.cos(t*(i+1)*1.2) * (w*0.18) ;
+    const ry = Math.sin(t*(i+1)*1.1) * (h*0.12);
+    const x = w/2 + rx, y = h/2 + ry;
+    uc.beginPath();
+    uc.fillStyle = i%2===0? '#00f0ff':'#ff2ee8';
+    uc.arc(x,y,6 + i*1.5, 0, Math.PI*2);
+    uc.fill();
+    // soft glow
+    uc.fillStyle = 'rgba(0,240,255,0.06)';
+    uc.beginPath(); uc.arc(x,y, 12 + i*3, 0, Math.PI*2); uc.fill();
+  }
 }
 
-// Render loop
+/* -------------------------
+   Animation Loop
+   ------------------------- */
 function animate(){
-    requestAnimationFrame(animate);
-    animateParticles();
-    animatePanels();
-    renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+  const t = performance.now() * 0.001;
+  // float stars slowly forward
+  const pos = geo.attributes.position.array;
+  for(let i=0;i<PCOUNT;i++){
+    pos[i*3+2] += 0.6;
+    if(pos[i*3+2] > 1300) pos[i*3+2] = -1300 + Math.random()*200;
+  }
+  geo.attributes.position.needsUpdate = true;
+
+  // float panels subtle movement
+  panels.forEach((el, idx) => {
+    const s = panelState[idx];
+    const dx = Math.sin(t*0.5 + idx) * 6;
+    const dy = Math.cos(t*0.6 + idx) * 6;
+    s.x = s.ox + dx; s.y = s.oy + dy;
+    el.style.left = s.x + 'px';
+    el.style.top = s.y + 'px';
+  });
+
+  // update line connecting panel1 -> panel2 (screen->world mapping)
+  const r1 = panels[0].getBoundingClientRect();
+  const r2 = panels[1].getBoundingClientRect();
+  // convert screen coords to centered coords for 3D line
+  const cx = window.innerWidth/2, cy = window.innerHeight/2;
+  const p1x = (r1.left + r1.width/2) - cx;
+  const p1y = -((r1.top + r1.height/2) - cy);
+  const p2x = (r2.left + r2.width/2) - cx;
+  const p2y = -((r2.top + r2.height/2) - cy);
+  const positionsArray = trailLine.geometry.attributes.position.array;
+  positionsArray[0] = p1x; positionsArray[1] = p1y; positionsArray[2] = -40;
+  positionsArray[3] = p2x; positionsArray[4] = p2y; positionsArray[5] = -40;
+  trailLine.geometry.attributes.position.needsUpdate = true;
+  // animate cube and ambient subtle changes
+  productCube.rotation.x += 0.006 + Math.sin(t)*0.001;
+  productCube.rotation.y += 0.01;
+
+  // occasionally pulse audio and visual particle
+  if(enabledAudio && Math.random() < 0.006){
+    AudioEngine.playPulse(200 + Math.random()*600, 0.4);
+  }
+
+  // draw visualizer + universe placeholders
+  drawVisualizer();
+  drawUniverse();
+
+  renderer.render(scene, camera);
 }
+// start loop
 animate();
 
-// Handle resize
+// resize handler
 window.addEventListener('resize', ()=>{
-    camera.aspect = window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
 });
+
+// helper to draw visualizer by reusing drawVisualizer() to avoid duplicate function name
+function drawVisualizer(){ drawVisualizer = window.drawVisualizer || drawVisualizer; } // noop to keep linter happy
+// but we already implemented drawVisualizer earlier, so just ensure it exists
+window.drawVisualizer = window.drawVisualizer || function(){ /* placeholder */ };
+
+// make sure our canvases size match CSS dims
+function adjustCanvasSizes(){
+  const mv = document.getElementById('musicVisualizer');
+  mv.width = mv.clientWidth; mv.height = mv.clientHeight;
+  const umc = document.getElementById('universeMap');
+  umc.width = umc.clientWidth; umc.height = umc.clientHeight;
+}
+adjustCanvasSizes();
+window.addEventListener('resize', adjustCanvasSizes);
+
+/* Ensure mouse interactions prompt sounds only after activation:
+ * - playHover and playClick are invoked on pointer events already
+ * - ambient bed started on Activate Sound
+ */
 </script>
 </body>
 </html>
