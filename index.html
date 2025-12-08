@@ -1,193 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KRREVIVEÉLITE Universe V8</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRREVIVEÉLITE V13 Universe</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.8.0/dist/ethers.min.js"></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
-body{background:#0a0a0a;color:#fff;overflow-x:hidden;}
-#universe{position:relative;width:100%;min-height:100vh;background:radial-gradient(ellipse at center,#0a0a0a 0%,#000 100%);overflow:hidden;}
-.star{position:absolute;border-radius:50%;background:white;animation:twinkle 2s infinite alternate;}
-@keyframes twinkle{0%{opacity:0.2;}100%{opacity:1;}}
-nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.85);display:flex;justify-content:center;padding:10px 0;z-index:1000;}
-nav a{color:#0ff;margin:0 20px;text-decoration:none;font-weight:bold;transition:color 0.2s;}
-nav a:hover{color:#fff;}
-.panel{position:absolute;width:260px;height:160px;background:rgba(20,20,30,0.85);border:2px solid #0ff;border-radius:12px;padding:15px;backdrop-filter:blur(5px);cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;}
-.panel:hover{transform:scale(1.05);box-shadow:0 0 25px #0ff;}
-.section{width:100%;padding:100px 20px 50px 20px;text-align:center;}
-#code-editor{width:90%;height:300px;margin:20px auto;background:#111;color:#0ff;font-family:monospace;border-radius:10px;padding:10px;resize:vertical;overflow:auto;}
-#code-preview{width:90%;max-width:800px;height:300px;margin:20px auto;background:#000;border-radius:10px;padding:10px;overflow:auto;color:#0ff;}
-#marketplace-grid{display:flex;flex-wrap:wrap;justify-content:center;}
-.market-item{width:200px;height:120px;margin:15px;background:rgba(25,25,35,0.9);border:2px solid #0ff;border-radius:10px;text-align:center;padding:10px;transition:transform 0.3s,box-shadow 0.3s;}
-.market-item:hover{transform:scale(1.05);box-shadow:0 0 20px #0ff;}
-.market-item button{margin-top:10px;padding:5px 10px;background:#0ff;border:none;color:#000;border-radius:5px;cursor:pointer;font-weight:bold;}
-.market-item button:hover{background:#0aa;}
-#mini-game{width:90%;max-width:800px;margin:0 auto;background:rgba(20,20,30,0.95);border-radius:15px;padding:20px;text-align:center;}
-#achievements{width:90%;max-width:800px;margin:30px auto;text-align:left;}
-.achievement{background:rgba(30,30,50,0.9);border:2px solid #0ff;border-radius:10px;margin:10px;padding:10px;transition:transform 0.3s,box-shadow 0.3s;}
-.achievement.unlocked{box-shadow:0 0 25px #0ff;transform:scale(1.05); animation:pulse 1s infinite alternate;}
-@keyframes pulse{0%{box-shadow:0 0 15px #0ff;}100%{box-shadow:0 0 35px #0ff;}}
-</style>
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Ethers.js for Web3 -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.0/dist/ethers.min.js"></script>
 </head>
+
 <body>
 
-<nav>
-  <a href="#dashboard">Dashboard</a>
-  <a href="#ai-tools">AI Tools</a>
-  <a href="#marketplace">Marketplace</a>
-  <a href="#games">Mini-Games</a>
-  <a href="#achievements">Achievements</a>
-</nav>
+    <!-- UNIVERSE BACKGROUND -->
+    <div id="universe"></div>
 
-<div id="universe">
-  <div class="panel" style="top:150px; left:50px;" onclick="openPanel('ai-tools')">AI Tools</div>
-  <div class="panel" style="top:150px; left:350px;" onclick="openPanel('marketplace')">Marketplace</div>
-  <div class="panel" style="top:150px; left:650px;" onclick="openPanel('games')">Mini-Games</div>
-</div>
+    <!-- PANELS -->
 
-<!-- AI Tools -->
-<div class="section" id="ai-tools">
-  <h1>GPT-Powered Code Playground</h1>
-  <div id="code-editor" contenteditable="true">// Type JS/HTML/CSS here...</div>
-  <p id="ai-suggestion" style="color:#0ff;font-style:italic;">GPT Suggestion: Start by defining a function!</p>
-  <h3>Live Preview</h3>
-  <iframe id="code-preview"></iframe>
-</div>
+    <!-- AI PANEL -->
+    <div class="panel" id="panelAI" style="top: 60px; left: 60px;">
+        <h2>AI Control Panel</h2>
+        <textarea id="aiInput" placeholder="Ask the KRREVIVEÉLITE AI..."></textarea>
+        <button onclick="sendAI()">Run AI</button>
+        <div id="aiOutput"></div>
+    </div>
 
-<!-- Marketplace -->
-<div class="section" id="marketplace">
-  <h1>Web3 Marketplace</h1>
-  <div id="marketplace-grid">
-    <div class="market-item">AI Template<br><button onclick="purchase('AI Template')">Buy</button></div>
-    <div class="market-item">Code Script<br><button onclick="purchase('Code Script')">Buy</button></div>
-  </div>
-  <button onclick="connectWallet()">Connect Wallet</button>
-  <p id="wallet-status"></p>
-</div>
+    <!-- MARKETPLACE PANEL -->
+    <div class="panel" id="panelMarket" style="top: 60px; left: 380px;">
+        <h2>Marketplace</h2>
+        <div id="marketplace-grid">
+            <div class="market-item">
+                <span>Planet NFT</span>
+                <button onclick="buyNFT('Planet')">Buy</button>
+            </div>
 
-<!-- Mini-Games -->
-<div class="section" id="games">
-  <h1>Mini-Games</h1>
-  <div id="mini-game">
-    <p>Click 10 times to win!</p>
-    <button onclick="miniGameClick()">Click Me!</button>
-    <p id="game-counter">0 / 10</p>
-  </div>
-</div>
+            <div class="market-item">
+                <span>Galaxy NFT</span>
+                <button onclick="buyNFT('Galaxy')">Buy</button>
+            </div>
+        </div>
+    </div>
 
-<!-- Achievements -->
-<div class="section" id="achievements">
-  <h1>Achievements</h1>
-  <div id="achievements-list"></div>
-</div>
+    <!-- MINI GAME PANEL -->
+    <div class="panel" id="panelGame" style="top: 60px; left: 700px;">
+        <h2>Mini Game</h2>
+        <p>Click to terraform a planet:</p>
+        <button onclick="miniGameClick()">Terraform</button>
+        <p id="miniCounter">Progress: 0%</p>
+    </div>
 
-<script>
-// Starfield
-const universe=document.getElementById('universe');
-for(let i=0;i<300;i++){
-  const star=document.createElement('div');
-  star.className='star';
-  star.style.top=Math.random()*window.innerHeight+'px';
-  star.style.left=Math.random()*window.innerWidth+'px';
-  star.style.width=star.style.height=Math.random()*2+1+'px';
-  universe.appendChild(star);
-}
+    <!-- SCRIPT -->
+    <script src="main.js"></script>
 
-// Click sound
-const clickAudio=new Audio('https://freesound.org/data/previews/256/256113_3263906-lq.mp3');
-function playClickSound(){clickAudio.currentTime=0;clickAudio.play();}
-
-// Persistent Achievements
-let achievements = JSON.parse(localStorage.getItem('achievements')) || [];
-function unlockAchievement(name){
-  if(achievements.includes(name)) return;
-  achievements.push(name);
-  localStorage.setItem('achievements', JSON.stringify(achievements));
-  const achievementsList=document.getElementById('achievements-list');
-  const div=document.createElement('div');
-  div.className='achievement unlocked';
-  div.textContent=name;
-  achievementsList.appendChild(div);
-  createParticles(div);
-}
-
-// Load persistent achievements
-achievements.forEach(name=>{
-  const achievementsList=document.getElementById('achievements-list');
-  const div=document.createElement('div');
-  div.className='achievement unlocked';
-  div.textContent=name;
-  achievementsList.appendChild(div);
-});
-
-// Mini-Game
-let counter=0;
-function miniGameClick(){
-  counter++;
-  document.getElementById('game-counter').textContent=counter+' / 10';
-  if(counter>=10){ 
-    alert('You won the mini-game!');
-    counter=0; 
-    document.getElementById('game-counter').textContent='0 / 10'; 
-    unlockAchievement('Mini-Game Winner'); 
-  }
-}
-
-// Marketplace purchase
-function purchase(item){
-  alert(`Purchased ${item}!`);
-  unlockAchievement(`Bought ${item}`);
-}
-
-// Panel navigation
-function openPanel(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'}); 
-  playClickSound();
-}
-
-// Particle effect
-function createParticles(element){
-  for(let i=0;i<20;i++){
-    const p=document.createElement('div');
-    p.className='star';
-    p.style.top=element.offsetTop + Math.random()*element.offsetHeight + 'px';
-    p.style.left=element.offsetLeft + Math.random()*element.offsetWidth + 'px';
-    p.style.width=p.style.height='3px';
-    document.body.appendChild(p);
-    setTimeout(()=>{p.remove();},1000);
-  }
-}
-
-// GPT Live simulation
-const codeEditor=document.getElementById('code-editor');
-const suggestion=document.getElementById('ai-suggestion');
-const preview=document.getElementById('code-preview');
-codeEditor.addEventListener('input', async ()=>{
-  const val=codeEditor.textContent.toLowerCase();
-  if(val.includes('function')) suggestion.textContent='GPT Suggestion: Good! Try calling it.';
-  else if(val.includes('console')) suggestion.textContent='GPT Suggestion: Logging output detected!';
-  else suggestion.textContent='GPT Suggestion: Start by defining a function!';
-  preview.srcdoc=val;
-});
-
-// Web3 Wallet
-async function connectWallet(){
-  if(typeof window.ethereum!=='undefined'){
-    try{
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      document.getElementById('wallet-status').textContent=`Connected: ${accounts[0]}`;
-      unlockAchievement('Wallet Connected');
-    }catch(err){console.log(err);}
-  }else{alert('Install Metamask!');}
-}
-
-// Ambient music
-const ambient=new Audio('https://freesound.org/data/previews/567/567331_1648171-lq.mp3');
-ambient.loop=true; ambient.volume=0.3; ambient.play();
-</script>
 </body>
 </html>
