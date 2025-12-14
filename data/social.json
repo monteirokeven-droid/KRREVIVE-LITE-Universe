@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "author": "EliteGamer",
+      "handle": "elite123",
+      "avatar": "https://via.placeholder.com/56",
+      "content": "Just completed the galactic raid, it was insane!",
+      "likes": 42,
+      "iso": "2025-12-12T19:30:00Z"
+    },
+    {
+      "id": "2",
+      "author": "StarPilot",
+      "handle": "starx",
+      "avatar": "https://via.placeholder.com/56",
+      "content": "Streaming the next space battle tonight, join me!",
+      "likes": 15,
+      "iso": "2025-12-13T16:00:00Z"
+    }
+  ],
+  "suggested": [
+    {
+      "name": "CosmicWarrior",
+      "handle": "cosmic01",
+      "avatar": "https://via.placeholder.com/40",
+      "following": false
+    },
+    {
+      "name": "SpaceRanger",
+      "handle": "spaceranger",
+      "avatar": "https://via.placeholder.com/40",
+      "following": true
+    }
+  ]
+}
