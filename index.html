@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE V13 Universe</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Ethers.js for Web3 -->
-    <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.0/dist/ethers.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRREVIVEÉLITE Universe</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- SPA Containers -->
-    <div id="global-loader">Loading...</div>
-    <div id="app"></div>
-    <div id="toast"></div>
+<header>
+  <nav class="navbar">
+    <div class="logo">KRREVIVEÉLITE</div>
+    <ul class="nav-menu">
+      <li><a href="#universe" class="nav-link">Universe</a></li>
+      <li><a href="#gaming" class="nav-link">Gaming</a></li>
+      <li><a href="#social" class="nav-link">Social</a></li>
+      <li><a href="#subscribe" class="nav-link">Subscribe</a></li>
+    </ul>
+    <div class="hamburger">☰</div>
+  </nav>
+</header>
 
-    <!-- UNIVERSE BACKGROUND -->
-    <div id="universe"></div>
+<section id="universe" class="universe-gate-section">
+  <div class="cosmic-header">
+    <span class="transmission-status">Transmission Online</span>
+    <h1 class="glitch-text">KRREVIVEÉLITE</h1>
+    <p class="sub-header">Explore the ultimate digital realm</p>
+    <button class="btn btn-main-action">Enter Universe</button>
+  </div>
+</section>
 
-    <!-- PANELS -->
-    <!-- AI PANEL -->
-    <div class="panel" id="panelAI" style="top: 60px; left: 60px;">
-        <h2>AI Control Panel</h2>
-        <textarea id="aiInput" placeholder="Ask the KRREVIVEÉLITE AI..."></textarea>
-        <button onclick="sendAI()">Run AI</button>
-        <div id="aiOutput"></div>
+<section class="dimension-grid">
+  <div class="dimension-box physical-dim"><h3>Physical Realm</h3><p>Action and energy</p></div>
+  <div class="dimension-box digital-dim"><h3>Digital Realm</h3><p>Code and tech</p></div>
+  <div class="dimension-box cosmic-dim"><h3>Cosmic Realm</h3><p>Wisdom and growth</p></div>
+  <div class="dimension-box shadow-dim"><h3>Shadow Realm</h3><p>Suppression and secrecy</p></div>
+</section>
+
+<section id="gaming">
+  <h2>Gaming Universe</h2>
+  <div id="featuredVideo"></div>
+  <ul id="streamSchedule"></ul>
+  <div id="sessionThumbnails"></div>
+  <div id="gamingPagination"></div>
+</section>
+
+<section id="social">
+  <h2>Elite Social Feed</h2>
+  <div id="feedLoader" hidden>Loading feed…</div>
+  <div id="socialFeed"></div>
+  <div id="suggestedAccounts"></div>
+</section>
+
+<section id="subscribe">
+  <form class="email-form">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<!-- AI Assistant Modal -->
+<div id="aiAssistant" class="ai-modal">
+  <div class="ai-inner">
+    <div class="ai-header">
+      <span>Elite AI</span>
+      <button class="close-ai">×</button>
     </div>
-
-    <!-- MARKETPLACE PANEL -->
-    <div class="panel" id="panelMarket" style="top: 60px; left: 380px;">
-        <h2>Marketplace</h2>
-        <div id="marketplace-grid">
-            <div class="market-item">
-                <span>Planet NFT</span>
-                <button data-add-to-cart data-id="planet-nft" data-name="Planet NFT" data-price="19.99" data-type="nft" data-download="">Buy</button>
-            </div>
-            <div class="market-item">
-                <span>Galaxy NFT</span>
-                <button data-add-to-cart data-id="galaxy-nft" data-name="Galaxy NFT" data-price="29.99" data-type="nft" data-download="">Buy</button>
-            </div>
-        </div>
+    <div class="ai-messages"></div>
+    <div class="ai-input-container">
+      <input type="text" id="aiInput" placeholder="Ask anything…">
+      <button id="aiSend">Send</button>
     </div>
+  </div>
+</div>
 
-    <!-- MINI GAME PANEL -->
-    <div class="panel" id="panelGame" style="top: 60px; left: 700px;">
-        <h2>Mini Game</h2>
-        <p>Click to terraform a planet:</p>
-        <button onclick="miniGameClick()">Terraform</button>
-        <p id="miniCounter">Progress: 0%</p>
-    </div>
+<!-- Futuristic Canvas -->
+<canvas id="futuristicCanvas"></canvas>
 
-    <!-- Scripts -->
-    <script src="main.js"></script>
-    <script src="js/krrevive-core.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
