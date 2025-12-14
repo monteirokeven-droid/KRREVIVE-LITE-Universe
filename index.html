@@ -1,82 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KRREVIVEÉLITE Universe</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRREVIVEÉLITE Universe</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Minimal CSS for demo purposes */
+        body { margin:0; font-family:sans-serif; background:#0a0a0a; color:#fff; }
+        .navbar { position:fixed; top:0; width:100%; display:flex; justify-content:space-between; padding:1rem; background:rgba(0,0,0,0.7); z-index:999; transition: box-shadow 0.3s; }
+        .hamburger { display:none; cursor:pointer; flex-direction:column; gap:5px; }
+        .hamburger div { width:25px; height:3px; background:#fff; }
+        .nav-menu { display:flex; gap:1rem; }
+        .nav-menu.active { display:flex; flex-direction:column; }
+        section { min-height:100vh; padding:5rem 2rem; opacity:0; transition:opacity 1s ease; }
+        section.visible { opacity:1; }
+        .btn { padding:0.5rem 1rem; cursor:pointer; border:none; border-radius:5px; background:#d4af37; color:#000; transition: transform 0.2s; }
+        .fade-in { opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .visible.fade-in { opacity:1; transform: translateY(0); }
+        .video-modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center; z-index:1000; }
+        .modal-inner { width:80%; height:80%; position:relative; }
+        .close-btn { position:absolute; top:10px; right:10px; padding:0.5rem 1rem; cursor:pointer; }
+        canvas#futuristicCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+    </style>
 </head>
-<body>
+<body class="loading">
 
-<header>
-  <nav class="navbar">
-    <div class="logo">KRREVIVEÉLITE</div>
-    <ul class="nav-menu">
-      <li><a href="#universe" class="nav-link">Universe</a></li>
-      <li><a href="#gaming" class="nav-link">Gaming</a></li>
-      <li><a href="#social" class="nav-link">Social</a></li>
-      <li><a href="#subscribe" class="nav-link">Subscribe</a></li>
-    </ul>
-    <div class="hamburger">☰</div>
-  </nav>
-</header>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">KRREVIVEÉLITE</div>
+        <div class="hamburger"><div></div><div></div><div></div></div>
+        <div class="nav-menu">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#gaming" class="nav-link">Gaming</a>
+            <a href="#social" class="nav-link">Social</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
 
-<section id="universe" class="universe-gate-section">
-  <div class="cosmic-header">
-    <span class="transmission-status">Transmission Online</span>
-    <h1 class="glitch-text">KRREVIVEÉLITE</h1>
-    <p class="sub-header">Explore the ultimate digital realm</p>
-    <button class="btn btn-main-action">Enter Universe</button>
-  </div>
-</section>
+    <!-- FUTURISTIC BACKGROUND -->
+    <canvas id="futuristicCanvas"></canvas>
 
-<section class="dimension-grid">
-  <div class="dimension-box physical-dim"><h3>Physical Realm</h3><p>Action and energy</p></div>
-  <div class="dimension-box digital-dim"><h3>Digital Realm</h3><p>Code and tech</p></div>
-  <div class="dimension-box cosmic-dim"><h3>Cosmic Realm</h3><p>Wisdom and growth</p></div>
-  <div class="dimension-box shadow-dim"><h3>Shadow Realm</h3><p>Suppression and secrecy</p></div>
-</section>
+    <!-- SECTIONS -->
+    <section id="home">
+        <h1>Welcome to KRREVIVEÉLITE Universe</h1>
+        <p>Explore the elite gaming, social, and AI experiences.</p>
+        <button class="btn">Enter Universe</button>
+    </section>
 
-<section id="gaming">
-  <h2>Gaming Universe</h2>
-  <div id="featuredVideo"></div>
-  <ul id="streamSchedule"></ul>
-  <div id="sessionThumbnails"></div>
-  <div id="gamingPagination"></div>
-</section>
+    <section id="gaming">
+        <h2>Gaming Section</h2>
+        <div id="featuredVideo"></div>
+        <div>
+            <label>Filter Character:</label>
+            <select id="filterCharacter"><option value="">All</option></select>
+            <label>Filter Protocol:</label>
+            <select id="filterProtocol"><option value="">All</option></select>
+            <label>Search:</label>
+            <input type="text" id="filterSearch" placeholder="Search sessions">
+        </div>
+        <div id="sessionThumbnails" class="grid"></div>
+        <div id="gamingPagination"></div>
+    </section>
 
-<section id="social">
-  <h2>Elite Social Feed</h2>
-  <div id="feedLoader" hidden>Loading feed…</div>
-  <div id="socialFeed"></div>
-  <div id="suggestedAccounts"></div>
-</section>
+    <section id="social">
+        <h2>Social Feed</h2>
+        <div id="feedLoader" hidden>Loading...</div>
+        <div id="socialFeed"></div>
+        <h3>Suggested Accounts</h3>
+        <div id="suggestedAccounts"></div>
+    </section>
 
-<section id="subscribe">
-  <form class="email-form">
-    <input type="email" placeholder="Enter your email" required>
-    <button type="submit">Subscribe</button>
-  </form>
-</section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Message" required></textarea>
+            <button type="submit" class="btn">Send</button>
+        </form>
+        <form class="email-form">
+            <input type="email" placeholder="Subscribe to Elite">
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+    </section>
 
-<!-- AI Assistant Modal -->
-<div id="aiAssistant" class="ai-modal">
-  <div class="ai-inner">
-    <div class="ai-header">
-      <span>Elite AI</span>
-      <button class="close-ai">×</button>
+    <!-- BACKGROUND CONTROLS -->
+    <div id="backgroundControls" style="position:fixed; bottom:1rem; right:1rem; background:rgba(0,0,0,0.6); padding:0.5rem 1rem; border-radius:8px;">
+        <label><input type="checkbox" id="bgControlEnable" checked> Enable Background</label>
+        <label>Opacity: <input type="range" id="bgControlOpacity" min="0" max="1" step="0.01" value="0.9"></label>
+        <label><input type="checkbox" id="bgControlReduced"> Reduce Motion</label>
+        <button id="bgControlReset" class="btn">Reset</button>
     </div>
-    <div class="ai-messages"></div>
-    <div class="ai-input-container">
-      <input type="text" id="aiInput" placeholder="Ask anything…">
-      <button id="aiSend">Send</button>
-    </div>
-  </div>
-</div>
 
-<!-- Futuristic Canvas -->
-<canvas id="futuristicCanvas"></canvas>
-
-<script src="script.js"></script>
+    <!-- SCRIPT -->
+    <script src="script.js"></script>
 </body>
 </html>
