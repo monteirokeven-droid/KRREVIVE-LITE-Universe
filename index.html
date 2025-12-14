@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KRREVIVEÉLITE V13 Universe</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 
     <!-- Ethers.js for Web3 -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.0/dist/ethers.min.js"></script>
@@ -14,11 +14,15 @@
 
 <body>
 
+    <!-- SPA Containers -->
+    <div id="global-loader">Loading...</div>
+    <div id="app"></div>
+    <div id="toast"></div>
+
     <!-- UNIVERSE BACKGROUND -->
     <div id="universe"></div>
 
     <!-- PANELS -->
-
     <!-- AI PANEL -->
     <div class="panel" id="panelAI" style="top: 60px; left: 60px;">
         <h2>AI Control Panel</h2>
@@ -33,12 +37,11 @@
         <div id="marketplace-grid">
             <div class="market-item">
                 <span>Planet NFT</span>
-                <button onclick="buyNFT('Planet')">Buy</button>
+                <button data-add-to-cart data-id="planet-nft" data-name="Planet NFT" data-price="19.99" data-type="nft" data-download="">Buy</button>
             </div>
-
             <div class="market-item">
                 <span>Galaxy NFT</span>
-                <button onclick="buyNFT('Galaxy')">Buy</button>
+                <button data-add-to-cart data-id="galaxy-nft" data-name="Galaxy NFT" data-price="29.99" data-type="nft" data-download="">Buy</button>
             </div>
         </div>
     </div>
@@ -51,8 +54,9 @@
         <p id="miniCounter">Progress: 0%</p>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- Scripts -->
     <script src="main.js"></script>
+    <script src="js/krrevive-core.js"></script>
 
 </body>
 </html>
