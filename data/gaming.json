@@ -1,0 +1,38 @@
+{
+  "featured": {
+    "title": "Epic Space Battle",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://via.placeholder.com/320x180",
+    "description": "Watch the elite gaming session of epic space battle!",
+    "characters": ["PilotX", "StarKnight"],
+    "protocols": ["PvP", "Co-op"],
+    "iso": "2025-12-13T18:00:00Z"
+  },
+  "upcoming": [
+    {
+      "title": "Next Elite Raid",
+      "platform": "YouTube",
+      "iso": "2025-12-15T20:00:00Z"
+    }
+  ],
+  "pastSessions": [
+    {
+      "title": "Galactic Siege",
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://via.placeholder.com/320x180",
+      "description": "A thrilling battle through the galaxy.",
+      "characters": ["PilotX", "StarKnight"],
+      "protocols": ["PvP", "Solo"],
+      "iso": "2025-12-12T19:00:00Z"
+    },
+    {
+      "title": "Cyber Arena",
+      "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://via.placeholder.com/320x180",
+      "description": "Fast-paced cyber combat session.",
+      "characters": ["CyberWolf", "NeoBlade"],
+      "protocols": ["Co-op"],
+      "iso": "2025-12-10T17:00:00Z"
+    }
+  ]
+}
