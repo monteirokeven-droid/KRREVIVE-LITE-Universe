@@ -1,291 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE | System Interface</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --primary: #00f3ff; /* Cyan Neon */
-            --secondary: #bc13fe; /* Neon Purple */
-            --accent: #d4af37; /* Gold/Elite */
-            --bg-dark: #050505;
-            --glass: rgba(10, 10, 10, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --font-head: 'Orbitron', sans-serif;
-            --font-body: 'Roboto Mono', monospace;
-        }
-
-        * { box-sizing: border-box; outline: none; }
-        body, html { margin: 0; padding: 0; scroll-behavior: smooth; }
-        
-        body {
-            background-color: var(--bg-dark);
-            color: #fff;
-            font-family: var(--font-body);
-            overflow-x: hidden;
-        }
-
-        /* --- TYPOGRAPHY & BASE --- */
-        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 2px; }
-        h1 { font-weight: 900; text-shadow: 0 0 20px var(--primary); }
-        h2 { border-left: 4px solid var(--accent); padding-left: 1rem; margin-bottom: 2rem; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        .logo span { color: var(--accent); }
-
-        /* --- UI COMPONENTS --- */
-        .btn {
-            background: transparent; border: 1px solid var(--primary);
-            color: var(--primary); padding: 0.8rem 2rem;
-            font-family: var(--font-head); font-weight: 700;
-            cursor: pointer; text-transform: uppercase;
-            transition: all 0.3s ease; position: relative;
-            overflow: hidden; z-index: 1;
-        }
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: 0; 
-            width: 0%; height: 100%; background: var(--primary); 
-            z-index: -1; transition: width 0.3s ease;
-        }
-        .btn:hover::before { width: 100%; }
-        .btn:hover { color: #000; box-shadow: 0 0 20px var(--primary); }
-
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-        }
-        
-        /* Form Inputs */
-        input, select, textarea {
-            background: #000; color: #fff;
-            border: 1px solid var(--border);
-            padding: 0.7rem 1rem;
-            font-family: var(--font-body);
-        }
-        input:focus, select:focus, textarea:focus { border-color: var(--primary); }
-        
-        /* --- NAVBAR --- */
-        .navbar {
-            position: fixed; top: 0; width: 100%;
-            display: flex; justify-content: space-between;
-            align-items: center; padding: 1.5rem 3rem;
-            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
-            z-index: 1000; transition: background 0.3s;
-        }
-        .navbar.scrolled { background: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--border); }
-        .logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 900; }
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { font-size: 0.9rem; letter-spacing: 1px; }
-        .nav-link:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
-        .hamburger div { width: 30px; height: 2px; background: var(--primary); transition: 0.3s; }
-
-        /* --- CANVAS & SECTIONS --- */
-        #futuristicCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        section {
-            min-height: 100vh; padding: 8rem 2rem 4rem 2rem;
-            max-width: 1400px; margin: 0 auto;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        section.visible { opacity: 1; transform: translateY(0); }
-        #home { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 100vh; }
-        #home p { max-width: 600px; margin-bottom: 2rem; line-height: 1.6; color: #aaa; }
-        
-        /* GAMING GRID & FILTERS */
-        .filter-bar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 4px; }
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;
-        }
-        .card { background: rgba(20, 20, 20, 0.6); border: 1px solid var(--border); transition: 0.3s; position: relative; overflow: hidden; cursor: pointer; }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card-img { height: 180px; position: relative; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .card-body { padding: 1.5rem; }
-        .tag { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent); padding: 2px 6px; display: inline-block; margin-bottom: 0.5rem; }
-        
-        /* SOCIAL FEED */
-        #socialFeed { max-width: 800px; margin: 0 auto; }
-        .post { border-left: 2px solid var(--secondary); padding: 1.5rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.03); }
-        .post-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--border); }
-        
-        /* CONTACT FORM */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        form { display: flex; flex-direction: column; gap: 1.5rem; }
-        
-        /* MODAL */
-        .video-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: flex; justify-content: center; align-items: center;
-            z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-        }
-        .video-modal.open { opacity: 1; pointer-events: all; }
-        .modal-inner { width: 80%; max-width: 900px; position: relative; background: #000; padding: 2rem; border: 1px solid var(--primary); }
-        .close-btn { 
-            position: absolute; top: -40px; right: 0; color: #fff; cursor: pointer; 
-            font-size: 2rem; background: none; border: none; padding: 0;
-        }
-
-        /* --- SITEMAP OVERLAY (Holographic Modal) --- */
-        #sitemapOverlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
-            z-index: 3000; display: flex; flex-direction: column;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-            padding: 2rem;
-        }
-        #sitemapOverlay.active { opacity: 1; pointer-events: all; }
-        .map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        #sitemapSearch {
-            background: transparent; border: none; border-bottom: 2px solid var(--primary);
-            color: #fff; font-size: 1.5rem; font-family: var(--font-head);
-            width: 50%; padding: 0.5rem; text-align: center;
-        }
-        #sitemapGrid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem; overflow-y: auto; padding-bottom: 2rem;
-        }
-        .map-category {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border);
-            padding: 1rem; transition: 0.2s;
-        }
-        .map-category:hover { border-color: var(--accent); background: rgba(212, 175, 55, 0.05); }
-        .map-category h4 { color: var(--primary); margin-top: 0; font-size: 0.9rem; }
-        .map-link-item { color: #aaa; font-size: 0.8rem; cursor: pointer; padding: 2px 0; transition: 0.2s; }
-        .map-link-item:hover { color: #fff; transform: translateX(5px); }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .hamburger { display: flex; }
-            .nav-menu {
-                position: fixed; top: 0; right: 0; height: 100vh; width: 70%;
-                background: #000; flex-direction: column; padding: 5rem 2rem;
-                transform: translateX(100%); transition: 0.3s;
-                border-left: 1px solid var(--primary);
-            }
-            .nav-menu.active { transform: translateX(0); }
-            #contact { grid-template-columns: 1fr; }
-            #sitemapSearch { width: 100%; font-size: 1.2rem; margin-top: 1rem; }
-            .map-header { flex-direction: column; align-items: flex-start; }
-            .close-btn { position: absolute; top: 1rem; right: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="video-modal" id="videoModal">
-        <div class="modal-inner">
-            <button class="close-btn" id="closeModal">&times;</button>
-            <div id="modalContent" style="color:#fff; text-align:center; padding:3rem;">
-                <h3>Simulating Interface...</h3>
-                <p>Loading Secure Protocol</p>
-            </div>
-        </div>
-    </div>
-    
-    <div id="sitemapOverlay">
-        <div class="map-header">
-            <h2 style="margin:0;">Universe Navigation Interface</h2>
-            <input type="text" id="sitemapSearch" placeholder="Search Sector..." autocomplete="off">
-            <button id="closeMap" class="close-btn">&times;</button>
-        </div>
-        <div id="sitemapGrid">
-            </div>
-    </div>
-
-    <nav class="navbar" id="navbar">
-        <div class="logo">KRREVIVE<span>ÉLITE</span></div>
-        <div class="hamburger" id="hamburger">
-            <div></div><div></div><div></div>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#gaming" class="nav-link">Gaming</a>
-            <a href="#social" class="nav-link">Social</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <button id="openMapBtn" class="btn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">System Map</button>
-        </div>
-    </nav>
-
-    <canvas id="futuristicCanvas"></canvas>
-
-    <main>
-        <section id="home" class="visible">
-            <h3>System Online</h3>
-            <h1>Welcome to the<br>Universe</h1>
-            <p>Experience the nexus of elite gaming, social synthesis, and artificial intelligence interfaces. Upgrade your reality.</p>
-            <button class="btn" onclick="document.getElementById('gaming').scrollIntoView()">Initialize</button>
-        </section>
-
-        <section id="gaming">
-            <h2>Combat Protocols</h2>
-            
-            <div class="glass-panel">
-                <div class="filter-bar">
-                    <input type="text" id="filterSearch" placeholder="Search Data Stream...">
-                    <select id="filterCharacter">
-                        <option value="">All Classes</option>
-                        <option value="Vanguard">Vanguard</option>
-                        <option value="Spectre">Spectre</option>
-                        <option value="Titan">Titan</option>
-                    </select>
-                    <select id="filterProtocol">
-                        <option value="">All Modes</option>
-                        <option value="Ranked">Ranked</option>
-                        <option value="Casual">Casual</option>
-                        <option value="Tournament">Tournament</option>
-                    </select>
-                </div>
-                
-                <div id="sessionThumbnails" class="grid">
-                    </div>
-            </div>
-        </section>
-
-        <section id="social">
-            <h2>Social Feed</h2>
-            <div id="socialFeed">
-                </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <button id="loadMoreSocial" class="btn">Load More Data</button>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div>
-                <h2>Establish Link</h2>
-                <p>Submit inquiries regarding elite membership, bug reports, or partnership opportunities.</p>
-                <div style="margin-top: 2rem;">
-                    <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
-                        <div style="color:var(--primary)">EMAIL</div>
-                        <div>system@krrevive.elite</div>
-                    </div>
-                    <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
-                        <div style="color:var(--primary)">LOC</div>
-                        <div>Sector 7, Neo-Grid</div>
-                    </div>
-                </div>
-            </div>
-            
-            <form id="contactForm" class="glass-panel">
-                <input type="text" name="name" placeholder="Agent Name" required>
-                <input type="email" name="email" placeholder="Comms Frequency (Email)" required>
-                <textarea name="message" placeholder="Encrypted Message" required></textarea>
-                <button type="submit" class="btn">Transmit</button>
-            </form>
-        </section>
-    </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -322,10 +34,43 @@
                 {category:"25. Movie & Streaming",subs:["Watch Parties","Film Library","Director Commentary","Short Films","Reviews"]}
             ];
 
-            // --- 3. SITEMAP LOGIC ---
+            // --- 3. SITEMAP LOGIC & RENDERING ---
             const sitemapOverlay = qs('#sitemapOverlay');
             const sitemapGrid = qs('#sitemapGrid');
             const sitemapSearch = qs('#sitemapSearch');
+            
+            // Define the navigation function globally so the onclick event in HTML can find it
+            window.navigateTo = function(subName) {
+                // Convert "Music Player" to "music-player" for routing
+                const route = subName.toLowerCase().replace(/[^a-z0-9]/g, '-'); 
+                
+                // Close the map overlay first
+                sitemapOverlay.classList.remove('active');
+
+                // --- CORE ROUTING LOGIC ---
+                switch(route) {
+                    case 'music-player':
+                        // CRITICAL FIX: Direct relative link to the new music file!
+                        window.location.href = 'music.html'; 
+                        break;
+                    case 'gallery':
+                        window.location.href = 'gallery.html'; // Placeholder
+                        break;
+                    case 'wallpapers':
+                        window.location.href = 'wallpapers.html'; // Placeholder
+                        break;
+                    case 'dashboard':
+                    case 'mission-brief':
+                        // If it's a section on the index page, navigate to the root
+                        window.location.href = '/'; 
+                        break;
+                    default:
+                        // Default action for unlinked pages
+                        showVideoModal(`Access Protocol for ${subName} is still initializing. Please check back later.`);
+                        break;
+                }
+            }
+
 
             function renderSitemap(filter = "") {
                 sitemapGrid.innerHTML = "";
@@ -342,6 +87,7 @@
                         let subHtml = section.subs.map(sub => {
                             // Only display sub-link if it matches the filter OR the category matched
                             if (filter && !sub.toLowerCase().includes(lowerFilter) && !catMatch) return ''; 
+                            // The onclick attribute now correctly calls the defined function above
                             return `<div class="map-link-item" onclick="window.navigateTo('${sub}')">RP: ${sub}</div>`;
                         }).join('');
                         
@@ -354,333 +100,20 @@
                 });
             }
 
+            // --- 4. INITIALIZATION AND EVENT LISTENERS ---
+
             // Map Event Listeners
             qs('#openMapBtn').addEventListener('click', () => {
                 sitemapOverlay.classList.add('active');
                 renderSitemap();
-                setTimeout(() => sitemapSearch.focus(), 100);
+                setTimeout(() => qs('#sitemapSearch').focus(), 100);
             });
             qs('#closeMap').addEventListener('click', () => {
                 sitemapOverlay.classList.remove('active');
             });
-            sitemapSearch.addEventListener('input', (e) => {
-                renderSitemap(e.target.value);
-            });
-            window.navigateTo = (dest) => {
-                sitemapOverlay.classList.remove('active');
-                alert(`>> INITIALIZING JUMP TO: [ ${dest} ]\n>> LOADING ASSETS...`);
-            };
-
-
-            // --- 4. CANVAS ANIMATION (Particle Network) ---
-            const canvas = qs('#futuristicCanvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let animationActive = true;
-            let currentOpacity = 0.5;
-
-            function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                    if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                }
-            }
-            // Create Particles
-            for(let i=0; i<100; i++) particles.push(new Particle());
-
-            function animate() {
-                if (!animationActive) return;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                particles.forEach((p, index) => {
-                    p.update();
-                    // Draw Dot
-                    ctx.fillStyle = `rgba(0, 243, 255, ${currentOpacity})`;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
-
-                    // Draw Connections
-                    for(let j = index; j < particles.length; j++) {
-                        const p2 = particles[j];
-                        const dx = p.x - p2.x;
-                        const dy = p.y - p2.y;
-                        const dist = Math.sqrt(dx*dx + dy*dy);
-                        
-                        if (dist < 100) {
-                            ctx.strokeStyle = `rgba(0, 243, 255, ${currentOpacity * (1 - dist/100)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                        }
-                    }
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-
-            // --- 5. UI INTERACTIONS & SCROLL REVEAL ---
-            window.addEventListener('scroll', () => {
-                const nav = qs('.navbar');
-                if (window.scrollY > 50) nav.classList.add('scrolled');
-                else nav.classList.remove('scrolled');
-                
-                qsa('section').forEach(sec => {
-                    const top = sec.getBoundingClientRect().top;
-                    if (top < window.innerHeight - 100) sec.classList.add('visible');
-                });
-            });
-
-            // Hamburger Menu
-            const ham = qs('#hamburger');
-            const menu = qs('#navMenu');
-            ham.addEventListener('click', () => {
-                menu.classList.toggle('active');
-            });
-
-            // Modal Logic
-            const modal = qs('#videoModal');
-            qs('#closeModal').addEventListener('click', () => { modal.classList.remove('open'); });
-            window.openModal = (title) => {
-                qs('#modalContent h3').innerText = title;
-                modal.classList.add('open');
-            };
-
-            // --- 6. GAMING SECTION DATA & LOGIC ---
-            const gamingData = Array.from({length: 12}, (_, i) => ({
-                id: i,
-                title: `Protocol Omega ${i+1}`,
-                character: i % 3 === 0 ? 'Vanguard' : i % 3 === 1 ? 'Spectre' : 'Titan',
-                mode: i % 2 === 0 ? 'Ranked' : 'Casual',
-                image: `https://picsum.photos/seed/${i+100}/400/250`
-            }));
+            // --- FIX: Add the event listener for the search bar which was cut off ---
+            qs('#sitemapSearch').addEventListener('input', (e) => renderSitemap(e.target.value)); 
             
-            function renderGaming(data) {
-                const container = qs('#sessionThumbnails');
-                container.innerHTML = data.length === 0 ? '<p>No matching protocols found.</p>' : data.map(item => `
-                    <div class="card" onclick="openModal('${item.title}')">
-                        <div class="card-img">
-                            <img src="${item.image}" alt="Game Image">
-                            <div style="position:absolute; bottom:0; left:0; background:var(--primary); color:#000; padding:2px 8px; font-size:0.7rem; font-weight:bold;">LIVE</div>
-                        </div>
-                        <div class="card-body">
-                            <span class="tag">${item.character}</span>
-                            <span class="tag" style="border-color:var(--secondary); color:var(--secondary)">${item.mode}</span>
-                            <h4>${item.title}</h4>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            function filterGaming() {
-                const search = qs('#filterSearch').value.toLowerCase();
-                const char = qs('#filterCharacter').value;
-                const mode = qs('#filterProtocol').value;
-
-                const filtered = gamingData.filter(item => 
-                    item.title.toLowerCase().includes(search) &&
-                    (char === '' || item.character === char) &&
-                    (mode === '' || item.mode === mode)
-                );
-                renderGaming(filtered);
-            }
-
-            qs('#filterSearch').addEventListener('keyup', filterGaming);
-            qs('#filterCharacter').addEventListener('change', filterGaming);
-            qs('#filterProtocol').addEventListener('change', filterGaming);
-            renderGaming(gamingData); // Initial Render
-
-            // --- 7. SOCIAL FEED MOCKUP ---
-            const socialData = [
-                { user: 'Elite_One', content: 'Just secured the platinum trophy in Sector 4. The graphics update is insane. #KRREVIVE', time: '2m ago' },
-                { user: 'CyberDrifter', content: 'Looking for a squad for tonight\'s raid. Must be lvl 50+. DM me.', time: '15m ago' },
-                { user: 'SystemAdmin', content: 'Maintenance scheduled for 0300 hours. Downtime approx 30 mins.', time: '1h ago' }
-            ];
-
-            function renderSocial(data) {
-                const container = qs('#socialFeed');
-                data.forEach(post => {
-                    const div = document.createElement('div');
-                    div.className = 'post';
-                    div.innerHTML = `
-                        <div class="post-header">
-                            <div class="avatar"></div>
-                            <div>
-                                <div style="color:var(--primary); font-weight:bold;">${post.user}</div>
-                                <div style="font-size:0.8rem; color:#888;">${post.time}</div>
-                            </div>
-                        </div>
-                        <p>${post.content}</p>
-                    `;
-                    container.appendChild(div);
-                });
-            }
-            renderSocial(socialData);
-
-            qs('#loadMoreSocial').addEventListener('click', () => {
-                const btn = qs('#loadMoreSocial');
-                const originalText = btn.innerText;
-                btn.innerText = 'Decrypting...';
-                setTimeout(() => {
-                    renderSocial(socialData); // Load another batch
-                    btn.innerText = originalText;
-                }, 1000);
-            });
-
-            // --- 8. FORM HANDLING ---
-            qs('#contactForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = e.target.querySelector('button');
-                const originalText = btn.innerText;
-                
-                btn.innerText = 'Transmitting...';
-                
-                setTimeout(() => {
-                    alert('Transmission Received. Stand by for contact.');
-                    e.target.reset();
-                    btn.innerText = originalText;
-                }, 1500);
-            });
-        });
-    </script>
-</body>
-</html>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. CORE UTILS ---
-            const qs = (selector) => document.querySelector(selector);
-            const qsa = (selector) => document.querySelectorAll(selector);
-
-            // --- 2. UNIVERSE MAP DATA (25 Categories) ---
-            const universeMap = [
-                {category:"1. Home & Overview",subs:["Dashboard","Mission Brief","Announcements","System Status","Quick Links"]},
-                {category:"2. Technology & Artifacts",subs:["Tech Tree","Ancient Artifacts","Blueprints","Research Lab","Inventory"]},
-                {category:"3. Story & Media",subs:["Lore Archive","Cinematics","Audio Logs","Character Bios","Timeline"]},
-                {category:"4. Faction & Mission",subs:["Faction Selection","Mission Board","Rankings","Reputation","Squad Management"]},
-                {category:"5. Gaming Hub",subs:["Official Library","Indie Games","Fan-made Games","Launchers","Patch Notes","Multiplayer Lobby","VR/AR Zone"]},
-                {category:"6. Engineering Hub",subs:["CAD Tools","Simulators","Project Portfolio","Code Repository","Hardware Specs"]},
-                {category:"7. Gameplay Interactive",subs:["Live Events","Mini-Games","Daily Challenges","Achievement Tracker","Interactive Maps"]},
-                {category:"8. Multimedia",subs:["Music Player", "Gallery", "Wallpapers", "Soundboards", "Asset Store"]},
-                {category:"9. Community",subs:["Forums","Clans","Wiki","Fan Art","Polls & Voting"]},
-                {category:"10. Social Hub",subs:["Feed","Direct Messages","Friend List","Voice Chat","Streaming Integration"]},
-                {category:"11. Learning & Education",subs:["Tutorials","Documentation","Knowledge Base","Mentorship","Certification"]},
-                {category:"12. Problem Solving",subs:["Bug Tracker","Feature Requests","Hackathons","Collaboration Board","Idea Incubator"]},
-                {category:"13. Support Center",subs:["FAQ","Ticket System","Live Support","Account Recovery","Billing"]},
-                {category:"14. Services Market",subs:["Freelance Board","Coaching","Design Services","Dev for Hire","Escrow"]},
-                {category:"15. Analytics",subs:["Player Stats","Site Metrics","Performance Graphs","Heatmaps","Trend Analysis"]},
-                {category:"16. Events",subs:["Tournament Brackets","Calendar","RSVP System","Virtual Convention","Prize Pools"]},
-                {category:"17. Innovation Lab",subs:["Beta Tests","Experimental Features","Sandbox Mode","Dev Logs","Feedback Loop"]},
-                {category:"18. User Feedback",subs:["Surveys","Suggestion Box","Rating System","Focus Groups","Roadmap Voting"]},
-                {category:"19. Video & Streaming",subs:["Live Channels","VOD Archive","Streamer Tools","Overlays","Donation Setup"]},
-                {category:"20. Courses Hub",subs:["Engineering Paths","Game Dev 101","Media Production","Leadership","Gamified Learning"]},
-                {category:"21. Health & Wellness",subs:["Ergonomics","Eye Care","Focus Timers","Mental Health Resources","Break Reminders"]},
-                {category:"22. Accessibility",subs:["Contrast Settings","Screen Reader Mode","Keybinding Remap","Colorblind Modes","Text Scaling"]},
-                {category:"23. Personalization",subs:["Theme Editor","Avatar Creator","Interface Layout","Notification Config","Privacy"]},
-                {category:"24. Safety & Security",subs:["2FA Setup","Login History","Block List","Report User","Data Export"]},
-                {category:"25. Movie & Streaming",subs:["Watch Parties","Film Library","Director Commentary","Short Films","Reviews"]}
-            ];
-
-            // --- 3. SITEMAP LOGIC (MODIFIED) ---
-            const sitemapOverlay = qs('#sitemapOverlay');
-            const sitemapGrid = qs('#sitemapGrid');
-            const sitemapSearch = qs('#sitemapSearch');
-            const openMapBtn = qs('#openMapBtn');
-            const closeMap = qs('#closeMap');
-
-            function renderSitemap(filter = "") {
-                sitemapGrid.innerHTML = "";
-                const lowerFilter = filter.toLowerCase();
-
-                universeMap.forEach(section => {
-                    const catMatch = section.category.toLowerCase().includes(lowerFilter);
-                    let subLinksHTML = "";
-                    let hasVisibleLinks = false;
-
-                    // Create Links with 'data-route' Attribute
-                    section.subs.forEach(sub => {
-                        const subMatch = sub.toLowerCase().includes(lowerFilter);
-                        if (catMatch || subMatch) {
-                            // Converts "Music Player" to "music-player"
-                            subLinksHTML += `<div class="map-link-item" data-route="${sub.toLowerCase().replace(/[^a-z0-9]/g, '-')}" title="Go to ${sub}">${sub}</div>`;
-                            hasVisibleLinks = true;
-                        }
-                    });
-
-                    if (hasVisibleLinks || catMatch) {
-                        const categoryDiv = document.createElement('div');
-                        categoryDiv.classList.add('map-category');
-                        categoryDiv.innerHTML = `
-                            <h4>${section.category}</h4>
-                            <div class="map-links">${subLinksHTML}</div>
-                        `;
-                        sitemapGrid.appendChild(categoryDiv);
-                    }
-                });
-                
-                // ATTACH EVENT LISTENER TO ALL NEW LINKS
-                qsa('.map-link-item').forEach(link => {
-                    link.addEventListener('click', handleSitemapClick);
-                });
-            }
-
-
-            // 4. NEW FUNCTION: HANDLES THE CLICK AND NAVIGATION (THE FIX)
-            function handleSitemapClick(event) {
-                const route = event.currentTarget.getAttribute('data-route');
-                
-                // Close the map overlay first
-                sitemapOverlay.classList.remove('active');
-
-                // --- ROUTING LOGIC ---
-                switch(route) {
-                    case 'music-player':
-                        // CRITICAL FIX: Direct link to the new music file!
-                        window.location.href = '/music.html'; 
-                        break;
-                    case 'gallery':
-                        // Placeholder link
-                        window.location.href = '/gallery.html'; 
-                        break;
-                    case 'wallpapers':
-                        // Placeholder link
-                        window.location.href = '/wallpapers.html'; 
-                        break;
-                    case 'dashboard':
-                    case 'mission-brief':
-                        // These link back to the root page or hash sections
-                        window.location.href = '/'; 
-                        break;
-                    default:
-                        // Default action for unlinked pages 
-                        showVideoModal(`Access Protocol for ${event.currentTarget.textContent} is still initializing. Please check back later.`);
-                        break;
-                }
-            }
-
-
-            // --- 5. INITIALIZATION AND EVENT LISTENERS ---
-            // Open Map
-            openMapBtn.addEventListener('click', () => {
-                renderSitemap();
-                sitemapOverlay.classList.add('active');
-            });
-            
-            // Close Map
-            closeMap.addEventListener('click', () => sitemapOverlay.classList.remove('active'));
-            
-            // Search filter
-            sitemapSearch.addEventListener('input', (e) => renderSitemap(e.target.value));
-
             // Hamburger menu logic 
             const hamburger = qs('#hamburger');
             const navMenu = qs('#navMenu');
@@ -696,28 +129,16 @@
                  qs('#modalContent').innerHTML = content;
                  videoModal.classList.add('open');
             }
-
+            
+            // Intersection Observer for Section Visibility (Your original code)
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
+            }, observerOptions);
+            qsa('section').forEach(section => { observer.observe(section); });
 
             // Initial render
             renderSitemap();
-            
-            // Intersection Observer for Section Visibility
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-
-            qsa('section').forEach(section => {
-                observer.observe(section);
-            });
         });
-            </script>
-            
+    </script>
+    
