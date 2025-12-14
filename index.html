@@ -553,3 +553,171 @@
     </script>
 </body>
 </html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. CORE UTILS ---
+            const qs = (selector) => document.querySelector(selector);
+            const qsa = (selector) => document.querySelectorAll(selector);
+
+            // --- 2. UNIVERSE MAP DATA (25 Categories) ---
+            const universeMap = [
+                {category:"1. Home & Overview",subs:["Dashboard","Mission Brief","Announcements","System Status","Quick Links"]},
+                {category:"2. Technology & Artifacts",subs:["Tech Tree","Ancient Artifacts","Blueprints","Research Lab","Inventory"]},
+                {category:"3. Story & Media",subs:["Lore Archive","Cinematics","Audio Logs","Character Bios","Timeline"]},
+                {category:"4. Faction & Mission",subs:["Faction Selection","Mission Board","Rankings","Reputation","Squad Management"]},
+                {category:"5. Gaming Hub",subs:["Official Library","Indie Games","Fan-made Games","Launchers","Patch Notes","Multiplayer Lobby","VR/AR Zone"]},
+                {category:"6. Engineering Hub",subs:["CAD Tools","Simulators","Project Portfolio","Code Repository","Hardware Specs"]},
+                {category:"7. Gameplay Interactive",subs:["Live Events","Mini-Games","Daily Challenges","Achievement Tracker","Interactive Maps"]},
+                {category:"8. Multimedia",subs:["Music Player", "Gallery", "Wallpapers", "Soundboards", "Asset Store"]},
+                {category:"9. Community",subs:["Forums","Clans","Wiki","Fan Art","Polls & Voting"]},
+                {category:"10. Social Hub",subs:["Feed","Direct Messages","Friend List","Voice Chat","Streaming Integration"]},
+                {category:"11. Learning & Education",subs:["Tutorials","Documentation","Knowledge Base","Mentorship","Certification"]},
+                {category:"12. Problem Solving",subs:["Bug Tracker","Feature Requests","Hackathons","Collaboration Board","Idea Incubator"]},
+                {category:"13. Support Center",subs:["FAQ","Ticket System","Live Support","Account Recovery","Billing"]},
+                {category:"14. Services Market",subs:["Freelance Board","Coaching","Design Services","Dev for Hire","Escrow"]},
+                {category:"15. Analytics",subs:["Player Stats","Site Metrics","Performance Graphs","Heatmaps","Trend Analysis"]},
+                {category:"16. Events",subs:["Tournament Brackets","Calendar","RSVP System","Virtual Convention","Prize Pools"]},
+                {category:"17. Innovation Lab",subs:["Beta Tests","Experimental Features","Sandbox Mode","Dev Logs","Feedback Loop"]},
+                {category:"18. User Feedback",subs:["Surveys","Suggestion Box","Rating System","Focus Groups","Roadmap Voting"]},
+                {category:"19. Video & Streaming",subs:["Live Channels","VOD Archive","Streamer Tools","Overlays","Donation Setup"]},
+                {category:"20. Courses Hub",subs:["Engineering Paths","Game Dev 101","Media Production","Leadership","Gamified Learning"]},
+                {category:"21. Health & Wellness",subs:["Ergonomics","Eye Care","Focus Timers","Mental Health Resources","Break Reminders"]},
+                {category:"22. Accessibility",subs:["Contrast Settings","Screen Reader Mode","Keybinding Remap","Colorblind Modes","Text Scaling"]},
+                {category:"23. Personalization",subs:["Theme Editor","Avatar Creator","Interface Layout","Notification Config","Privacy"]},
+                {category:"24. Safety & Security",subs:["2FA Setup","Login History","Block List","Report User","Data Export"]},
+                {category:"25. Movie & Streaming",subs:["Watch Parties","Film Library","Director Commentary","Short Films","Reviews"]}
+            ];
+
+            // --- 3. SITEMAP LOGIC (MODIFIED) ---
+            const sitemapOverlay = qs('#sitemapOverlay');
+            const sitemapGrid = qs('#sitemapGrid');
+            const sitemapSearch = qs('#sitemapSearch');
+            const openMapBtn = qs('#openMapBtn');
+            const closeMap = qs('#closeMap');
+
+            function renderSitemap(filter = "") {
+                sitemapGrid.innerHTML = "";
+                const lowerFilter = filter.toLowerCase();
+
+                universeMap.forEach(section => {
+                    const catMatch = section.category.toLowerCase().includes(lowerFilter);
+                    let subLinksHTML = "";
+                    let hasVisibleLinks = false;
+
+                    // Create Links with 'data-route' Attribute
+                    section.subs.forEach(sub => {
+                        const subMatch = sub.toLowerCase().includes(lowerFilter);
+                        if (catMatch || subMatch) {
+                            // Converts "Music Player" to "music-player"
+                            subLinksHTML += `<div class="map-link-item" data-route="${sub.toLowerCase().replace(/[^a-z0-9]/g, '-')}" title="Go to ${sub}">${sub}</div>`;
+                            hasVisibleLinks = true;
+                        }
+                    });
+
+                    if (hasVisibleLinks || catMatch) {
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.classList.add('map-category');
+                        categoryDiv.innerHTML = `
+                            <h4>${section.category}</h4>
+                            <div class="map-links">${subLinksHTML}</div>
+                        `;
+                        sitemapGrid.appendChild(categoryDiv);
+                    }
+                });
+                
+                // ATTACH EVENT LISTENER TO ALL NEW LINKS
+                qsa('.map-link-item').forEach(link => {
+                    link.addEventListener('click', handleSitemapClick);
+                });
+            }
+
+
+            // 4. NEW FUNCTION: HANDLES THE CLICK AND NAVIGATION (THE FIX)
+            function handleSitemapClick(event) {
+                const route = event.currentTarget.getAttribute('data-route');
+                
+                // Close the map overlay first
+                sitemapOverlay.classList.remove('active');
+
+                // --- ROUTING LOGIC ---
+                switch(route) {
+                    case 'music-player':
+                        // CRITICAL FIX: Direct link to the new music file!
+                        window.location.href = '/music.html'; 
+                        break;
+                    case 'gallery':
+                        // Placeholder link
+                        window.location.href = '/gallery.html'; 
+                        break;
+                    case 'wallpapers':
+                        // Placeholder link
+                        window.location.href = '/wallpapers.html'; 
+                        break;
+                    case 'dashboard':
+                    case 'mission-brief':
+                        // These link back to the root page or hash sections
+                        window.location.href = '/'; 
+                        break;
+                    default:
+                        // Default action for unlinked pages 
+                        showVideoModal(`Access Protocol for ${event.currentTarget.textContent} is still initializing. Please check back later.`);
+                        break;
+                }
+            }
+
+
+            // --- 5. INITIALIZATION AND EVENT LISTENERS ---
+            // Open Map
+            openMapBtn.addEventListener('click', () => {
+                renderSitemap();
+                sitemapOverlay.classList.add('active');
+            });
+            
+            // Close Map
+            closeMap.addEventListener('click', () => sitemapOverlay.classList.remove('active'));
+            
+            // Search filter
+            sitemapSearch.addEventListener('input', (e) => renderSitemap(e.target.value));
+
+            // Hamburger menu logic 
+            const hamburger = qs('#hamburger');
+            const navMenu = qs('#navMenu');
+            hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+            // Modal functionality 
+            const videoModal = qs('#videoModal');
+            const closeModal = qs('#closeModal');
+            closeModal.addEventListener('click', () => {
+                videoModal.classList.remove('open');
+            });
+            function showVideoModal(content) {
+                 qs('#modalContent').innerHTML = content;
+                 videoModal.classList.add('open');
+            }
+
+
+            // Initial render
+            renderSitemap();
+            
+            // Intersection Observer for Section Visibility
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            qsa('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+            </script>
+            
