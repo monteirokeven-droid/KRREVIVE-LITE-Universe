@@ -1,580 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRREVIVEÉLITE | System Interface</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CSS VARIABLES & RESET --- */
-        :root {
-            --primary: #00f3ff; /* Cyan */
-            --secondary: #bc13fe; /* Neon Purple */
-            --accent: #d4af37; /* Gold */
-            --bg-dark: #050505;
-            --glass: rgba(10, 10, 10, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --font-head: 'Orbitron', sans-serif;
-            --font-body: 'Roboto Mono', monospace;
-        }
-
-        * { box-sizing: border-box; outline: none; }
-        body, html { margin: 0; padding: 0; scroll-behavior: smooth; }
-        
-        body {
-            background-color: var(--bg-dark);
-            color: #fff;
-            font-family: var(--font-body);
-            overflow-x: hidden;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 2px; }
-        h1 { font-weight: 900; text-shadow: 0 0 20px var(--primary); }
-        h2 { border-left: 4px solid var(--accent); padding-left: 1rem; margin-bottom: 2rem; }
-        
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-
-        /* --- UI COMPONENTS --- */
-        .btn {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 0.8rem 2rem;
-            font-family: var(--font-head);
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0%; height: 100%;
-            background: var(--primary);
-            z-index: -1;
-            transition: width 0.3s ease;
-        }
-
-        .btn:hover::before { width: 100%; }
-        .btn:hover { color: #000; box-shadow: 0 0 20px var(--primary); }
-
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-        }
-
-        /* --- NAVBAR --- */
-        .navbar {
-            position: fixed;
-            top: 0; width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 3rem;
-            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            z-index: 1000;
-            transition: background 0.3s;
-        }
-        
-        .navbar.scrolled { background: rgba(5, 5, 5, 0.95); border-bottom: 1px solid var(--border); }
-
-        .logo {
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #fff;
-        }
-        .logo span { color: var(--accent); }
-
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { font-size: 0.9rem; letter-spacing: 1px; }
-        .nav-link:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
-        .hamburger div { width: 30px; height: 2px; background: var(--primary); transition: 0.3s; }
-
-        /* --- CANVAS --- */
-        #futuristicCanvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-        }
-
-        /* --- SECTIONS --- */
-        section {
-            min-height: 100vh;
-            padding: 8rem 2rem 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        section.visible { opacity: 1; transform: translateY(0); }
-
-        /* HERO */
-        #home {
-            display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-            height: 100vh;
-        }
-        #home p { max-width: 600px; margin-bottom: 2rem; line-height: 1.6; color: #aaa; }
-
-        /* GAMING FILTERS */
-        .filter-bar {
-            display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
-            background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 4px;
-        }
-        
-        input, select {
-            background: #000; color: #fff;
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            font-family: var(--font-body);
-            flex: 1;
-            min-width: 150px;
-        }
-        input:focus, select:focus { border-color: var(--primary); }
-
-        /* GAMING GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid var(--border);
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card-img { height: 180px; background: #222; position: relative; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; }
-        .card-body { padding: 1.5rem; }
-        .tag { font-size: 0.7rem; color: var(--accent); border: 1px solid var(--accent); padding: 2px 6px; display: inline-block; margin-bottom: 0.5rem; }
-
-        /* SOCIAL FEED */
-        #socialFeed { max-width: 800px; margin: 0 auto; }
-        .post {
-            background: rgba(255,255,255,0.03);
-            border-left: 2px solid var(--secondary);
-            padding: 1.5rem; margin-bottom: 1.5rem;
-        }
-        .post-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--border); }
-
-        /* CONTACT FORM */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-        form { display: flex; flex-direction: column; gap: 1.5rem; }
-        textarea { height: 150px; background: #000; border: 1px solid var(--border); color: #fff; padding: 1rem; resize: none; }
-
-        /* SETTINGS PANEL */
-        #backgroundControls {
-            position: fixed; bottom: 2rem; right: 2rem;
-            background: rgba(0,0,0,0.9); border: 1px solid var(--primary);
-            padding: 1rem; border-radius: 8px; z-index: 100;
-            display: flex; flex-direction: column; gap: 10px;
-            font-size: 0.8rem;
-            transform: translateX(120%); transition: transform 0.3s;
-        }
-        #backgroundControls.active { transform: translateX(0); }
-        .settings-toggle {
-            position: fixed; bottom: 2rem; right: 2rem;
-            width: 40px; height: 40px; background: var(--primary);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 101; color: #000;
-        }
-
-        /* MODAL */
-        .video-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-        }
-        .video-modal.open { opacity: 1; pointer-events: all; }
-        .modal-inner { width: 80%; max-width: 900px; position: relative; background: #000; padding: 2rem; border: 1px solid var(--primary); }
-        .close-btn { position: absolute; top: -40px; right: 0; color: #fff; cursor: pointer; font-size: 2rem; }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem; }
-            .hamburger { display: flex; }
-            .nav-menu {
-                position: fixed; top: 0; right: 0; height: 100vh; width: 70%;
-                background: #000; flex-direction: column; padding: 5rem 2rem;
-                transform: translateX(100%); transition: 0.3s;
-                border-left: 1px solid var(--primary);
-            }
-            .nav-menu.active { transform: translateX(0); }
-            #contact { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRREVIVEÉLITE | Universe System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #00f3ff;
+    --primary-dim: rgba(0,243,255,0.1);
+    --secondary: #bc13fe;
+    --accent: #ffd700;
+    --bg-dark: #030303;
+    --glass: rgba(10,10,10,0.85);
+    --border: rgba(255,255,255,0.15);
+    --font-head: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+}
+*{box-sizing:border-box;outline:none;}
+body, html{margin:0;padding:0;scroll-behavior:smooth;font-family:var(--font-body);font-size:18px;background-color:var(--bg-dark);color:#fff;overflow-x:hidden;}
+::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#000;}::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px;}
+h1,h2,h3,h4{font-family:var(--font-head);text-transform:uppercase;letter-spacing:2px;margin:0;}
+h1{font-weight:900;text-shadow:0 0 20px var(--primary);font-size:3rem;}
+h2{border-left:4px solid var(--accent);padding-left:1rem;margin-bottom:2rem;color:#fff;}
+a{text-decoration:none;color:inherit;transition:0.3s;}
+.btn{background:linear-gradient(90deg, transparent 0%, rgba(0,243,255,0.1) 100%);border:1px solid var(--primary);color:var(--primary);padding:0.8rem 2rem;font-family:var(--font-head);font-weight:700;cursor:pointer;text-transform:uppercase;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:all 0.3s ease;position:relative;z-index:1;}
+.btn:hover{background:var(--primary);color:#000;box-shadow:0 0 25px var(--primary);}
+.glass-panel{background:var(--glass);backdrop-filter:blur(15px);border:1px solid var(--border);padding:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5);}
+.navbar{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(3,3,3,0.8);border-bottom:1px solid var(--border);z-index:1000;backdrop-filter:blur(10px);}
+.logo{font-family:var(--font-head);font-size:1.5rem;font-weight:900;color:#fff;display:flex;align-items:center;gap:10px;}
+.logo span{color:var(--accent);}
+.logo-icon{width:10px;height:10px;background:var(--primary);box-shadow:0 0 10px var(--primary);transform:rotate(45deg);}
+.nav-menu{display:flex;gap:2rem;align-items:center;}
+.nav-link{font-size:1rem;font-weight:700;letter-spacing:1px;}
+.nav-link:hover{color:var(--primary);}
+.map-trigger-btn{background:var(--secondary);border:none;color:#fff;font-family:var(--font-head);padding:0.5rem 1.5rem;cursor:pointer;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);}
+.map-trigger-btn:hover{box-shadow:0 0 15px var(--secondary);}
+#sitemapOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,5,5,0.98);z-index:2500;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.4s ease;backdrop-filter:blur(20px);}
+#sitemapOverlay.active{opacity:1;pointer-events:all;}
+.sitemap-header{padding:2rem 3rem;border-bottom:1px solid var(--primary);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg, rgba(0,243,255,0.05) 0%, transparent 100%);}
+.sitemap-search-container{flex:1;margin:0 3rem;position:relative;}
+.sitemap-search{width:100%;background:transparent;border:none;border-bottom:2px solid var(--border);color:#fff;font-family:var(--font-head);font-size:1.5rem;padding:0.5rem;}
+.sitemap-search:focus{border-color:var(--primary);}
+.sitemap-grid{flex:1;overflow-y:auto;padding:3rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem;}
+.map-category{border:1px solid var(--border);background:rgba(255,255,255,0.02);transition:0.3s;position:relative;overflow:hidden;}
+.map-category:hover{border-color:var(--primary);background:var(--primary-dim);transform:translateY(-5px);}
+.map-category h4{padding:1rem;background:rgba(255,255,255,0.05);border-bottom:1px solid var(--border);color:var(--accent);font-size:1.1rem;}
+.map-links{padding:1rem;display:flex;flex-direction:column;gap:0.5rem;}
+.map-link-item{font-size:0.9rem;color:#aaa;cursor:pointer;display:flex;align-items:center;gap:5px;}
+.map-link-item:hover{color:#fff;padding-left:5px;}
+.map-link-item::before{content:'>';color:var(--primary);font-size:0.7rem;opacity:0;transition:0.2s;}
+.map-link-item:hover::before{opacity:1;}
+.close-map{font-size:2rem;cursor:pointer;color:var(--primary);transition:0.3s;}
+.close-map:hover{transform:rotate(90deg);color:#fff;}
+section{min-height:100vh;padding:8rem 2rem 4rem 2rem;max-width:1400px;margin:0 auto;opacity:0;transform:translateY(20px);transition:opacity 1s ease, transform 1s ease;}
+section.visible{opacity:1;transform:translateY(0);}
+#futuristicCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+@media(max-width:768px){.navbar{padding:1rem;}.nav-menu{display:none;}.sitemap-header{padding:1rem;flex-direction:column;gap:1rem;}.sitemap-search-container{margin:0;width:100%;}h1{font-size:2rem;}}
+</style>
 </head>
 <body>
 
-    <div class="video-modal" id="videoModal">
-        <div class="modal-inner">
-            <div class="close-btn" id="closeModal">&times;</div>
-            <div id="modalContent" style="color:#fff; text-align:center; padding:3rem;">
-                <h3>Simulating Interface...</h3>
-                <p>Loading Secure Protocol</p>
-            </div>
+<div id="sitemapOverlay">
+    <div class="sitemap-header">
+        <div>
+            <div style="font-size:0.8rem;color:var(--primary)">SYSTEM NAVIGATION</div>
+            <h2 style="margin:0;border:none;padding:0;font-size:1.5rem;">UNIVERSE MAP</h2>
         </div>
+        <div class="sitemap-search-container">
+            <input type="text" id="sitemapSearch" class="sitemap-search" placeholder="Search 123 Sections, Tools, or Hubs..." autofocus>
+        </div>
+        <div class="close-map" id="closeMap">&times;</div>
     </div>
+    <div class="sitemap-grid" id="sitemapGrid"></div>
+</div>
 
-    <nav class="navbar" id="navbar">
-        <div class="logo">KRREVIVE<span>ÉLITE</span></div>
-        <div class="hamburger" id="hamburger">
-            <div></div><div></div><div></div>
-        </div>
-        <div class="nav-menu" id="navMenu">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#gaming" class="nav-link">Gaming</a>
-            <a href="#social" class="nav-link">Social</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </div>
-    </nav>
-
-    <canvas id="futuristicCanvas"></canvas>
-
-    <div class="settings-toggle" id="settingsToggle">⚙</div>
-    <div id="backgroundControls">
-        <h4>Sys.Config</h4>
-        <label><input type="checkbox" id="bgControlEnable" checked> Active BG</label>
-        <label>Opacity <input type="range" id="bgControlOpacity" min="0" max="1" step="0.1" value="0.5"></label>
-        <button id="bgControlReset" class="btn" style="padding: 5px; font-size: 0.7rem;">Reset</button>
+<nav class="navbar" id="navbar">
+    <div class="logo"><div class="logo-icon"></div>KRREVIVE<span>ÉLITE</span></div>
+    <div class="nav-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#gaming" class="nav-link">Gaming</a>
+        <a href="#community" class="nav-link">Community</a>
+        <button class="map-trigger-btn" id="openMapBtn">SYSTEM MAP ::</button>
     </div>
+</nav>
 
-    <main>
-        <section id="home" class="visible">
-            <h3>System Online</h3>
-            <h1>Welcome to the<br>Universe</h1>
-            <p>Experience the nexus of elite gaming, social synthesis, and artificial intelligence interfaces. Upgrade your reality.</p>
-            <button class="btn" onclick="document.getElementById('gaming').scrollIntoView()">Initialize</button>
-        </section>
+<canvas id="futuristicCanvas"></canvas>
 
-        <section id="gaming">
-            <h2>Combat Protocols</h2>
-            
-            <div class="glass-panel">
-                <div class="filter-bar">
-                    <input type="text" id="filterSearch" placeholder="Search Data Stream...">
-                    <select id="filterCharacter">
-                        <option value="">All Classes</option>
-                        <option value="Vanguard">Vanguard</option>
-                        <option value="Spectre">Spectre</option>
-                        <option value="Titan">Titan</option>
-                    </select>
-                    <select id="filterProtocol">
-                        <option value="">All Modes</option>
-                        <option value="Ranked">Ranked</option>
-                        <option value="Casual">Casual</option>
-                        <option value="Tournament">Tournament</option>
-                    </select>
-                </div>
-                
-                <div id="sessionThumbnails" class="grid">
-                    </div>
-                <div id="gamingPagination" style="margin-top:2rem; display:flex; gap:10px; justify-content:center;"></div>
-            </div>
-        </section>
+<main>
+    <section id="home" class="visible">
+        <div style="margin-bottom:1rem;color:var(--primary);letter-spacing:4px;">SYSTEM ONLINE</div>
+        <h1>Welcome to the<br>Universe</h1>
+        <p style="max-width:600px;line-height:1.6;color:#bbb;margin-bottom:2rem;">
+            Access the ultimate ecosystem for elite gaming, professional engineering, AI synthesis, and social evolution. Explore 123 interconnected modules designed for your ascent.
+        </p>
+        <div style="display:flex;gap:1rem;">
+            <button class="btn" onclick="openSystemMap()">Explore Modules</button>
+            <button class="btn" style="border-color:var(--secondary);color:var(--secondary);">Join Faction</button>
+        </div>
+    </section>
+    <!-- Placeholder sections for all other hubs -->
+    <section id="gaming"><h2>Gaming Hub</h2><div class="glass-panel">Select a protocol via the System Map.</div></section>
+    <section id="engineering"><h2>Engineering Hub</h2><div class="glass-panel">All professional engineering tools and simulators.</div></section>
+    <section id="courses"><h2>Courses Hub</h2><div class="glass-panel">All learning modules and gamified courses.</div></section>
+    <section id="video"><h2>Video & Streaming Hub</h2><div class="glass-panel">YouTube-style free platform with live and VOD.</div></section>
+    <section id="movies"><h2>Movie & Streaming Hub</h2><div class="glass-panel">Netflix-style cinematic content ad-free.</div></section>
+    <section id="community"><h2>Community</h2><div class="glass-panel">Forums, fan content, and collaboration boards.</div></section>
+    <section id="social"><h2>Social Hub</h2><div class="glass-panel">Microblogging, messaging, and community feeds.</div></section>
+    <section id="health"><h2>Health & Wellness Hub</h2><div class="glass-panel">Ergonomics, focus, mental health, and wellness.</div></section>
+    <section id="accessibility"><h2>Accessibility Hub</h2><div class="glass-panel">Screen readers, contrast, colorblind modes, and text scaling.</div></section>
+    <section id="personalization"><h2>Personalization Hub</h2><div class="glass-panel">Theme editor, avatars, layout, notifications.</div></section>
+    <section id="safety"><h2>Safety & Security Hub</h2><div class="glass-panel">Account security, 2FA, reporting, and privacy.</div></section>
+</main>
 
-        <section id="social">
-            <h2>Social Feed</h2>
-            <div id="socialFeed">
-                </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <button id="loadMoreSocial" class="btn">Load More Data</button>
-            </div>
-        </section>
+<script>
+const universeMap = [
+    {category:"1. Home & Overview",subs:["Dashboard","Mission Brief","Announcements","System Status","Quick Links"]},
+    {category:"2. Technology & Artifacts",subs:["Tech Tree","Ancient Artifacts","Blueprints","Research Lab","Inventory"]},
+    {category:"3. Story & Media",subs:["Lore Archive","Cinematics","Audio Logs","Character Bios","Timeline"]},
+    {category:"4. Faction & Mission",subs:["Faction Selection","Mission Board","Rankings","Reputation","Squad Management"]},
+    {category:"5. Gaming Hub",subs:["Official Library","Indie Games","Fan-made Games","Launchers","Patch Notes","Multiplayer Lobby","VR/AR Zone"]},
+    {category:"6. Engineering Hub",subs:["CAD Tools","Simulators","Project Portfolio","Code Repository","Hardware Specs"]},
+    {category:"7. Gameplay Interactive",subs:["Live Events","Mini-Games","Daily Challenges","Achievement Tracker","Interactive Maps"]},
+    {category:"8. Multimedia",subs:["Music Player","Gallery","Wallpapers","Soundboards","Asset Store"]},
+    {category:"9. Community",subs:["Forums","Clans","Wiki","Fan Art","Polls & Voting"]},
+    {category:"10. Social Hub",subs:["Feed","Direct Messages","Friend List","Voice Chat","Streaming Integration"]},
+    {category:"11. Learning & Education",subs:["Tutorials","Documentation","Knowledge Base","Mentorship","Certification"]},
+    {category:"12. Problem Solving",subs:["Bug Tracker","Feature Requests","Hackathons","Collaboration Board","Idea Incubator"]},
+    {category:"13. Support Center",subs:["FAQ","Ticket System","Live Support","Account Recovery","Billing"]},
+    {category:"14. Services Market",subs:["Freelance Board","Coaching","Design Services","Dev for Hire","Escrow"]},
+    {category:"15. Analytics",subs:["Player Stats","Site Metrics","Performance Graphs","Heatmaps","Trend Analysis"]},
+    {category:"16. Events",subs:["Tournament Brackets","Calendar","RSVP System","Virtual Convention","Prize Pools"]},
+    {category:"17. Innovation Lab",subs:["Beta Tests","Experimental Features","Sandbox Mode","Dev Logs","Feedback Loop"]},
+    {category:"18. User Feedback",subs:["Surveys","Suggestion Box","Rating System","Focus Groups","Roadmap Voting"]},
+    {category:"19. Video & Streaming",subs:["Live Channels","VOD Archive","Streamer Tools","Overlays","Donation Setup"]},
+    {category:"20. Courses Hub",subs:["Engineering Paths","Game Dev 101","Media Production","Leadership","Gamified Learning"]},
+    {category:"21. Health & Wellness",subs:["Ergonomics","Eye Care","Focus Timers","Mental Health Resources","Break Reminders"]},
+    {category:"22. Accessibility",subs:["Contrast Settings","Screen Reader Mode","Keybinding Remap","Colorblind Modes","Text Scaling"]},
+    {category:"23. Personalization",subs:["Theme Editor","Avatar Creator","Interface Layout","Notification Config","Privacy"]},
+    {category:"24. Safety & Security",subs:["2FA Setup","Login History","Block List","Report User","Data Export"]},
+    {category:"25. Movie & Streaming",subs:["Watch Parties","Film Library","Director Commentary","Short Films","Reviews"]}
+];
 
-        <section id="contact">
-            <div>
-                <h2>Establish Link</h2>
-                <p>Submit inquiries regarding elite membership, bug reports, or partnership opportunities.</p>
-                <div style="margin-top: 2rem;">
-                    <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
-                        <div style="color:var(--primary)">EMAIL</div>
-                        <div>system@krrevive.elite</div>
-                    </div>
-                    <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center;">
-                        <div style="color:var(--primary)">LOC</div>
-                        <div>Sector 7, Neo-Grid</div>
-                    </div>
-                </div>
-            </div>
-            
-            <form id="contactForm">
-                <input type="text" name="name" placeholder="Agent Name" required>
-                <input type="email" name="email" placeholder="Comms Frequency (Email)" required>
-                <textarea name="message" placeholder="Encrypted Message" required></textarea>
-                <button type="submit" class="btn">Transmit</button>
-            </form>
-        </section>
-    </main>
+const sitemapOverlay = document.getElementById('sitemapOverlay');
+const sitemapGrid = document.getElementById('sitemapGrid');
+const sitemapSearch = document.getElementById('sitemapSearch');
+const openMapBtn = document.getElementById('openMapBtn');
+const closeMap = document.getElementById('closeMap');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            /* --- 1. SYSTEM UTILS --- */
-            const qs = (selector) => document.querySelector(selector);
-            const qsa = (selector) => document.querySelectorAll(selector);
+function renderSitemap(filter=""){
+    sitemapGrid.innerHTML="";
+    const lowerFilter = filter.toLowerCase();
+    universeMap.forEach(section=>{
+        const catMatch = section.category.toLowerCase().includes(lowerFilter);
+        const subMatch = section.subs.some(sub=>sub.toLowerCase().includes(lowerFilter));
+        if(catMatch || subMatch){
+            const card = document.createElement('div');
+            card.className='map-category';
+            let subHtml = section.subs.map(sub=>{
+                if(filter && !sub.toLowerCase().includes(lowerFilter) && !catMatch) return '';
+                return `<div class="map-link-item" onclick="navigateTo('${sub}')">${sub}</div>`;
+            }).join('');
+            if(subHtml==='') subHtml=`<div style="color:#666;font-style:italic;padding:1rem;">No direct matches in subsections</div>`;
+            card.innerHTML=`<h4>${section.category}</h4><div class="map-links">${subHtml}</div>`;
+            sitemapGrid.appendChild(card);
+        }
+    });
+}
 
-            /* --- 2. CANVAS ANIMATION (The "Network" Effect) --- */
-            const canvas = document.getElementById('futuristicCanvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let opacity = 0.5;
-            let animationActive = true;
+function openSystemMap(){
+    sitemapOverlay.classList.add('active');
+    renderSitemap();
+    setTimeout(()=>sitemapSearch.focus(),100);
+}
+openMapBtn.addEventListener('click',openSystemMap);
+closeMap.addEventListener('click',()=>{sitemapOverlay.classList.remove('active');});
+sitemapSearch.addEventListener('input',(e)=>{renderSitemap(e.target.value);});
+window.navigateTo=(dest)=>{
+    sitemapOverlay.classList.remove('active');
+    alert(`Initializing Protocol: ${dest}\nLoading modules...`);
+};
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
+// Canvas Background
+const canvas=document.getElementById('futuristicCanvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1;}draw(){ctx.fillStyle='rgba(0,243,255,0.3)';ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();}}
+function initParticles(){particles=[];for(let i=0;i<80;i++)particles.push(new Particle());}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+initParticles();animate();
+</script>
 
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 1;
-                    this.vy = (Math.random() - 0.5) * 1;
-                    this.size = Math.random() * 2;
-                }
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                }
-                draw() {
-                    ctx.fillStyle = `rgba(0, 243, 255, ${opacity})`;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                const count = window.innerWidth < 768 ? 50 : 100;
-                for (let i = 0; i < count; i++) {
-                    particles.push(new Particle());
-                }
-            }
-
-            function animate() {
-                if (!animationActive) return;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                // Draw connections
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (dist < 150) {
-                            ctx.strokeStyle = `rgba(0, 243, 255, ${opacity * (1 - dist/150)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
-                requestAnimationFrame(animate);
-            }
-            
-            initParticles();
-            animate();
-
-            // Background Controls
-            qs('#settingsToggle').addEventListener('click', () => {
-                qs('#backgroundControls').classList.toggle('active');
-            });
-
-            qs('#bgControlEnable').addEventListener('change', (e) => {
-                animationActive = e.target.checked;
-                if(animationActive) animate();
-                else ctx.clearRect(0, 0, canvas.width, canvas.height);
-            });
-
-            qs('#bgControlOpacity').addEventListener('input', (e) => {
-                opacity = e.target.value;
-            });
-
-            /* --- 3. UI INTERACTIONS --- */
-            // Navbar Scroll Effect
-            window.addEventListener('scroll', () => {
-                const nav = qs('.navbar');
-                if (window.scrollY > 50) nav.classList.add('scrolled');
-                else nav.classList.remove('scrolled');
-                
-                // Scroll Reveal
-                qsa('section').forEach(sec => {
-                    const top = sec.getBoundingClientRect().top;
-                    if (top < window.innerHeight - 100) sec.classList.add('visible');
-                });
-            });
-
-            // Hamburger Menu
-            const ham = qs('#hamburger');
-            const menu = qs('#navMenu');
-            ham.addEventListener('click', () => {
-                menu.classList.toggle('active');
-                // Animate hamburger lines if desired
-            });
-
-            // Modal Logic
-            const modal = qs('#videoModal');
-            const closeModal = qs('#closeModal');
-            
-            window.openModal = (title) => {
-                qs('#modalContent h3').innerText = title;
-                modal.classList.add('open');
-            };
-            
-            closeModal.addEventListener('click', () => {
-                modal.classList.remove('open');
-            });
-
-            /* --- 4. GAMING SECTION DATA & LOGIC --- */
-            const gamingData = Array.from({length: 12}, (_, i) => ({
-                id: i,
-                title: `Protocol Omega ${i+1}`,
-                character: i % 3 === 0 ? 'Vanguard' : i % 3 === 1 ? 'Spectre' : 'Titan',
-                mode: i % 2 === 0 ? 'Ranked' : 'Casual',
-                image: `https://picsum.photos/seed/${i+100}/400/250` // Placeholder images
-            }));
-
-            function renderGaming(data) {
-                const container = qs('#sessionThumbnails');
-                container.innerHTML = '';
-                
-                if(data.length === 0) {
-                    container.innerHTML = '<p>No matching protocols found.</p>';
-                    return;
-                }
-
-                data.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="card-img">
-                            <img src="${item.image}" alt="Game Image">
-                            <div style="position:absolute; bottom:0; left:0; background:var(--primary); color:#000; padding:2px 8px; font-size:0.7rem; font-weight:bold;">LIVE</div>
-                        </div>
-                        <div class="card-body">
-                            <span class="tag">${item.character}</span>
-                            <span class="tag" style="border-color:var(--secondary); color:var(--secondary)">${item.mode}</span>
-                            <h4>${item.title}</h4>
-                            <button class="btn" style="padding:0.3rem 1rem; font-size:0.7rem; width:100%; margin-top:1rem;" onclick="openModal('${item.title}')">Watch Stream</button>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
-            }
-
-            // Filtering
-            function filterGaming() {
-                const search = qs('#filterSearch').value.toLowerCase();
-                const char = qs('#filterCharacter').value;
-                const mode = qs('#filterProtocol').value;
-
-                const filtered = gamingData.filter(item => {
-                    const matchSearch = item.title.toLowerCase().includes(search);
-                    const matchChar = char === '' || item.character === char;
-                    const matchMode = mode === '' || item.mode === mode;
-                    return matchSearch && matchChar && matchMode;
-                });
-
-                renderGaming(filtered);
-            }
-
-            qs('#filterSearch').addEventListener('keyup', filterGaming);
-            qs('#filterCharacter').addEventListener('change', filterGaming);
-            qs('#filterProtocol').addEventListener('change', filterGaming);
-
-            // Initial Render
-            renderGaming(gamingData);
-
-            /* --- 5. SOCIAL FEED MOCKUP --- */
-            const socialData = [
-                { user: 'Elite_One', content: 'Just secured the platinum trophy in Sector 4. The graphics update is insane. #KRREVIVE', time: '2m ago' },
-                { user: 'CyberDrifter', content: 'Looking for a squad for tonight\'s raid. Must be lvl 50+. DM me.', time: '15m ago' },
-                { user: 'SystemAdmin', content: 'Maintenance scheduled for 0300 hours. Downtime approx 30 mins.', time: '1h ago' }
-            ];
-
-            function renderSocial() {
-                const container = qs('#socialFeed');
-                socialData.forEach(post => {
-                    const div = document.createElement('div');
-                    div.className = 'post fade-in';
-                    div.innerHTML = `
-                        <div class="post-header">
-                            <div class="avatar"></div>
-                            <div>
-                                <div style="color:var(--primary); font-weight:bold;">${post.user}</div>
-                                <div style="font-size:0.8rem; color:#888;">${post.time}</div>
-                            </div>
-                        </div>
-                        <p>${post.content}</p>
-                    `;
-                    container.appendChild(div);
-                });
-            }
-            renderSocial();
-
-            qs('#loadMoreSocial').addEventListener('click', () => {
-                // Simulate loading more
-                const btn = qs('#loadMoreSocial');
-                btn.innerText = 'Decrypting...';
-                setTimeout(() => {
-                    renderSocial(); // Just duplicate for demo
-                    btn.innerText = 'Load More Data';
-                }, 1000);
-            });
-
-            /* --- 6. FORM HANDLING --- */
-            qs('#contactForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const btn = e.target.querySelector('button');
-                const originalText = btn.innerText;
-                
-                btn.innerText = 'Transmitting...';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#000';
-
-                setTimeout(() => {
-                    alert('Transmission Received. Stand by for contact.');
-                    e.target.reset();
-                    btn.innerText = originalText;
-                    btn.style.background = 'transparent';
-                    btn.style.color = 'var(--primary)';
-                }, 1500);
-            });
-        });
-    </script>
 </body>
 </html>
