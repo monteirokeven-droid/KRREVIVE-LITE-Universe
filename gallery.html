@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — KRREVIVEÉLITE Universe</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .gal-hero { padding: 60px 20px; text-align: center; }
+    .gal-hero h1 { font-size: 44px; color: #f0b700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .gal-hero p { color: #9aa3b2; }
+    .gal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin: 40px 0 60px 0; }
+    .gal-item { border-radius: 12px; overflow: hidden; border: 1px solid rgba(240,183,0,0.12); aspect-ratio: 16/10; position: relative; }
+    .gal-item .art { position: absolute; inset: 0; }
+    .gal-item .cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; background: rgba(0,0,0,0.65); color: #f0f0f0; font-size: 13px; }
+    .a1 { background: radial-gradient(circle at 30% 30%, #8e44ad, #0a0a0e 70%), linear-gradient(135deg, #1a1a2e, #0a0a0e); }
+    .a2 { background: radial-gradient(circle at 70% 20%, #00d9ff33, transparent 60%), radial-gradient(circle at 20% 80%, #f0b70033, transparent 55%), #0a0a0e; }
+    .a3 { background: conic-gradient(from 200deg at 50% 50%, #0a0a0e, #2b1055, #0a0a0e, #7597de22, #0a0a0e); }
+    .a4 { background: linear-gradient(160deg, #3b0f0f 0%, #0a0a0e 55%, #20060a 100%); }
+    .a5 { background: radial-gradient(ellipse at 50% 120%, #00d9ff44, transparent 60%), radial-gradient(ellipse at 50% -20%, #8e44ad55, transparent 60%), #0a0a0e; }
+    .a6 { background: repeating-linear-gradient(45deg, #101016 0 12px, #0a0a0e 12px 24px), radial-gradient(circle at 50% 50%, #f0b70022, transparent 60%); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo"><span class="logo-icon">◆</span> <span>KRREVIVEÉLITE</span></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="wallpapers.html">Wallpapers</a></li>
+        <li><a href="universe.html">Universe</a></li>
+        <li><a href="media.html">Media</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <section class="gal-hero">
+      <h1>Gallery</h1>
+      <p>Visual transmissions from across the KRREVIVEÉLITE Universe.</p>
+    </section>
+    <section class="container">
+      <div class="gal-grid">
+        <div class="gal-item"><div class="art a1"></div><div class="cap">Nebula Protocol — Sector 7</div></div>
+        <div class="gal-item"><div class="art a2"></div><div class="cap">Dual Signal — Gold / Cyan</div></div>
+        <div class="gal-item"><div class="art a3"></div><div class="cap">Vortex Gate</div></div>
+        <div class="gal-item"><div class="art a4"></div><div class="cap">Crimson Descent</div></div>
+        <div class="gal-item"><div class="art a5"></div><div class="cap">Horizon Bloom</div></div>
+        <div class="gal-item"><div class="art a6"></div><div class="cap">Grid Doctrine</div></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><p>© 2025 KRREVIVEÉLITE Universe. All Rights Reserved.</p></footer>
+</body>
+</html>
