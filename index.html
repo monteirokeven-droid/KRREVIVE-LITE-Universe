@@ -1,4 +1,89 @@
-    <script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRREVIVEÉLITE Universe — Enter the Multiverse</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, rgba(0,191,255,0.05), rgba(10,10,14,1) 70%); padding: 4rem 1.5rem; }
+    .hero .kicker { color: #00BFFF; letter-spacing: 0.35em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1rem; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 4.5rem); }
+    .hero p { color: #aaa; max-width: 620px; margin: 1rem auto 2.5rem auto; }
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; max-width: 1100px; margin: 0 auto; padding: 0 20px 70px 20px; }
+    .pillar { border: 1px solid rgba(255,215,0,0.15); border-radius: 12px; padding: 26px; background: rgba(26,26,30,0.6); opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
+    .pillar.visible { opacity: 1; transform: none; }
+    .pillar h3 { color: #FFD700; margin: 0 0 8px 0; letter-spacing: .08em; }
+    .pillar p { color: #9a9a9a; font-size: .9rem; margin: 0 0 14px 0; }
+    .pillar a { color: #00BFFF; text-decoration: none; font-size: .85rem; letter-spacing: .1em; }
+    section { opacity: 1; }
+    section.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s; }
+    section.reveal.visible { opacity: 1; transform: none; }
+    #sitemapOverlay { position: fixed; inset: 0; background: rgba(5,5,8,.96); z-index: 2000; display: none; overflow-y: auto; padding: 60px 20px; }
+    #sitemapOverlay.active { display: block; }
+    #sitemapGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; max-width: 1200px; margin: 24px auto 0 auto; }
+    .map-cat { border: 1px solid rgba(0,191,255,.2); border-radius: 10px; padding: 16px; background: #101016; }
+    .map-cat h4 { color: #FFD700; margin: 0 0 10px 0; font-size: .95rem; }
+    .map-cat button { display: block; width: 100%; text-align: left; background: none; border: none; color: #9adfff; padding: 5px 0; cursor: pointer; font-size: .82rem; font-family: inherit; }
+    .map-cat button:hover { color: #fff; }
+    .map-bar { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    #sitemapSearch { flex: 1; min-width: 220px; padding: 12px 16px; background: #1A1A1E; border: 1px solid rgba(255,215,0,.3); color: #fff; border-radius: 8px; font-family: inherit; }
+    #closeMap { padding: 12px 22px; background: transparent; border: 1px solid #00BFFF; color: #00BFFF; border-radius: 8px; cursor: pointer; font-family: inherit; letter-spacing: .1em; }
+    #videoModal { position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 3000; display: none; justify-content: center; align-items: center; padding: 20px; }
+    #videoModal.open { display: flex; }
+    #videoModal .modal-box { background: #141419; border: 1px solid rgba(255,215,0,.25); border-radius: 12px; padding: 30px; max-width: 520px; width: 100%; color: #ddd; position: relative; }
+    #closeModal { position: absolute; top: 10px; right: 14px; background: none; border: none; color: #888; font-size: 1.4rem; cursor: pointer; }
+    .footer { text-align: center; padding: 26px; color: #666; font-size: .8rem; border-top: 1px solid rgba(255,215,0,.1); }
+  </style>
+</head>
+<body>
+  <header id="header-protocol">
+    <nav>
+      <div class="logo">KRREVIVEÉLITE</div>
+      <button id="hamburger" aria-label="Menu" style="display:none;">☰</button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="universe.html">Universe</a></li>
+        <li><a href="tools.html">AI Augmentation</a></li>
+        <li><a href="game.html">Game</a></li>
+        <li><a href="media.html">Media</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="kicker">// Transmission Online</span>
+    <h1 class="glitch-text">KRREVIVEÉLITE<br>UNIVERSE</h1>
+    <p>Twenty-five worlds. One protocol. Games, AI labs, media, learning, and the multiverse map — enter and explore.</p>
+    <button class="btn-main-action" id="openMapBtn">Open Universe Map</button>
+  </section>
+
+  <section class="reveal">
+    <div class="pillars">
+      <div class="pillar"><h3>GAMING HUB</h3><p>Play in the browser. Mini-games, downloads, the arena.</p><a href="game.html">ENTER →</a></div>
+      <div class="pillar"><h3>AI AUGMENTATION</h3><p>Coding lab, playground, and prompt engineering.</p><a href="tools.html">ENTER →</a></div>
+      <div class="pillar"><h3>CREATION HUB</h3><p>Resumes, dashboards, automation, content systems.</p><a href="creation-hub.html">ENTER →</a></div>
+      <div class="pillar"><h3>THE UNIVERSE</h3><p>Ten worlds, one elite multiverse.</p><a href="universe.html">ENTER →</a></div>
+    </div>
+  </section>
+
+  <div id="sitemapOverlay">
+    <div class="map-bar">
+      <input id="sitemapSearch" type="text" placeholder="Search the 25 worlds...">
+      <button id="closeMap">CLOSE ✕</button>
+    </div>
+    <div id="sitemapGrid"></div>
+  </div>
+
+  <div id="videoModal">
+    <div class="modal-box">
+      <button id="closeModal">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer class="footer"><p>© 2025 KRREVIVEÉLITE Universe. All Rights Reserved.</p></footer>
+<script>
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. CORE UTILS ---
@@ -141,4 +226,5 @@
             renderSitemap();
         });
     </script>
-    
+</body>
+</html>
